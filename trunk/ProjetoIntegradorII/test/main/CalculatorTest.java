@@ -46,7 +46,7 @@ public class CalculatorTest {
         int a = 10;
         int b = 5;
         Calculator instance = new Calculator();
-        int expResult = 16;
+        int expResult = 15;
         int result = instance.soma(a, b);
         assertEquals(expResult, result);
     }
