@@ -14,6 +14,11 @@ import static org.junit.Assert.*;
 public class CalculatorTest {
     
     public CalculatorTest() {
+        
+        
+        /**
+         * 
+         */
     }
 
     @BeforeClass
