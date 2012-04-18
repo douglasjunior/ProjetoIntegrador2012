@@ -1,0 +1,42 @@
+#topo {
+    position: relative;
+    background-color: #036fab;
+    color: white;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+}
+
+#menu {
+    position: relative;
+    background-color: #0000ff;
+    color: white;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+}
+
+#rodape {
+    position: relative;
+    background-color: #c2dfef;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+}
+
+.conteudo {
+    position: relative;
+    background-color: #dddddd;
+    padding: 5px;
+}
+
+#topo a:link, #topo a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#topo a:link:hover, #topo a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+
