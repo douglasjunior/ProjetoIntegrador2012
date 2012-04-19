@@ -3,7 +3,6 @@ package br.edu.utfpr.rnc.dao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.Selection;
 
 public abstract class DaoAbstrato<T> {
 
