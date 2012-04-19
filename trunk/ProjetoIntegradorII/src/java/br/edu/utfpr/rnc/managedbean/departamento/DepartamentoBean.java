@@ -13,7 +13,7 @@ import javax.faces.convert.FacesConverter;
 @ManagedBean(name = "departamentoBean")
 @RequestScoped
 public class DepartamentoBean {
-
+    
     @EJB
     private DepartamentoDao departamentoDao;
 
