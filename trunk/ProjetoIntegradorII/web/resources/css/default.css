@@ -6,15 +6,7 @@ body {
     margin: 10px;
 }
 
-h1 {
-    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
-    border-bottom: 1px solid #AFAFAF; 
-    font-size:  16px;
-    font-weight: bold;
-    margin: 0px;
-    padding: 0px;
-    color: #D20005;
-}
+
 
 a:link, a:visited {
   color: #045491;
@@ -26,4 +18,12 @@ a:link:hover, a:visited:hover  {
   color: #045491;
   font-weight : bold;
   text-decoration : underline;
+}
+
+#head_center {
+    margin: 0 auto;
+}
+#head_center h1 {
+    text-align: center;
+    font-size: 30px;
 }

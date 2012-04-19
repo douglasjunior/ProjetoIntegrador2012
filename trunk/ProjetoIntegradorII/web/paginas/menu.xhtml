@@ -2,6 +2,14 @@
      xmlns:h="http://java.sun.com/jsf/html"
      xmlns:f="http://java.sun.com/jsf/core"
      xmlns:p="http://primefaces.org/ui">
-    
-    <p:panel>Menu</p:panel>
+
+    <p:panel>
+        <h:form prependId="false">
+            <p:menubar>
+                <p:submenu label="Cadastro" icon="ui-icon ui-icon-document">
+                    <p:menuitem action="#{gerenciadorPaginas.cadastroDepartamento}" ajax="false" value="Departamento"></p:menuitem>
+                </p:submenu>
+            </p:menubar>
+        </h:form>
+    </p:panel>
 </div>

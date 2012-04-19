@@ -35,4 +35,8 @@ public class GerenciadorPaginas implements Serializable {
     public String getCabecalho() {
         return cabecalho;
     }
+    public String cadastroDepartamento(){
+        this.conteudo = "./paginas/departamento/cadastro.xhtml";
+        return "refreshPage";
+    }
 }

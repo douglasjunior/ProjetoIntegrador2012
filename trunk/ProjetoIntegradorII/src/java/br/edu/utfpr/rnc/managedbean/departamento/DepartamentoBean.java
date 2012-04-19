@@ -52,7 +52,7 @@ public class DepartamentoBean {
             }
             if (object instanceof Departamento) {
                 Departamento o = (Departamento) object;
-                return getStringKey(o.getCodigo());
+                return getStringKey(o.getId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + DepartamentoBean.class.getName());
             }
