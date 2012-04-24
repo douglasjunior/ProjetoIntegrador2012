@@ -1,7 +1,13 @@
 package br.edu.utfpr.rnc.managedbean.departamento;
 
 import br.edu.utfpr.rnc.dao.departamento.DepartamentoDao;
+import br.edu.utfpr.rnc.dao.usuario.UsuarioDao;
+import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
 import br.edu.utfpr.rnc.pojo.departamento.Departamento;
+import br.edu.utfpr.rnc.pojo.usuario.Usuario;
+import br.edu.utfpr.rnc.util.JsfUtil;
+import java.util.Arrays;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -13,11 +19,15 @@ import javax.faces.convert.FacesConverter;
 @ManagedBean(name = "departamentoBean")
 @RequestScoped
 public class DepartamentoBean {
-    
+
     @EJB
     private DepartamentoDao departamentoDao;
+    @EJB
+    private UsuarioDao usuarioDao;
+    private Departamento departamento;
 
     public DepartamentoBean() {
+        departamento = new Departamento();
     }
 
     @FacesConverter(forClass = Departamento.class)
@@ -57,5 +67,32 @@ public class DepartamentoBean {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + DepartamentoBean.class.getName());
             }
         }
+    }
+
+    public DepartamentoConverter getConverter() {
+        return new DepartamentoConverter();
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    public void salvar() {
+        try {
+            departamentoDao.criarEntidade(departamento);
+            departamento = new Departamento();
+            JsfUtil.addSuccessMessage("", "Departamento cadastrado com sucesso.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JsfUtil.addErrorMessage("", "Erro ao cadastrar departamento.");
+        }
+    }
+
+    public List<Usuario> getUsuariosResponsaveis() {
+        return usuarioDao.buscarTodos();
     }
 }

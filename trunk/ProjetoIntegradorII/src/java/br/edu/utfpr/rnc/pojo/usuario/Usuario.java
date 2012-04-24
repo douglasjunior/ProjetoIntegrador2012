@@ -25,6 +25,7 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String nome;
     @JoinColumn(name="RESPONSAVEL_ID",referencedColumnName="ID")
     @OneToMany(mappedBy = "responsavel")
     private List<Departamento> departamentos;
@@ -38,6 +39,14 @@ public class Usuario implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public List<Departamento> getDepartamentos() {
