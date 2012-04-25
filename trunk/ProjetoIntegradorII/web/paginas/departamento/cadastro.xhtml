@@ -2,10 +2,13 @@
      xmlns:ui="http://java.sun.com/jsf/facelets"
      xmlns:h="http://java.sun.com/jsf/html"
      xmlns:f="http://java.sun.com/jsf/core"
-     xmlns:p="http://primefaces.org/ui">
+     xmlns:p="http://primefaces.org/ui"> 
+
     <h:form id="formMap" prependId="false">
         <p:growl id="messages" showDetail="true" globalOnly="true" life="2000" />
         <h3 class="tituloCadastro"><h:outputText value="Cadastro de Departamento"/></h3>
+        <p:inputText value="#{departamentoBean.departamento.id}" id="id" />
+
         <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
             <h:outputLabel for="nome" value="Nome:"><span class="required">*</span></h:outputLabel>
             <h:panelGrid columns="2">
@@ -18,7 +21,7 @@
         <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
             <h:outputLabel for="responsavel" value="Responsável:"><span class="required">*</span></h:outputLabel>
             <h:panelGrid columns="2">
-                <p:selectOneMenu value="#{departamentoBean.departamento.responsavel}" id="responsavel" effect="fade" converter="#{usuarioBean.converter}" required="true">  
+                <p:selectOneMenu value="#{departamentoBean.departamento.responsavel}" id="responsavel" effect="fade" converter="#{usuarioBean.converter}" required="false">  
                     <f:selectItem itemLabel="Selecione o usuário responsável" itemValue="" />  
                     <f:selectItems value="#{departamentoBean.usuariosResponsaveis}" var="responsavel" itemLabel="#{responsavel.nome}" itemValue="#{responsavel}"/>  
                 </p:selectOneMenu>   

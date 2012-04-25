@@ -1,7 +1,7 @@
 <div xmlns="http://www.w3.org/1999/xhtml"
      xmlns:h="http://java.sun.com/jsf/html"
-     xmlns:p="http://primefaces.org/ui"
-     xmlns:f="http://java.sun.com/jsf/core">
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:p="http://primefaces.org/ui">
     <h:form>
         <p:growl globalOnly="true" id="messages" />
         <p:ajaxStatus style="width:16px;height:20px;margin-top: 3px;">
@@ -36,7 +36,7 @@
                                title="Editar este Tipo" value="Editar " id="editar"/>
 
                 <p:commandLink  styleClass="ui-icon ui-icon-trash" title="Excluir este Tipo" value="Excluir" actionListener="#{departamentoBean.addToSession()}"
-                                id="excluir" rendered="#{!departamento.isBound}" oncomplete="confirmation.show()"/>
+                                id="excluir" rendered="#{!departamento.bound}" oncomplete="confirmation.show()"/>
             </p:column>
 
         </p:dataTable>

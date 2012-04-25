@@ -2,11 +2,9 @@ package br.edu.utfpr.rnc.managedbean.departamento;
 
 import br.edu.utfpr.rnc.dao.departamento.DepartamentoDao;
 import br.edu.utfpr.rnc.dao.usuario.UsuarioDao;
-import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
 import br.edu.utfpr.rnc.pojo.departamento.Departamento;
 import br.edu.utfpr.rnc.pojo.usuario.Usuario;
 import br.edu.utfpr.rnc.util.JsfUtil;
-import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -83,12 +81,12 @@ public class DepartamentoBean {
 
     public void salvar() {
         try {
-            if (departamento.getId()==0) {
+            System.out.println(departamento.getId());
+            if (departamento.getId() == 0) {
                 departamentoDao.criarEntidade(departamento);
-            }else{
+            } else {
                 departamentoDao.editar(departamento);
             }
-            
             departamento = new Departamento();
             JsfUtil.addSuccessMessage("", "Departamento salvo com sucesso.");
         } catch (Exception e) {
@@ -100,11 +98,13 @@ public class DepartamentoBean {
     public List<Usuario> getUsuariosResponsaveis() {
         return usuarioDao.buscarTodos();
     }
-        public List<Departamento> getTodosDepartamentos() {
+
+    public List<Departamento> getTodosDepartamentos() {
         return departamentoDao.buscarTodos();
     }
-        public void editar(){
-            Departamento departamento = (Departamento) JsfUtil.getObjectFromRequestParameter("departamento");
-            this.departamento = departamento;            
-        }
+
+    public void editar() {
+        Departamento departamento = (Departamento) JsfUtil.getObjectFromRequestParameter("departamento");
+        this.departamento = departamento;
+    }
 }

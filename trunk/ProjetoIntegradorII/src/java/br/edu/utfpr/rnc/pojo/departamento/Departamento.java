@@ -51,6 +51,13 @@ public class Departamento implements Serializable {
         this.responsavel = responsavel;
     }
 
+    public boolean isBound() {
+        if (getResponsavel() == null) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
