@@ -83,16 +83,28 @@ public class DepartamentoBean {
 
     public void salvar() {
         try {
-            departamentoDao.criarEntidade(departamento);
+            if (departamento.getId()==0) {
+                departamentoDao.criarEntidade(departamento);
+            }else{
+                departamentoDao.editar(departamento);
+            }
+            
             departamento = new Departamento();
-            JsfUtil.addSuccessMessage("", "Departamento cadastrado com sucesso.");
+            JsfUtil.addSuccessMessage("", "Departamento salvo com sucesso.");
         } catch (Exception e) {
             e.printStackTrace();
-            JsfUtil.addErrorMessage("", "Erro ao cadastrar departamento.");
+            JsfUtil.addErrorMessage("", "Erro ao salvar departamento.");
         }
     }
 
     public List<Usuario> getUsuariosResponsaveis() {
         return usuarioDao.buscarTodos();
     }
+        public List<Departamento> getTodosDepartamentos() {
+        return departamentoDao.buscarTodos();
+    }
+        public void editar(){
+            Departamento departamento = (Departamento) JsfUtil.getObjectFromRequestParameter("departamento");
+            this.departamento = departamento;            
+        }
 }

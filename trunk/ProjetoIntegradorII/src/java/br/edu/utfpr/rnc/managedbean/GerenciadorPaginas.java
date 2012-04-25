@@ -39,4 +39,8 @@ public class GerenciadorPaginas implements Serializable {
         this.conteudo = "./paginas/departamento/cadastro.xhtml";
         return "refreshPage";
     }
+     public String consultaDepartamento(){
+        this.conteudo = "./paginas/departamento/listar.xhtml";
+        return "refreshPage";
+    }
 }

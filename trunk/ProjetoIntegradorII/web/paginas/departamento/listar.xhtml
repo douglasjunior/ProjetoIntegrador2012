@@ -1,0 +1,61 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:f="http://java.sun.com/jsf/core">
+    <h:form>
+        <p:growl globalOnly="true" id="messages" />
+        <p:ajaxStatus style="width:16px;height:20px;margin-top: 3px;">
+            <f:facet name="start">
+                <h:graphicImage value="./resources/images/ajaxloading.gif" />
+            </f:facet>
+
+            <f:facet name="complete">
+                <h:outputText value="" />
+            </f:facet>
+        </p:ajaxStatus>
+        <p:dataTable var="departamento" value="#{departamentoBean.todosDepartamentos}" id="tipoList" rows="10"
+                     emptyMessage="Nenhum registro encontrado!" paginator="true" paginatorPosition="bottom"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15">
+
+            <f:facet name="header">
+                <h:outputText value="Lista de Tipos"/>
+            </f:facet>
+
+            <p:column styleClass="col_codigo" headerText="Código">
+                <h:outputText value="#{departamento.id}" />
+            </p:column>
+
+            <p:column filterBy="#{departamento.nome}" styleClass="col_nome" headerText="Nome" sortBy="#{departamento.nome}">
+                <h:outputText value="#{departamento.nome}" />
+            </p:column>
+
+            <p:column headerText="Opções">
+                <p:commandLink actionListener="#{departamentoBean.editar()}" styleClass="ui-icon ui-icon-pencil"
+                               action="#{gerenciadorPaginas.cadastroDepartamento()}" ajax="false"
+                               title="Editar este Tipo" value="Editar " id="editar"/>
+
+                <p:commandLink  styleClass="ui-icon ui-icon-trash" title="Excluir este Tipo" value="Excluir" actionListener="#{departamentoBean.addToSession()}"
+                                id="excluir" rendered="#{!departamento.isBound}" oncomplete="confirmation.show()"/>
+            </p:column>
+
+        </p:dataTable>
+        <h:commandLink title="Gera um relatório dos tipos de projeto, em pdf, a partir da tabela" styleClass="pdfLink">
+            <h:inputHidden value="Relatório dos Tipos de Projeto" id="titulo"/>
+            <p:graphicImage value="/resources/images/pdf.png" />
+            <p:dataExporter type="pdf" target="tipoList" fileName="TiposProjeto" excludeColumns="2"
+                            encoding="ISO-8859-1" preProcessor="#{customPDFGenerator.preProcessPDF}"/>
+        </h:commandLink>
+
+        <p:confirmDialog message="Deseja realmente excluir este Tipo?"
+                         header="Confirmação" severity="alert" widgetVar="confirmation" closable="false">
+
+            <p:commandButton value="Sim" update="tipoList messages" oncomplete="confirmation.hide()" style="position: relative;left: 45px;"
+                             actionListener="#{departamentoBean.remover()}">
+            </p:commandButton>
+            <p:commandButton value="Não" oncomplete="confirmation.hide()" style="position: relative;left: 115px;"
+                             actionListener="#{departamentoBean.removeTipoFromSession()}"/>
+
+        </p:confirmDialog>
+    </h:form>
+</div>
