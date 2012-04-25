@@ -38,7 +38,7 @@
         <property file="nbproject/private/private.properties"/>
     </target>
     <target name="-pre-init-libraries">
-        <property location="lib\nblibraries.properties" name="libraries.path"/>
+        <property location="lib/nblibraries.properties" name="libraries.path"/>
         <dirname file="${libraries.path}" property="libraries.dir.nativedirsep"/>
         <pathconvert dirsep="/" property="libraries.dir">
             <path path="${libraries.dir.nativedirsep}"/>
@@ -672,48 +672,42 @@ exists or setup the property manually. For example like this:
         <dirname file="${dist.war}" property="dist.jar.dir"/>
         <mkdir dir="${dist.jar.dir}"/>
         <jar compress="${jar.compress}" jarfile="${dist.war}">
-            <fileset dir="${build.web.dir}" excludes="WEB-INF/classes/.netbeans_*"/>
+            <fileset dir="${build.web.dir}"/>
         </jar>
     </target>
     <target depends="init,compile,compile-jsps,-pre-dist" if="do.war.package.with.custom.manifest" name="-do-dist-with-manifest">
         <dirname file="${dist.war}" property="dist.jar.dir"/>
         <mkdir dir="${dist.jar.dir}"/>
         <jar compress="${jar.compress}" jarfile="${dist.war}" manifest="${build.meta.inf.dir}/MANIFEST.MF">
-            <fileset dir="${build.web.dir}" excludes="WEB-INF/classes/.netbeans_*"/>
+            <fileset dir="${build.web.dir}"/>
         </jar>
     </target>
     <target depends="init,compile,compile-jsps,-pre-dist" if="do.tmp.war.package.without.custom.manifest" name="-do-tmp-dist-without-manifest">
         <dirname file="${dist.war}" property="dist.jar.dir"/>
         <mkdir dir="${dist.jar.dir}"/>
         <jar compress="${jar.compress}" jarfile="${dist.war}">
-            <fileset dir="${build.web.dir}" excludes="WEB-INF/classes/.netbeans_*"/>
+            <fileset dir="${build.web.dir}"/>
         </jar>
     </target>
     <target depends="init,compile,compile-jsps,-pre-dist" if="do.tmp.war.package.with.custom.manifest" name="-do-tmp-dist-with-manifest">
         <dirname file="${dist.war}" property="dist.jar.dir"/>
         <mkdir dir="${dist.jar.dir}"/>
         <jar compress="${jar.compress}" jarfile="${dist.war}" manifest="${build.meta.inf.dir}/MANIFEST.MF">
-            <fileset dir="${build.web.dir}" excludes="WEB-INF/classes/.netbeans_*"/>
+            <fileset dir="${build.web.dir}"/>
         </jar>
     </target>
     <target depends="init,compile,compile-jsps,-pre-dist,-do-dist-with-manifest,-do-dist-without-manifest" name="do-dist"/>
     <target depends="init" if="dist.ear.dir" name="library-inclusion-in-manifest">
-        <copyfiles files="${file.reference.primefaces-3.2.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${libs.eclipselink.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.ejb-3_0-api.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${libs.jsf20.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.javax.el.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${libs.MySQLDriver.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.lib-Java-EE-GlassFish-v3}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
     <target depends="init" name="library-inclusion-in-archive" unless="dist.ear.dir">
-        <copyfiles files="${file.reference.primefaces-3.2.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${libs.eclipselink.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.ejb-3_0-api.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${libs.jsf20.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.javax.el.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${libs.MySQLDriver.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.lib-Java-EE-GlassFish-v3}" todir="${build.web.dir}/WEB-INF/classes"/>
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
         <delete dir="${build.web.dir}/WEB-INF/lib"/>
@@ -722,7 +716,7 @@ exists or setup the property manually. For example like this:
         <dirname file="${dist.ear.war}" property="dist.jar.dir"/>
         <mkdir dir="${dist.jar.dir}"/>
         <jar compress="${jar.compress}" jarfile="${dist.ear.war}" manifest="${build.web.dir}/META-INF/MANIFEST.MF">
-            <fileset dir="${build.web.dir}" excludes="WEB-INF/classes/.netbeans_*"/>
+            <fileset dir="${build.web.dir}"/>
         </jar>
     </target>
     <target name="-post-dist">
