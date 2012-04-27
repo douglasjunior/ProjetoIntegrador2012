@@ -1,0 +1,8 @@
+2012-04-27 02:19:24 Error: [MissingControllerException] Controller class Index.phpController could not be found.
+#0 C:\xampp\htdocs\cakeVri\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2012-04-27 02:41:20 Error: [MissingActionException] Action ClientesController::AddNada() could not be found.
+#0 C:\xampp\htdocs\cakeVri\lib\Cake\Routing\Dispatcher.php(103): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\cakeVri\lib\Cake\Routing\Dispatcher.php(85): Dispatcher->_invoke(Object(ClientesController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\cakeVri\app\webroot\index.php(96): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}

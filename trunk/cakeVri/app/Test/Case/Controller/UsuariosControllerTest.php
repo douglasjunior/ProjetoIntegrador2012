@@ -1,10 +1,10 @@
 <?php
-App::uses('RrcsController', 'Controller');
+App::uses('UsuariosController', 'Controller');
 
 /**
- * TestRrcsController *
+ * TestUsuariosController *
  */
-class TestRrcsController extends RrcsController {
+class TestUsuariosController extends UsuariosController {
 /**
  * Auto render
  *
@@ -26,16 +26,16 @@ class TestRrcsController extends RrcsController {
 }
 
 /**
- * RrcsController Test Case
+ * UsuariosController Test Case
  *
  */
-class RrcsControllerTestCase extends CakeTestCase {
+class UsuariosControllerTestCase extends CakeTestCase {
 /**
  * Fixtures
  *
  * @var array
  */
-	public $fixtures = array('app.rrc', 'app.usuario');
+	public $fixtures = array('app.usuario', 'app.rrc', 'app.cliente');
 
 /**
  * setUp method
@@ -44,8 +44,8 @@ class RrcsControllerTestCase extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->Rrcs = new TestRrcsController();
-		$this->Rrcs->constructClasses();
+		$this->Usuarios = new TestUsuariosController();
+		$this->Usuarios->constructClasses();
 	}
 
 /**
@@ -54,7 +54,7 @@ class RrcsControllerTestCase extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->Rrcs);
+		unset($this->Usuarios);
 
 		parent::tearDown();
 	}

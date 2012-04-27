@@ -47,8 +47,8 @@ class RrcsController extends AppController {
 				$this->Session->setFlash(__('The rrc could not be saved. Please, try again.'));
 			}
 		}
-		$clientes = $this->Rrc->Cliente->find('list');
-		$this->set(compact('clientes'));
+		$usuarios = $this->Rrc->Usuario->find('list');
+		$this->set(compact('usuarios'));
 	}
 
 /**
@@ -72,8 +72,8 @@ class RrcsController extends AppController {
 		} else {
 			$this->request->data = $this->Rrc->read(null, $id);
 		}
-		$clientes = $this->Rrc->Cliente->find('list');
-		$this->set(compact('clientes'));
+		$usuarios = $this->Rrc->Usuario->find('list');
+		$this->set(compact('usuarios'));
 	}
 
 /**
