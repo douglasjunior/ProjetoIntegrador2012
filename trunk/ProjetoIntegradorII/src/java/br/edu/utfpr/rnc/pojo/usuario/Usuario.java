@@ -29,7 +29,34 @@ public class Usuario implements Serializable {
     @JoinColumn(name="RESPONSAVEL_ID",referencedColumnName="ID")
     @OneToMany(mappedBy = "responsavel")
     private List<Departamento> departamentos;
+    private String login;
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    private String senha;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
     public Usuario() {
     }
 

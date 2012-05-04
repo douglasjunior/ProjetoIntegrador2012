@@ -7,7 +7,7 @@
     <h:form id="formMap" prependId="false">
         <p:growl id="messages" showDetail="true" globalOnly="true" life="2000" />
         <h3 class="tituloCadastro"><h:outputText value="Cadastro de Departamento"/></h3>
-        <p:inputText value="#{departamentoBean.departamento.id}" id="id" />
+        <h:inputHidden value="#{departamentoBean.departamento.id}" id="id" />
 
         <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
             <h:outputLabel for="nome" value="Nome:"><span class="required">*</span></h:outputLabel>

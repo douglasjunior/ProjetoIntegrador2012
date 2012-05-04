@@ -13,6 +13,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "departamentoBean")
 @RequestScoped
@@ -106,5 +107,24 @@ public class DepartamentoBean {
     public void editar() {
         Departamento departamento = (Departamento) JsfUtil.getObjectFromRequestParameter("departamento");
         this.departamento = departamento;
+    }
+    public void remover() {
+        Departamento departamento = (Departamento) JsfUtil.getObjectFromSession("departamento");
+        departamentoDao.remover(departamento);
+        JsfUtil.addSuccessMessage("Departamento removido com sucesso!","");
+        removerDepartamentoDaSessao();
+        
+              
+    }
+    public void adicionarDepartamentonaSessao(){       
+        Departamento departamento = (Departamento) JsfUtil.getObjectFromRequestParameter("departamento");
+        HttpSession hs = JsfUtil.getSession(false);
+        hs.setAttribute("departamento", departamento);
+        
+                
+    }
+    public void removerDepartamentoDaSessao(){
+        HttpSession hs = JsfUtil.getSession(false);
+        hs.removeAttribute("departamento");
     }
 }

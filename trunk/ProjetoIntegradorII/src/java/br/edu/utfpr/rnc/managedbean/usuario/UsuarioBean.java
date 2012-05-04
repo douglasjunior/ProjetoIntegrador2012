@@ -2,7 +2,7 @@ package br.edu.utfpr.rnc.managedbean.usuario;
 
 import br.edu.utfpr.rnc.dao.usuario.UsuarioDao;
 import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
-import br.edu.utfpr.rnc.pojo.departamento.Departamento;
+import br.edu.utfpr.rnc.pojo.usuario.Usuario;
 import br.edu.utfpr.rnc.pojo.usuario.Usuario;
 import br.edu.utfpr.rnc.util.JsfUtil;
 import java.util.Arrays;
@@ -14,6 +14,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "usuarioBean")
 @RequestScoped
@@ -22,12 +23,29 @@ public class UsuarioBean {
     @EJB
     private UsuarioDao usuarioDao;
     private Usuario usuario;
+    private String confirmaSenha;
+
+    public String getConfirmaSenha() {
+        return confirmaSenha;
+    }
+
+    public void setConfirmaSenha(String confirmaSenha) {
+        this.confirmaSenha = confirmaSenha;
+    }
+
+    public UsuarioDao getUsuarioDao() {
+        return usuarioDao;
+    }
+
+    public void setUsuarioDao(UsuarioDao usuarioDao) {
+        this.usuarioDao = usuarioDao;
+    }
 
     public UsuarioBean() {
         usuario = new Usuario();
     }
 
-    @FacesConverter(forClass = Departamento.class)
+    @FacesConverter(forClass = Usuario.class)
     public static class UsuarioConverter implements Converter {
 
         @Override
@@ -79,13 +97,50 @@ public class UsuarioBean {
     }
 
     public String salvar() {
-        GerenciadorPaginas gerenciador = (GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas");
-        System.out.println(gerenciador);
-        gerenciador.setConteudo("./paginas/home.xhtml");
+        if (!this.usuario.getSenha().equals(this.confirmaSenha)) {
+            JsfUtil.addErrorMessage("", "As senhas digitadas não conferem!");
+            confirmaSenha=null;
+            return null;
+        } else {
+            GerenciadorPaginas gerenciador = (GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas");
+            System.out.println(gerenciador);
+            gerenciador.setConteudo("./paginas/home.xhtml");
+        }
         return "refreshPage";
+
     }
 
     public List<Usuario> getUsuariosResponsaveis() {
         return Arrays.asList(new Usuario(), new Usuario(), new Usuario(), new Usuario());
+    }
+
+    public void editar() {
+        Usuario usuario = (Usuario) JsfUtil.getObjectFromRequestParameter("usuario");
+        this.usuario = usuario;
+    }
+
+    public void remover() {
+        Usuario usuario = (Usuario) JsfUtil.getObjectFromSession("usuario");
+        usuarioDao.remover(usuario);
+        JsfUtil.addSuccessMessage("usuario removido com sucesso!", "");
+        removerusuarioDaSessao();
+
+
+    }
+
+    public void adicionarUsuarionaSessao() {
+        Usuario usuario = (Usuario) JsfUtil.getObjectFromRequestParameter("usuario");
+        HttpSession hs = JsfUtil.getSession(false);
+        hs.setAttribute("usuario", usuario);
+
+
+    }
+
+    public void removerusuarioDaSessao() {
+        HttpSession hs = JsfUtil.getSession(false);
+        hs.removeAttribute("usuario");
+    }
+     public List<Usuario> getTodosUsuarios() {
+        return usuarioDao.buscarTodos();
     }
 }

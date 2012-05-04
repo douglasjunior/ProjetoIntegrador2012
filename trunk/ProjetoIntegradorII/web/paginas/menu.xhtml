@@ -8,9 +8,11 @@ xmlns:p="http://primefaces.org/ui">
             <p:menubar>
                 <p:submenu label="Cadastros" icon="ui-icon ui-icon-document">
                     <p:menuitem action="#{gerenciadorPaginas.cadastroDepartamento}" ajax="false" value="Departamento"></p:menuitem>
+                    <p:menuitem action="#{gerenciadorPaginas.cadastroUsuario}" ajax="false" value="Usuario"></p:menuitem>
                 </p:submenu>
                 <p:submenu label="Consultas" icon="ui-icon ui-icon-document">
                     <p:menuitem action="#{gerenciadorPaginas.consultaDepartamento}" ajax="false" value="Departamento"></p:menuitem>
+                    <p:menuitem action="#{gerenciadorPaginas.consultaUsuario}" ajax="false" value="Usuario"></p:menuitem>
                 </p:submenu>
             </p:menubar>
         </h:form>
