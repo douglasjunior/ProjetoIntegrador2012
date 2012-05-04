@@ -2,9 +2,6 @@
 
 App::uses('AppController', 'Controller');
 
-CakePlugin::load('Uploader');
-App::import('Vendor', 'Uploader.Uploader');
-
 /**
  * Usuarios Controller
  *
@@ -14,18 +11,22 @@ class FilesController extends AppController {
 
     public function upload() {
         if (!empty($this->data)) {
+
+            $fileTmp = $this->request->data['File']['fileName']['tmp_name'];
+            $fileName = $this->request->data['File']['fileName']['name'];
+            $diretorioDestino = "anexos/" . $fileName;
+
+            echo $this->request->data['File']['fileName']['name'] . '<br />';
+            echo $this->request->data['File']['fileName']['tmp_name'] . '<br />';
+            echo $diretorioDestino . '<br />';
             
-            echo $this->request->data['File']['fileName']['name'];
-            echo $this->request->data['File']['fileName']['type'];
-            echo $this->request->data['File']['fileName']['tmp_name'];
-            echo $this->request->data['File']['fileName']['errors'];
-            
-            
-            $this->Uploader = new Uploader(array('anexos' => TMP));
-            if ($data = $this->Uploader->upload('fileName')) {
-                echo 'sucesso';
-                // Upload successful, do whatever
+            if ($data = move_uploaded_file($fileTmp, $diretorioDestino)) {
+                echo 'Sucesso' . '<br />';
+                echo '<a href=\'../' . $diretorioDestino . '\'>Link para anexo.</a>';
+            } else {
+                echo 'Falha' . '<br />';
             }
+
             debug($data);
         }
     }

@@ -2,8 +2,6 @@
 
 App::uses('AppController', 'Controller');
 
-CakePlugin::load('Uploader');
-App::import('Vendor', 'Uploader.Uploader');
 
 /**
  * Rrcs Controller
