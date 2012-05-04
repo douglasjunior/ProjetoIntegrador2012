@@ -11,7 +11,7 @@
         echo $this->Form->input('email');
         echo $this->Form->input('usuario');
         echo $this->Form->input('senha');
-        echo $this->Form->select('interno', array('0' => 'Externo', '1' => 'Interno'), array('default' => '0','empty'=>false));
+        echo $this->Form->select('interno', array('0' => 'Externo', '1' => 'Interno'), array('default' => '0', 'empty' => false));
         echo $this->Form->input('departamento');
         ?>
     </fieldset>
