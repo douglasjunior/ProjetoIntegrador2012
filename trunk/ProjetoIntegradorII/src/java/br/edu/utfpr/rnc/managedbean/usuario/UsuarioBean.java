@@ -1,8 +1,6 @@
 package br.edu.utfpr.rnc.managedbean.usuario;
 
 import br.edu.utfpr.rnc.dao.usuario.UsuarioDao;
-import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
-import br.edu.utfpr.rnc.pojo.usuario.Usuario;
 import br.edu.utfpr.rnc.pojo.usuario.Usuario;
 import br.edu.utfpr.rnc.util.JsfUtil;
 import java.util.Arrays;
@@ -96,18 +94,24 @@ public class UsuarioBean {
         this.usuario = usuario;
     }
 
-    public String salvar() {
+    public void salvar() {
         if (!this.usuario.getSenha().equals(this.confirmaSenha)) {
             JsfUtil.addErrorMessage("", "As senhas digitadas não conferem!");
-            confirmaSenha=null;
-            return null;
         } else {
-            GerenciadorPaginas gerenciador = (GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas");
-            System.out.println(gerenciador);
-            gerenciador.setConteudo("./paginas/home.xhtml");
+            confirmaSenha = null;
+            try {
+                if (usuario.getId() == 0) {
+                    usuarioDao.criarEntidade(usuario);
+                    JsfUtil.addSuccessMessage("", "Usuário salvo com sucesso.");
+                } else {
+                    usuarioDao.editar(usuario);
+                }
+                usuario = new Usuario();
+            } catch (Exception e) {
+                e.printStackTrace();
+                JsfUtil.addErrorMessage("", "Erro ao salvar usuário.");
+            }
         }
-        return "refreshPage";
-
     }
 
     public List<Usuario> getUsuariosResponsaveis() {
@@ -120,27 +124,31 @@ public class UsuarioBean {
     }
 
     public void remover() {
-        Usuario usuario = (Usuario) JsfUtil.getObjectFromSession("usuario");
-        usuarioDao.remover(usuario);
-        JsfUtil.addSuccessMessage("usuario removido com sucesso!", "");
-        removerusuarioDaSessao();
-
-
+        try {
+            Usuario usuario = (Usuario) JsfUtil.getObjectFromSession("usuario");
+            usuarioDao.remover(usuario);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        removerUsuarioDaSessao();
     }
 
     public void adicionarUsuarionaSessao() {
         Usuario usuario = (Usuario) JsfUtil.getObjectFromRequestParameter("usuario");
         HttpSession hs = JsfUtil.getSession(false);
         hs.setAttribute("usuario", usuario);
-
-
     }
 
-    public void removerusuarioDaSessao() {
+    public void removerUsuarioDaSessao() {
         HttpSession hs = JsfUtil.getSession(false);
         hs.removeAttribute("usuario");
     }
-     public List<Usuario> getTodosUsuarios() {
+
+    public List<Usuario> getTodosUsuarios() {
         return usuarioDao.buscarTodos();
+    }
+
+    public void limparCampos() {
+        usuario = new Usuario();
     }
 }

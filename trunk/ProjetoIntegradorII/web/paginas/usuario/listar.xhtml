@@ -13,7 +13,7 @@
                 <h:outputText value="" />
             </f:facet>
         </p:ajaxStatus>
-        <p:dataTable var="usuarios" value="#{usuarioBean.todosUsuarios}" id="tipoList" rows="10"
+        <p:dataTable var="usuario" value="#{usuarioBean.todosUsuarios}" id="tipoList" rows="10"
                      emptyMessage="Nenhum registro encontrado!" paginator="true" paginatorPosition="bottom"
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                      rowsPerPageTemplate="5,10,15">
@@ -38,7 +38,7 @@
                                action="#{gerenciadorPaginas.cadastroUsuario()}" ajax="false"
                                title="Editar este Tipo" value="Editar " id="editar"/>
 
-                <p:commandLink  styleClass="ui-icon ui-icon-trash" title="Excluir este Tipo" value="Excluir" actionListener="#{usuarioBean.adicionarUsuarionaSessao()}"
+                <p:commandLink  styleClass="ui-icon ui-icon-trash" title="Excluir este Usuário" value="Excluir" actionListener="#{usuarioBean.adicionarUsuarionaSessao()}"
                                 id="excluir" rendered="#{!usuario.bound}" oncomplete="confirmation.show()"/>
             </p:column>
 
@@ -50,14 +50,14 @@
                             encoding="ISO-8859-1" preProcessor="#{customPDFGenerator.preProcessPDF}"/>
         </h:commandLink>
 
-        <p:confirmDialog message="Deseja realmente excluir este Departamento?"
+        <p:confirmDialog message="Deseja realmente excluir este Usuário?"
                          header="Confirmação" severity="alert" widgetVar="confirmation" closable="false">
 
             <p:commandButton value="Sim" update="tipoList messages" oncomplete="confirmation.hide()" style="position: relative;left: 45px;"
-                             actionListener="#{departamentoBean.remover()}">
+                             actionListener="#{usuarioBean.remover()}">
             </p:commandButton>
             <p:commandButton value="Não" oncomplete="confirmation.hide()" style="position: relative;left: 115px;"
-                             actionListener="#{departamentoBean.removerDepartamentoDaSessao()}"/>
+                             actionListener="#{usuarioBean.removerUsuarioDaSessao()}"/>
 
         </p:confirmDialog>
     </h:form>

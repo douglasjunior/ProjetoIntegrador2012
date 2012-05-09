@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 /**
@@ -26,7 +25,8 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
-    @JoinColumn(name="RESPONSAVEL_ID",referencedColumnName="ID")
+//    @JoinColumn(name = "RESPONSAVEL_ID", referencedColumnName = "ID")
+//    @OneToMany(mappedBy = "responsavel")
     @OneToMany(mappedBy = "responsavel")
     private List<Departamento> departamentos;
     private String login;
@@ -56,7 +56,7 @@ public class Usuario implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
+
     public Usuario() {
     }
 
@@ -82,6 +82,13 @@ public class Usuario implements Serializable {
 
     public void setDepartamentos(List<Departamento> departamentos) {
         this.departamentos = departamentos;
+    }
+
+    public boolean isBound() {
+        if (departamentos == null || departamentos.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
     @Override

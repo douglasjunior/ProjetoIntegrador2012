@@ -108,22 +108,23 @@ public class DepartamentoBean {
         Departamento departamento = (Departamento) JsfUtil.getObjectFromRequestParameter("departamento");
         this.departamento = departamento;
     }
+
     public void remover() {
         Departamento departamento = (Departamento) JsfUtil.getObjectFromSession("departamento");
         departamentoDao.remover(departamento);
-        JsfUtil.addSuccessMessage("Departamento removido com sucesso!","");
+        JsfUtil.addSuccessMessage("Departamento removido com sucesso!", "");
         removerDepartamentoDaSessao();
-        
-              
+
+
     }
-    public void adicionarDepartamentonaSessao(){       
+
+    public void adicionarDepartamentonaSessao() {
         Departamento departamento = (Departamento) JsfUtil.getObjectFromRequestParameter("departamento");
         HttpSession hs = JsfUtil.getSession(false);
         hs.setAttribute("departamento", departamento);
-        
-                
     }
-    public void removerDepartamentoDaSessao(){
+
+    public void removerDepartamentoDaSessao() {
         HttpSession hs = JsfUtil.getSession(false);
         hs.removeAttribute("departamento");
     }

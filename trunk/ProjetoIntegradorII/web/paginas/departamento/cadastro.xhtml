@@ -33,10 +33,10 @@
 
         <p:commandButton value="Salvar" styleClass="saveButton" id="save" ajax="false" title="Salvar alterações"
                          action="#{departamentoBean.salvar}" image="ui-icon ui-icon-disk" style="margin-left: 100px;"/>
-
+        
         <p:commandButton value="Limpar" id="cancel" styleClass="cancelButton" update="@all" title="Limpar formulário"
                          immediate="true" actionListener="#{userController.clearFields()}" image="ui-icon ui-icon-close"
-                         style="margin-left: 80px;"/>
+                         style="margin-left: 80px;" rendered="#{departamentoBean.departamento.id == 0}"/>
     </h:form>
 
 </div>

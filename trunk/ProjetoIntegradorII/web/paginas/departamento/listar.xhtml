@@ -35,7 +35,7 @@
                                action="#{gerenciadorPaginas.cadastroDepartamento()}" ajax="false"
                                title="Editar este Tipo" value="Editar " id="editar"/>
 
-                <p:commandLink  styleClass="ui-icon ui-icon-trash" title="Excluir este Tipo" value="Excluir" actionListener="#{departamentoBean.adicionarDepartamentonaSessao()}"
+                <p:commandLink  styleClass="ui-icon ui-icon-trash" title="Excluir este Departamento" value="Excluir" actionListener="#{departamentoBean.adicionarDepartamentonaSessao()}"
                                 id="excluir" rendered="#{!departamento.bound}" oncomplete="confirmation.show()"/>
             </p:column>
 

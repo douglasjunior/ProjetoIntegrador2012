@@ -18,7 +18,7 @@
             </h:panelGrid>
 
         </h:panelGrid>
-        
+
         <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
             <h:outputLabel for="login" value="Login:"><span class="required">*</span></h:outputLabel>
             <h:panelGrid columns="2">
@@ -27,43 +27,44 @@
                 <p:message for="login"/>
             </h:panelGrid>
         </h:panelGrid>
-        
-         <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+
+        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
             <h:outputLabel for="email" value="Email:"><span class="required">*</span></h:outputLabel>
             <h:panelGrid columns="2">
                 <p:inputText value="#{usuarioBean.usuario.email}" id="email" maxlength="50" 
-                             title="Email do Usuario." required="true" requiredMessage="Campo obrigatório" size="45" />
+                             title="Email do Usuario." required="true" requiredMessage="Campo obrigatório" size="45" >
+                    <f:validateRegex pattern="^(\w+[\-\.])*\w+@(\w+\.)+[A-Za-z]+$"/>
+                </p:inputText>
                 <p:message for="email"/>
             </h:panelGrid>
         </h:panelGrid>
-        
+
         <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
             <h:outputLabel for="senha" value="Senha:"><span class="required">*</span></h:outputLabel>
             <h:panelGrid columns="2">
-                <p:inputText value="#{usuarioBean.usuario.senha}" id="senha" maxlength="10" 
-                             title="Senha do Usuario." required="true" requiredMessage="Campo obrigatório" size="45" />
+                <p:password value="#{usuarioBean.usuario.senha}" id="senha" maxlength="10" 
+                            title="Senha do Usuario." required="true" requiredMessage="Campo obrigatório" size="45" />
                 <p:message for="senha"/>
             </h:panelGrid>
         </h:panelGrid>
-        
+
         <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
             <h:outputLabel for="senha2" value="Confirme a Senha:"><span class="required">*</span></h:outputLabel>
             <h:panelGrid columns="2">
-                <p:inputText value="#{usuarioBean.confirmaSenha}" id="senha2" maxlength="10" 
-                             title="Senha do Usuario." required="true" requiredMessage="Campo obrigatório" size="45" />
+                <p:password value="#{usuarioBean.confirmaSenha}" id="senha2" maxlength="10" 
+                            title="Senha do Usuario." required="true" requiredMessage="Campo obrigatório" size="45" />
                 <p:message for="senha2"/>
             </h:panelGrid>
         </h:panelGrid>
-        
 
         <br/>
 
         <p:commandButton value="Salvar" styleClass="saveButton" id="save" ajax="false" title="Salvar alterações"
                          action="#{usuarioBean.salvar}" image="ui-icon ui-icon-disk" style="margin-left: 100px;"/>
 
-        <p:commandButton value="Limpar" id="cancel" styleClass="cancelButton" update="@all" title="Limpar formulário"
-                         immediate="true" actionListener="#{userController.clearFields()}" image="ui-icon ui-icon-close"
-                         style="margin-left: 80px;"/>
+        <p:commandButton value="Limpar" id="cancel" styleClass="cancelButton" update="@form" title="Limpar formulário"
+                         immediate="true" actionListener="#{usuarioBean.limparCampos()}" image="ui-icon ui-icon-close"
+                         style="margin-left: 80px;" rendered="#{usuarioBean.usuario.id == 0}"/>
     </h:form>
 
 </div>
