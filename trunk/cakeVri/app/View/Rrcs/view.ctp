@@ -63,7 +63,7 @@
 		</dd>
 		<dt><?php echo __('Anexo'); ?></dt>
 		<dd>
-			<?php echo h($rrc['Rrc']['anexo']); ?>
+                    <a href="../../<?php echo h($rrc['Rrc']['anexo']); ?>" > <?php echo h($rrc['Rrc']['anexo']); ?> </a>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('SetorOuEmpresa'); ?></dt>

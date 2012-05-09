@@ -35,9 +35,10 @@
 		<td><?php echo h($rrc['Rrc']['placa']); ?>&nbsp;</td>
 		<td><?php echo h($rrc['Rrc']['descricao']); ?>&nbsp;</td>
 		<td><?php echo h($rrc['Rrc']['relatorio']); ?>&nbsp;</td>
-		<td><?php echo h($rrc['Rrc']['anexo']); ?>&nbsp;</td>
+                <td> <a href="<?php echo h($rrc['Rrc']['anexo']); ?>" > <?php echo h($rrc['Rrc']['anexo']); ?> </a></td> 
 		<td><?php echo h($rrc['Rrc']['setorOuEmpresa']); ?>&nbsp;</td>
 		<td class="actions">
+			<?php echo $this->Html->link(__('Add Anexo'), array('action' => 'addAnexo', $rrc['Rrc']['id'])); ?>
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $rrc['Rrc']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $rrc['Rrc']['id'])); ?>
 			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $rrc['Rrc']['id']), null, __('Are you sure you want to delete # %s?', $rrc['Rrc']['id'])); ?>

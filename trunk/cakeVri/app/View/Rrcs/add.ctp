@@ -14,7 +14,6 @@
         echo $this->Form->input('placa');
         echo $this->Form->input('descricao');
         echo $this->Form->input('relatorio');
-        echo $this->Form->input('anexo', array('type' => 'file'));
         echo $this->Form->input('setorOuEmpresa');
         ?>
     </fieldset>
