@@ -1,6 +1,7 @@
 package br.edu.utfpr.rnc.managedbean.usuario;
 
 import br.edu.utfpr.rnc.dao.usuario.UsuarioDao;
+import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
 import br.edu.utfpr.rnc.pojo.usuario.Usuario;
 import br.edu.utfpr.rnc.util.JsfUtil;
 import java.util.Arrays;
@@ -101,10 +102,19 @@ public class UsuarioBean {
             confirmaSenha = null;
             try {
                 if (usuario.getId() == 0) {
-                    usuarioDao.criarEntidade(usuario);
-                    JsfUtil.addSuccessMessage("", "Usuário salvo com sucesso.");
+                    if (!usuario.getSenha().isEmpty()) {
+                        usuarioDao.criarEntidade(usuario);
+                        JsfUtil.addSuccessMessage("", "Usuário salvo com sucesso.");
+                    } else {
+                        JsfUtil.addErrorMessage("Erro ao salvar usuário", "Deve ser informada uma senha.");
+                    }
                 } else {
+                    if (usuario.getSenha().isEmpty()) {
+                        Usuario u = usuarioDao.buscar(usuario.getId());
+                        usuario.setSenha(u.getSenha());
+                    }
                     usuarioDao.editar(usuario);
+                    ((GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas")).consultaUsuario();
                 }
                 usuario = new Usuario();
             } catch (Exception e) {
