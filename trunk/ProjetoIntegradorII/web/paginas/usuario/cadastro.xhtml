@@ -43,7 +43,7 @@
             <h:outputLabel for="senha" value="Senha:"><span class="required">*</span></h:outputLabel>
             <h:panelGrid columns="2">
                 <p:password value="#{usuarioBean.usuario.senha}" id="senha" maxlength="10" immediate="true"
-                            title="Senha do Usuario." required="true" requiredMessage="Campo obrigatório" size="45" />
+                            title="Senha do Usuario." required="false" requiredMessage="Campo obrigatório" size="45" />
                 <p:message for="senha"/>
             </h:panelGrid>
         </h:panelGrid>
@@ -52,7 +52,7 @@
             <h:outputLabel for="senha2" value="Confirme a Senha:"><span class="required">*</span></h:outputLabel>
             <h:panelGrid columns="2">
                 <p:password value="#{usuarioBean.confirmaSenha}" id="senha2" maxlength="10" immediate="true" 
-                            title="Senha do Usuario." required="true" requiredMessage="Campo obrigatório" size="45" />
+                            title="Senha do Usuario." required="false" requiredMessage="Campo obrigatório" size="45" />
                 <p:message for="senha2"/>
             </h:panelGrid>
         </h:panelGrid>

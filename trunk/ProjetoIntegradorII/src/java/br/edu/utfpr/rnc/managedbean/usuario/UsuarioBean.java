@@ -4,6 +4,7 @@ import br.edu.utfpr.rnc.dao.usuario.UsuarioDao;
 import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
 import br.edu.utfpr.rnc.pojo.usuario.Usuario;
 import br.edu.utfpr.rnc.util.JsfUtil;
+import br.edu.utfpr.rnc.util.PasswordHash;
 import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
@@ -100,10 +101,13 @@ public class UsuarioBean {
             JsfUtil.addErrorMessage("", "As senhas digitadas não conferem!");
         } else {
             confirmaSenha = null;
+
             try {
                 if (usuario.getId() == 0) {
                     if (!usuario.getSenha().isEmpty()) {
+                        usuario.setSenha(new PasswordHash().hash512(usuario.getSenha()));
                         usuarioDao.criarEntidade(usuario);
+                        usuario = new Usuario();
                         JsfUtil.addSuccessMessage("", "Usuário salvo com sucesso.");
                     } else {
                         JsfUtil.addErrorMessage("Erro ao salvar usuário", "Deve ser informada uma senha.");
@@ -112,11 +116,13 @@ public class UsuarioBean {
                     if (usuario.getSenha().isEmpty()) {
                         Usuario u = usuarioDao.buscar(usuario.getId());
                         usuario.setSenha(u.getSenha());
+                    } else {
+                        usuario.setSenha(new PasswordHash().hash512(usuario.getSenha()));
                     }
                     usuarioDao.editar(usuario);
                     ((GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas")).consultaUsuario();
                 }
-                usuario = new Usuario();
+
             } catch (Exception e) {
                 e.printStackTrace();
                 JsfUtil.addErrorMessage("", "Erro ao salvar usuário.");
