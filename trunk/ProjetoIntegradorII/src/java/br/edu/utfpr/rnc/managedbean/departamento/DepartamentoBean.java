@@ -2,6 +2,7 @@ package br.edu.utfpr.rnc.managedbean.departamento;
 
 import br.edu.utfpr.rnc.dao.departamento.DepartamentoDao;
 import br.edu.utfpr.rnc.dao.usuario.UsuarioDao;
+import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
 import br.edu.utfpr.rnc.pojo.departamento.Departamento;
 import br.edu.utfpr.rnc.pojo.usuario.Usuario;
 import br.edu.utfpr.rnc.util.JsfUtil;
@@ -87,6 +88,7 @@ public class DepartamentoBean {
                 departamentoDao.criarEntidade(departamento);
             } else {
                 departamentoDao.editar(departamento);
+                ((GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas")).consultaDepartamento();
             }
             departamento = new Departamento();
             JsfUtil.addSuccessMessage("", "Departamento salvo com sucesso.");

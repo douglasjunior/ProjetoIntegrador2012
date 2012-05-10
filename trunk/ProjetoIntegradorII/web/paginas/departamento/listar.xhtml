@@ -13,13 +13,13 @@
                 <h:outputText value="" />
             </f:facet>
         </p:ajaxStatus>
-        <p:dataTable var="departamento" value="#{departamentoBean.todosDepartamentos}" id="tipoList" rows="10"
+        <p:dataTable var="departamento" value="#{departamentoBean.todosDepartamentos}" id="departamentoLista" rows="10"
                      emptyMessage="Nenhum registro encontrado!" paginator="true" paginatorPosition="bottom"
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                      rowsPerPageTemplate="5,10,15">
 
             <f:facet name="header">
-                <h:outputText value="Lista de Tipos"/>
+                <h:outputText value="Lista de Departamentos"/>
             </f:facet>
 
             <p:column styleClass="col_codigo" headerText="Código">
@@ -30,27 +30,32 @@
                 <h:outputText value="#{departamento.nome}" />
             </p:column>
 
+            <p:column filterBy="#{departamento.responsavel.nome}" styleClass="col_nome" headerText="Responsável" sortBy="#{departamento.responsavel.nome}">
+                <h:outputText value="#{departamento.responsavel.nome}" />
+            </p:column>
+
             <p:column headerText="Opções">
                 <p:commandLink actionListener="#{departamentoBean.editar()}" styleClass="ui-icon ui-icon-pencil"
                                action="#{gerenciadorPaginas.cadastroDepartamento()}" ajax="false"
-                               title="Editar este Tipo" value="Editar " id="editar"/>
+                               title="Editar este Departamento" value="Editar " id="editar"/>
 
                 <p:commandLink  styleClass="ui-icon ui-icon-trash" title="Excluir este Departamento" value="Excluir" actionListener="#{departamentoBean.adicionarDepartamentonaSessao()}"
                                 id="excluir" rendered="#{!departamento.bound}" oncomplete="confirmation.show()"/>
             </p:column>
 
         </p:dataTable>
-        <h:commandLink title="Gera um relatório dos tipos de projeto, em pdf, a partir da tabela" styleClass="pdfLink">
-            <h:inputHidden value="Relatório dos Tipos de Projeto" id="titulo"/>
-            <p:graphicImage value="/resources/images/pdf.png" />
-            <p:dataExporter type="pdf" target="tipoList" fileName="TiposProjeto" excludeColumns="2"
+
+<!--        <h:commandLink title="Gera um relatório dos departamentos cadastrados, em pdf, a partir da tabela" styleClass="pdfLink">
+            <h:inputHidden value="Relatório dos Departamentos Cadastrados" id="titulo"/>
+            <p:graphicImage value="/resources/images/pdf.png" width="48" height="48" />
+            <p:dataExporter type="pdf" target="departamentoLista" fileName="DepartamentosCadastrados" excludeColumns="2"
                             encoding="ISO-8859-1" preProcessor="#{customPDFGenerator.preProcessPDF}"/>
-        </h:commandLink>
+        </h:commandLink> -->
 
         <p:confirmDialog message="Deseja realmente excluir este Departamento?"
                          header="Confirmação" severity="alert" widgetVar="confirmation" closable="false">
 
-            <p:commandButton value="Sim" update="tipoList messages" oncomplete="confirmation.hide()" style="position: relative;left: 45px;"
+            <p:commandButton value="Sim" update="departamentoLista messages" oncomplete="confirmation.hide()" style="position: relative;left: 45px;"
                              actionListener="#{departamentoBean.remover()}">
             </p:commandButton>
             <p:commandButton value="Não" oncomplete="confirmation.hide()" style="position: relative;left: 115px;"

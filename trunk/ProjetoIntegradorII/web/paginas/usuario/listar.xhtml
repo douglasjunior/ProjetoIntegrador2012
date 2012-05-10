@@ -13,7 +13,7 @@
                 <h:outputText value="" />
             </f:facet>
         </p:ajaxStatus>
-        <p:dataTable var="usuario" value="#{usuarioBean.todosUsuarios}" id="tipoList" rows="10"
+        <p:dataTable var="usuario" value="#{usuarioBean.todosUsuarios}" id="usuarioLista" rows="10"
                      emptyMessage="Nenhum registro encontrado!" paginator="true" paginatorPosition="bottom"
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                      rowsPerPageTemplate="5,10,15">
@@ -36,24 +36,25 @@
             <p:column headerText="Opções">
                 <p:commandLink actionListener="#{usuarioBean.editar()}" styleClass="ui-icon ui-icon-pencil"
                                action="#{gerenciadorPaginas.cadastroUsuario()}" ajax="false"
-                               title="Editar este Tipo" value="Editar " id="editar"/>
+                               title="Editar este Usuário" value="Editar " id="editar"/>
 
                 <p:commandLink  styleClass="ui-icon ui-icon-trash" title="Excluir este Usuário" value="Excluir" actionListener="#{usuarioBean.adicionarUsuarionaSessao()}"
                                 id="excluir" rendered="#{!usuario.bound}" oncomplete="confirmation.show()"/>
             </p:column>
 
         </p:dataTable>
-        <h:commandLink title="Gera um relatório dos tipos de projeto, em pdf, a partir da tabela" styleClass="pdfLink">
-            <h:inputHidden value="Relatório dos Tipos de Projeto" id="titulo"/>
-            <p:graphicImage value="/resources/images/pdf.png" />
-            <p:dataExporter type="pdf" target="tipoList" fileName="TiposProjeto" excludeColumns="2"
-                            encoding="ISO-8859-1" preProcessor="#{customPDFGenerator.preProcessPDF}"/>
-        </h:commandLink>
+
+        <!-- <h:commandLink title="Gera um relatório dos usuários cadastrados, em pdf, a partir da tabela" styleClass="pdfLink">
+             <h:inputHidden value="Relatório dos Usuários cadastrados" id="titulo"/>
+             <p:graphicImage value="/resources/images/pdf.png" />
+             <p:dataExporter type="pdf" target="usuarioLista" fileName="UsuariosCadastrados" excludeColumns="2"
+                             encoding="ISO-8859-1" preProcessor="#{customPDFGenerator.preProcessPDF}"/>
+         </h:commandLink> -->
 
         <p:confirmDialog message="Deseja realmente excluir este Usuário?"
                          header="Confirmação" severity="alert" widgetVar="confirmation" closable="false">
 
-            <p:commandButton value="Sim" update="tipoList messages" oncomplete="confirmation.hide()" style="position: relative;left: 45px;"
+            <p:commandButton value="Sim" update="usuarioLista messages" oncomplete="confirmation.hide()" style="position: relative;left: 45px;"
                              actionListener="#{usuarioBean.remover()}">
             </p:commandButton>
             <p:commandButton value="Não" oncomplete="confirmation.hide()" style="position: relative;left: 115px;"
