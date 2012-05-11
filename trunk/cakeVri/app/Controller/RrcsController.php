@@ -19,6 +19,11 @@ class RrcsController extends AppController {
         $this->set('rrcs', $this->paginate());
     }
 
+    public function minhasRrcs() {
+        $this->Rrc->recursive = 0;
+        $this->set('rrcs', $this->paginate());
+    }
+
     /**
      * view method
      *

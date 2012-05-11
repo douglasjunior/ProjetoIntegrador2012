@@ -4,14 +4,14 @@ App::uses('AppController', 'Controller');
 
 /**
  * Users Controller
- *
+ * senha: '45658aed9ab330c83af707aaacea541365adbbe2'
  * @property User $User
  */
 class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add', 'logout', 'index', 'view', 'edit');
+     //   $this->Auth->allow('add', 'logout', 'index', 'view', 'edit','delete');
     }
 
     public function login() {
