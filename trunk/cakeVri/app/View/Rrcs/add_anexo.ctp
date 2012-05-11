@@ -14,7 +14,7 @@
     <h3><?php echo __('Actions'); ?></h3>
     <ul> 
         <li><?php echo $this->Html->link(__('List Rrcs'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('List Usuarios'), array('controller' => 'usuarios', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New Usuario'), array('controller' => 'usuarios', 'action' => 'add')); ?> </li>
+        <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
+        <li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
     </ul>
 </div>

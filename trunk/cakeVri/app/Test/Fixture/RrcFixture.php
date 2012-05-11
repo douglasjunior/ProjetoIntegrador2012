@@ -18,7 +18,7 @@ class RrcFixture extends CakeTestFixture {
  */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'key' => 'primary'),
-		'usuario_id' => array('type' => 'integer', 'null' => true, 'default' => NULL),
+		'user_id' => array('type' => 'integer', 'null' => true, 'default' => NULL),
 		'dataCriacao' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
 		'produto' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 100, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'quantidadeReprovado' => array('type' => 'integer', 'null' => true, 'default' => NULL),
@@ -43,7 +43,7 @@ class RrcFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'usuario_id' => 1,
+			'user_id' => 1,
 			'dataCriacao' => '2012-04-27 03:46:02',
 			'produto' => 'Lorem ipsum dolor sit amet',
 			'quantidadeReprovado' => 1,

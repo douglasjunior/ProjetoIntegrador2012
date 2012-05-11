@@ -55,7 +55,7 @@ DROP TABLE IF EXISTS `rrc`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rrc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `dataCriacao` datetime DEFAULT NULL,
   `produto` varchar(100) DEFAULT NULL,
   `quantidadeReprovado` int(11) DEFAULT NULL,
@@ -83,13 +83,13 @@ INSERT INTO `rrc` VALUES (1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,
 UNLOCK TABLES;
 
 --
--- Table structure for table `usuario`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `usuario`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuario` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
   `cnpj` varchar(45) DEFAULT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE `usuario` (
   `nomeContato` varchar(45) DEFAULT NULL,
   `telefone` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
-  `usuario` varchar(45) DEFAULT NULL,
+  `user` varchar(45) DEFAULT NULL,
   `senha` varchar(45) DEFAULT NULL,
   `interno` tinyint(4) DEFAULT NULL,
   `departamento` varchar(45) DEFAULT NULL,
@@ -106,13 +106,13 @@ CREATE TABLE `usuario` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuario`
+-- Dumping data for table `user`
 --
 
-LOCK TABLES `usuario` WRITE;
-/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (2,'sdfsadfsa','dfsadf','sadfasdfs','adfsadfsa','dfsadf','','','',NULL,NULL),(3,'Maiara','36838383838','asdasdasd','maiara','asdasd','asdf@asd.com','asdasdasd','asdasdasd',0,'asdasdasdasd');
-/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (2,'sdfsadfsa','dfsadf','sadfasdfs','adfsadfsa','dfsadf','','','',NULL,NULL),(3,'Maiara','36838383838','asdasdasd','maiara','asdasd','asdf@asd.com','asdasdasd','asdasdasd',0,'asdasdasdasd');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

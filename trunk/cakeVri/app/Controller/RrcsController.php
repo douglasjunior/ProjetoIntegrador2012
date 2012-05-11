@@ -48,13 +48,13 @@ class RrcsController extends AppController {
 
             if ($this->Rrc->save($this->request->data)) {
                 $this->Session->setFlash(__('The rrc has been saved'));
-                // $this->redirect(array('action' => 'index'));
+                $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The rrc could not be saved. Please, try again.'));
             }
         }
-        $usuarios = $this->Rrc->Usuario->find('list');
-        $this->set(compact('usuarios'));
+        $users = $this->Rrc->User->find('list');
+        $this->set(compact('users'));
     }
 
     public function salvarAnexo($arrayAnexo, $id) {
@@ -101,8 +101,8 @@ class RrcsController extends AppController {
         } else {
             $this->request->data = $this->Rrc->read(null, $id);
         }
-        $usuarios = $this->Rrc->Usuario->find('list');
-        $this->set(compact('usuarios'));
+        $users = $this->Rrc->User->find('list');
+        $this->set(compact('users'));
     }
 
     public function addAnexo($id = null) {
@@ -111,10 +111,6 @@ class RrcsController extends AppController {
             throw new NotFoundException(__('Invalid rrc'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
-            echo $this->request->data['Rrc']['anexo']['tmp_name'] . "<br />";
-            echo $this->request->data['Rrc']['anexo']['name'] . "<br />";
-            echo $this->request->data['Rrc']['anexo']['error'] . "<br />";
-
             $anexoSalvo = $this->salvarAnexo($this->request->data['Rrc']['anexo'], $id);
 
             $this->request->data['Rrc']['anexo'] = $anexoSalvo;
@@ -129,7 +125,7 @@ class RrcsController extends AppController {
         } else {
             $this->request->data = $this->Rrc->read(null, $id);
         }
-        $this->set(compact('usuarios'));
+        $this->set(compact('users'));
         $this->set('rrc', $this->Rrc->read(null, $id));
     }
 
@@ -143,10 +139,21 @@ class RrcsController extends AppController {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
         }
+
         $this->Rrc->id = $id;
         if (!$this->Rrc->exists()) {
             throw new NotFoundException(__('Invalid rrc'));
         }
+
+        $diretorioAnexos = "anexos/$id/";
+
+        // deletar arquivo de anexo
+        foreach ($anexos = scandir($diretorioAnexos) as $arquivoParaDeletar) {
+            @unlink($diretorioAnexos . $arquivoParaDeletar);
+        }
+
+        rmdir($diretorioAnexos);
+
         if ($this->Rrc->delete()) {
             $this->Session->setFlash(__('Rrc deleted'));
             $this->redirect(array('action' => 'index'));

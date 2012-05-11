@@ -11,7 +11,7 @@ class RrcTestCase extends CakeTestCase {
  *
  * @var array
  */
-	public $fixtures = array('app.rrc', 'app.usuario');
+	public $fixtures = array('app.rrc', 'app.user');
 
 /**
  * setUp method

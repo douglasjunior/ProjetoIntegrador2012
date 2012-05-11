@@ -1,17 +1,17 @@
 <?php
-App::uses('Usuario', 'Model');
+App::uses('User', 'Model');
 
 /**
- * Usuario Test Case
+ * User Test Case
  *
  */
-class UsuarioTestCase extends CakeTestCase {
+class UserTestCase extends CakeTestCase {
 /**
  * Fixtures
  *
  * @var array
  */
-	public $fixtures = array('app.usuario', 'app.rrc', 'app.cliente');
+	public $fixtures = array('app.user', 'app.rrc', 'app.cliente');
 
 /**
  * setUp method
@@ -20,7 +20,7 @@ class UsuarioTestCase extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->Usuario = ClassRegistry::init('Usuario');
+		$this->User = ClassRegistry::init('User');
 	}
 
 /**
@@ -29,7 +29,7 @@ class UsuarioTestCase extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->Usuario);
+		unset($this->User);
 
 		parent::tearDown();
 	}

@@ -6,9 +6,9 @@
 			<?php echo h($rrc['Rrc']['id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Usuario'); ?></dt>
+		<dt><?php echo __('User'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($rrc['Usuario']['id'], array('controller' => 'usuarios', 'action' => 'view', $rrc['Usuario']['id'])); ?>
+			<?php echo $this->Html->link($rrc['User']['id'], array('controller' => 'users', 'action' => 'view', $rrc['User']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('DataCriacao'); ?></dt>
@@ -80,7 +80,7 @@
 		<li><?php echo $this->Form->postLink(__('Delete Rrc'), array('action' => 'delete', $rrc['Rrc']['id']), null, __('Are you sure you want to delete # %s?', $rrc['Rrc']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List Rrcs'), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Rrc'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Usuarios'), array('controller' => 'usuarios', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Usuario'), array('controller' => 'usuarios', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

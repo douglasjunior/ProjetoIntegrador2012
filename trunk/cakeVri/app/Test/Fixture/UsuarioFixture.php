@@ -1,15 +1,15 @@
 <?php
 /**
- * UsuarioFixture
+ * UserFixture
  *
  */
-class UsuarioFixture extends CakeTestFixture {
+class UserFixture extends CakeTestFixture {
 /**
  * Table name
  *
  * @var string
  */
-	public $table = 'usuario';
+	public $table = 'user';
 
 /**
  * Fields
@@ -24,7 +24,7 @@ class UsuarioFixture extends CakeTestFixture {
 		'nomeContato' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'telefone' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'email' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'usuario' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'user' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'senha' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'interno' => array('type' => 'integer', 'null' => true, 'default' => NULL, 'length' => 4),
 		'departamento' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 45, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
@@ -46,7 +46,7 @@ class UsuarioFixture extends CakeTestFixture {
 			'nomeContato' => 'Lorem ipsum dolor sit amet',
 			'telefone' => 'Lorem ipsum dolor sit amet',
 			'email' => 'Lorem ipsum dolor sit amet',
-			'usuario' => 'Lorem ipsum dolor sit amet',
+			'user' => 'Lorem ipsum dolor sit amet',
 			'senha' => 'Lorem ipsum dolor sit amet',
 			'interno' => 1,
 			'departamento' => 'Lorem ipsum dolor sit amet'

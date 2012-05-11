@@ -4,7 +4,7 @@
 		<legend><?php echo __('Edit Rrc'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
-		echo $this->Form->input('usuario_id');
+		echo $this->Form->input('user_id');
 		echo $this->Form->input('dataCriacao');
 		echo $this->Form->input('produto');
 		echo $this->Form->input('quantidadeReprovado');
@@ -27,7 +27,7 @@
 
 		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Rrc.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Rrc.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('List Rrcs'), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Usuarios'), array('controller' => 'usuarios', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Usuario'), array('controller' => 'usuarios', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

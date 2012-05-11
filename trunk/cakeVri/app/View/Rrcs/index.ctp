@@ -3,7 +3,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('usuario_id');?></th>
+			<th><?php echo $this->Paginator->sort('user_id');?></th>
 			<th><?php echo $this->Paginator->sort('dataCriacao');?></th>
 			<th><?php echo $this->Paginator->sort('produto');?></th>
 			<th><?php echo $this->Paginator->sort('quantidadeReprovado');?></th>
@@ -23,7 +23,7 @@
 	<tr>
 		<td><?php echo h($rrc['Rrc']['id']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($rrc['Usuario']['id'], array('controller' => 'usuarios', 'action' => 'view', $rrc['Usuario']['id'])); ?>
+			<?php echo $this->Html->link($rrc['User']['id'], array('controller' => 'users', 'action' => 'view', $rrc['User']['id'])); ?>
 		</td>
 		<td><?php echo h($rrc['Rrc']['dataCriacao']); ?>&nbsp;</td>
 		<td><?php echo h($rrc['Rrc']['produto']); ?>&nbsp;</td>
@@ -65,7 +65,7 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Rrc'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Usuarios'), array('controller' => 'usuarios', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Usuario'), array('controller' => 'usuarios', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

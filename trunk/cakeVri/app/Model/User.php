@@ -1,20 +1,28 @@
 <?php
 
-App::uses('AppModel', 'Model');
+//App::uses('AppModel', 'Model');
+App::uses('AuthComponent', 'Controller/Component');
 
 /**
- * Usuario Model
+ * User Model
  *
  * @property Rrc $Rrc
  */
-class Usuario extends AppModel {
+class User extends AppModel {
 
     /**
      * Use table
      *
      * @var mixed False or table name
      */
-    public $useTable = 'usuario';
+    public $useTable = 'user';
+
+    public function beforeSave() {
+        if (isset($this->data[$this->alias]['password'])) {
+            $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
+        }
+        return true;
+    }
 
     /**
      * Validation rules
@@ -70,7 +78,7 @@ class Usuario extends AppModel {
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
         ),
-        'usuario' => array(
+        'username' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
             //'message' => 'Your custom message here',
@@ -88,7 +96,7 @@ class Usuario extends AppModel {
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
         ),
-        'senha' => array(
+        'password' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
             //'message' => 'Your custom message here',
@@ -106,9 +114,9 @@ class Usuario extends AppModel {
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
         ),
-        'interno' => array(
-            'boolean' => array(
-                'rule' => array('boolean'),
+        'tipo' => array(
+            'notempty' => array(
+                'rule' => array('notempty'),
             //'message' => 'Your custom message here',
             //'allowEmpty' => false,
             //'required' => false,
@@ -138,7 +146,7 @@ class Usuario extends AppModel {
     public $hasMany = array(
         'Rrc' => array(
             'className' => 'Rrc',
-            'foreignKey' => 'usuario_id',
+            'foreignKey' => 'user_id',
             'dependent' => false,
             'conditions' => '',
             'fields' => '',

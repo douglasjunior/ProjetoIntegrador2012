@@ -1,59 +1,59 @@
-<div class="usuarios view">
-<h2><?php  echo __('Usuario');?></h2>
+<div class="users view">
+<h2><?php  echo __('User');?></h2>
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>
-			<?php echo h($usuario['Usuario']['id']); ?>
+			<?php echo h($user['User']['id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Nome'); ?></dt>
 		<dd>
-			<?php echo h($usuario['Usuario']['nome']); ?>
+			<?php echo h($user['User']['nome']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Cnpj'); ?></dt>
 		<dd>
-			<?php echo h($usuario['Usuario']['cnpj']); ?>
+			<?php echo h($user['User']['cnpj']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Cidade'); ?></dt>
 		<dd>
-			<?php echo h($usuario['Usuario']['cidade']); ?>
+			<?php echo h($user['User']['cidade']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('NomeContato'); ?></dt>
 		<dd>
-			<?php echo h($usuario['Usuario']['nomeContato']); ?>
+			<?php echo h($user['User']['nomeContato']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Telefone'); ?></dt>
 		<dd>
-			<?php echo h($usuario['Usuario']['telefone']); ?>
+			<?php echo h($user['User']['telefone']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Email'); ?></dt>
 		<dd>
-			<?php echo h($usuario['Usuario']['email']); ?>
+			<?php echo h($user['User']['email']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Usuario'); ?></dt>
+		<dt><?php echo __('User'); ?></dt>
 		<dd>
-			<?php echo h($usuario['Usuario']['usuario']); ?>
+			<?php echo h($user['User']['username']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Senha'); ?></dt>
 		<dd>
-			<?php echo h($usuario['Usuario']['senha']); ?>
+			<?php echo h($user['User']['password']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Interno'); ?></dt>
+		<dt><?php echo __('Tipo'); ?></dt>
 		<dd>
-			<?php echo h($usuario['Usuario']['interno']); ?>
+			<?php echo h($user['User']['tipo']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Departamento'); ?></dt>
 		<dd>
-			<?php echo h($usuario['Usuario']['departamento']); ?>
+			<?php echo h($user['User']['departamento']); ?>
 			&nbsp;
 		</dd>
 	</dl>
@@ -61,21 +61,21 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Usuario'), array('action' => 'edit', $usuario['Usuario']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Usuario'), array('action' => 'delete', $usuario['Usuario']['id']), null, __('Are you sure you want to delete # %s?', $usuario['Usuario']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Usuarios'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Usuario'), array('action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit User'), array('action' => 'edit', $user['User']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Rrcs'), array('controller' => 'rrcs', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Rrc'), array('controller' => 'rrcs', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
 <div class="related">
 	<h3><?php echo __('Related Rrcs');?></h3>
-	<?php if (!empty($usuario['Rrc'])):?>
+	<?php if (!empty($user['Rrc'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Usuario Id'); ?></th>
+		<th><?php echo __('User Id'); ?></th>
 		<th><?php echo __('DataCriacao'); ?></th>
 		<th><?php echo __('Produto'); ?></th>
 		<th><?php echo __('QuantidadeReprovado'); ?></th>
@@ -92,10 +92,10 @@
 	</tr>
 	<?php
 		$i = 0;
-		foreach ($usuario['Rrc'] as $rrc): ?>
+		foreach ($user['Rrc'] as $rrc): ?>
 		<tr>
 			<td><?php echo $rrc['id'];?></td>
-			<td><?php echo $rrc['usuario_id'];?></td>
+			<td><?php echo $rrc['user_id'];?></td>
 			<td><?php echo $rrc['dataCriacao'];?></td>
 			<td><?php echo $rrc['produto'];?></td>
 			<td><?php echo $rrc['quantidadeReprovado'];?></td>
