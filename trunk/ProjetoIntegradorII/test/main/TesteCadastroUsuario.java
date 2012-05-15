@@ -1,4 +1,4 @@
-package br.edu.utfr.rnc.teste;
+package main;
 
 import com.thoughtworks.selenium.*;
 import org.junit.After;
