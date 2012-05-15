@@ -8,6 +8,7 @@ import br.edu.utfpr.rnc.util.PasswordHash;
 import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
@@ -166,5 +167,23 @@ public class UsuarioBean {
 
     public void limparCampos() {
         usuario = new Usuario();
+    }
+
+    public void login() {
+        List<Usuario> usuarios = usuarioDao.buscarTodos();
+        Usuario user = null;
+        for (Usuario u : usuarios) {
+            if (usuario.getLogin() != null && !usuario.getLogin().isEmpty() && usuario.getLogin().equals(u.getLogin())) {
+                user = u;
+                break;
+            }
+        }
+        if (user != null && user.getSenha().equals(new PasswordHash().hash512(usuario.getSenha()))) {
+            ((GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas")).home();
+            JsfUtil.redirect("../../index.xhtml");
+        } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage("username", new FacesMessage("Invalid UserName and Password"));
+        }
     }
 }
