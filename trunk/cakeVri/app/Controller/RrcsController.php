@@ -49,8 +49,6 @@ class RrcsController extends AppController {
             date_default_timezone_set('Brazil/East');
             $this->request->data['Rrc']['dataCriacao'] = date('Y-m-d H:i:s');
 
-
-
             if ($this->Rrc->save($this->request->data)) {
                 $this->Session->setFlash(__('The rrc has been saved'));
                 $this->redirect(array('action' => 'index'));
@@ -165,6 +163,23 @@ class RrcsController extends AppController {
         }
         $this->Session->setFlash(__('Rrc was not deleted'));
         $this->redirect(array('action' => 'index'));
+    }
+
+    public function aprovar($id = null) {
+        $this->Rrc->id = $id;
+        if (!$this->Rrc->exists()) {
+            throw new NotFoundException(__('Invalid rrc'));
+        }
+
+        $this->redirect(array('controller' => 'rncs', 'action' => 'aprovar', $id));
+    }
+
+    public function getRccByID($id) {
+        $this->Rrc->id = $id;
+        if (!$this->Rrc->exists()) {
+            throw new NotFoundException(__('Invalid rrc'));
+        }
+        return $this->Rrc->read(null, $id);;
     }
 
 }
