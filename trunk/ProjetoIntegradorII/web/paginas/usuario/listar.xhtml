@@ -2,7 +2,7 @@
      xmlns:h="http://java.sun.com/jsf/html"
      xmlns:f="http://java.sun.com/jsf/core"
      xmlns:p="http://primefaces.org/ui">
-    <h:form>
+    <h:form id="listarUsuario">
         <p:growl globalOnly="true" id="messages" />
         <p:ajaxStatus style="width:16px;height:20px;margin-top: 3px;">
             <f:facet name="start">
@@ -52,12 +52,12 @@
          </h:commandLink> -->
 
         <p:confirmDialog message="Deseja realmente excluir este Usuário?"
-                         header="Confirmação" severity="alert" widgetVar="confirmation" closable="false">
+                         header="Confirmação" severity="alert" widgetVar="confirmation" closable="false" id="confirmExcluir">
 
-            <p:commandButton value="Sim" update="usuarioLista messages" oncomplete="confirmation.hide()" style="position: relative;left: 45px;"
+            <p:commandButton value="Sim" id="confirmSim" update="usuarioLista messages" oncomplete="confirmation.hide()" style="position: relative;left: 45px;"
                              actionListener="#{usuarioBean.remover()}">
             </p:commandButton>
-            <p:commandButton value="Não" oncomplete="confirmation.hide()" style="position: relative;left: 115px;"
+            <p:commandButton value="Não" id="confirmNao" oncomplete="confirmation.hide()" style="position: relative;left: 115px;"
                              actionListener="#{usuarioBean.removerUsuarioDaSessao()}"/>
 
         </p:confirmDialog>

@@ -6,14 +6,15 @@ xmlns:p="http://primefaces.org/ui">
     <p:panel>
         <h:form prependId="false">
             <p:menubar>
-                <p:submenu label="Cadastros" icon="ui-icon ui-icon-document">
-                    <p:menuitem action="#{gerenciadorPaginas.cadastroDepartamento}" ajax="false" value="Departamento"></p:menuitem>
-                    <p:menuitem action="#{gerenciadorPaginas.cadastroUsuario}" ajax="false" value="Usuario"></p:menuitem>
+                <p:submenu label="Cadastros" icon="ui-icon ui-icon-document" id="subCadastros">
+                    <p:menuitem action="#{gerenciadorPaginas.cadastroDepartamento}" ajax="false" value="Departamento" id="itemCadDepartamento"></p:menuitem>
+                    <p:menuitem action="#{gerenciadorPaginas.cadastroUsuario}" ajax="false" value="Usuario" id="itemCadUsuario"></p:menuitem>
                 </p:submenu>
-                <p:submenu label="Consultas" icon="ui-icon ui-icon-document">
-                    <p:menuitem action="#{gerenciadorPaginas.consultaDepartamento}" ajax="false" value="Departamento"></p:menuitem>
-                    <p:menuitem action="#{gerenciadorPaginas.consultaUsuario}" ajax="false" value="Usuario"></p:menuitem>
+                <p:submenu label="Consultas" icon="ui-icon ui-icon-document" id="subConsultas">
+                    <p:menuitem action="#{gerenciadorPaginas.consultaDepartamento}" ajax="false" value="Departamento" id="itemConsDepartamento"></p:menuitem>
+                    <p:menuitem action="#{gerenciadorPaginas.consultaUsuario}" ajax="false" value="Usuario" id="itemConsUsuario"></p:menuitem>
                 </p:submenu>
+                <p:menuitem action="#{usuarioBean.logout()}" ajax="false" value="Sair" id="itemSair" icon="ui-icon ui-icon-power"></p:menuitem>
             </p:menubar>
         </h:form>
     </p:panel>

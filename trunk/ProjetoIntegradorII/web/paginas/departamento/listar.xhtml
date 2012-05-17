@@ -2,7 +2,7 @@
      xmlns:h="http://java.sun.com/jsf/html"
      xmlns:f="http://java.sun.com/jsf/core"
      xmlns:p="http://primefaces.org/ui">
-    <h:form>
+    <h:form id="listarDepartamento">
         <p:growl globalOnly="true" id="messages" />
         <p:ajaxStatus style="width:16px;height:20px;margin-top: 3px;">
             <f:facet name="start">
@@ -53,13 +53,13 @@
         </h:commandLink> -->
 
         <p:confirmDialog message="Deseja realmente excluir este Departamento?"
-                         header="Confirmação" severity="alert" widgetVar="confirmation" closable="false">
+                         header="Confirmação" severity="alert" widgetVar="confirmation" closable="false" id="confirmExcluir">
 
             <p:commandButton value="Sim" update="departamentoLista messages" oncomplete="confirmation.hide()" style="position: relative;left: 45px;"
-                             actionListener="#{departamentoBean.remover()}">
+                             actionListener="#{departamentoBean.remover()}" id="confirmSim">
             </p:commandButton>
             <p:commandButton value="Não" oncomplete="confirmation.hide()" style="position: relative;left: 115px;"
-                             actionListener="#{departamentoBean.removerDepartamentoDaSessao()}"/>
+                             actionListener="#{departamentoBean.removerDepartamentoDaSessao()}" id="confirmNao"/>
 
         </p:confirmDialog>
     </h:form>

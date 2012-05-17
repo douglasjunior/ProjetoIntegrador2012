@@ -8,7 +8,6 @@ import br.edu.utfpr.rnc.util.PasswordHash;
 import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
@@ -16,6 +15,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.servlet.http.HttpSession;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 
 @ManagedBean(name = "usuarioBean")
 @RequestScoped
@@ -170,20 +172,37 @@ public class UsuarioBean {
     }
 
     public void login() {
-        List<Usuario> usuarios = usuarioDao.buscarTodos();
-        Usuario user = null;
-        for (Usuario u : usuarios) {
-            if (usuario.getLogin() != null && !usuario.getLogin().isEmpty() && usuario.getLogin().equals(u.getLogin())) {
-                user = u;
-                break;
-            }
-        }
-        if (user != null && user.getSenha().equals(new PasswordHash().hash512(usuario.getSenha()))) {
+        try {
+            UsernamePasswordToken token = new UsernamePasswordToken(usuario.getLogin(), new PasswordHash().hash512(usuario.getSenha()));
+
+            Subject subject = SecurityUtils.getSubject();
+
+            subject.login(token);
+
+            token.clear();
+
+            subject.getSession().setTimeout(600000l);
+            
             ((GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas")).home();
-            JsfUtil.redirect("../../index.xhtml");
-        } else {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage("username", new FacesMessage("Invalid UserName and Password"));
+            JsfUtil.redirect("index.xhtml");
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("Usuário ou senha inválidos.", "");
         }
+    }
+
+    public void logout() {
+        Subject subject = SecurityUtils.getSubject();
+
+        if (subject != null) {
+            subject.logout();
+        }
+
+        HttpSession session = JsfUtil.getSession(false);
+
+        if (session != null) {
+            session.invalidate();
+        }
+
+        JsfUtil.redirect("index.xhtml");
     }
 }

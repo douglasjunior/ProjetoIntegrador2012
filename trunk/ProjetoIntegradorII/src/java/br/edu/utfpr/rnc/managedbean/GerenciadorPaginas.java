@@ -10,10 +10,11 @@ public class GerenciadorPaginas implements Serializable {
 
     private String cabecalho = "./paginas/cabecalho.xhtml";
     private String menu = "./paginas/menu.xhtml";
-    private String conteudo = "./paginas/home.xhtml";
+    private String conteudo = "./paginas/login.xhtml";
     private String rodape = "./paginas/rodape.xhtml";
 
     public GerenciadorPaginas() {
+        
     }
 
     public String getConteudo() {
