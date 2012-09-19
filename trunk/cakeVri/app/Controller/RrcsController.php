@@ -66,7 +66,7 @@ class RrcsController extends AppController {
         $diretorioDestino = "anexos/" . $id . "/";
 
         // cria diretorio se nao existir
-        mkdir($diretorioDestino);
+        mkdir($diretorioDestino, 0777, true);
 
         // apaga a anexos ja existentes se existirem
         foreach ($anexos = scandir("$diretorioDestino") as $arquivoParaDeletar) {
@@ -118,7 +118,6 @@ class RrcsController extends AppController {
 
             $this->request->data['Rrc']['anexo'] = $anexoSalvo;
 
-
             if ($this->Rrc->save($this->request->data)) {
                 $this->Session->setFlash(__('The rrc has been saved'));
                 $this->redirect(array('action' => 'index'));
@@ -136,7 +135,7 @@ class RrcsController extends AppController {
      * delete method
      *
      * @param string $id
-     * @return void
+     * @return void 
      */
     public function delete($id = null) {
         if (!$this->request->is('post')) {
@@ -179,7 +178,8 @@ class RrcsController extends AppController {
         if (!$this->Rrc->exists()) {
             throw new NotFoundException(__('Invalid rrc'));
         }
-        return $this->Rrc->read(null, $id);;
+        return $this->Rrc->read(null, $id);
+        ;
     }
 
 }
