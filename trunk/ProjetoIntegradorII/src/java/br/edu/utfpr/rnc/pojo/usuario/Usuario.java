@@ -7,11 +7,7 @@ package br.edu.utfpr.rnc.pojo.usuario;
 import br.edu.utfpr.rnc.pojo.departamento.Departamento;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 /**
  *
@@ -25,11 +21,12 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
-//    @JoinColumn(name = "RESPONSAVEL_ID", referencedColumnName = "ID")
-//    @OneToMany(mappedBy = "responsavel")
+    @JoinColumn(name = "RESPONSAVEL_ID", referencedColumnName = "ID")
     @OneToMany(mappedBy = "responsavel")
     private List<Departamento> departamentos;
     private String login;
+    private String senha;
+    private String email;
 
     public String getLogin() {
         return login;
@@ -38,8 +35,6 @@ public class Usuario implements Serializable {
     public void setLogin(String login) {
         this.login = login;
     }
-    private String senha;
-    private String email;
 
     public String getEmail() {
         return email;
