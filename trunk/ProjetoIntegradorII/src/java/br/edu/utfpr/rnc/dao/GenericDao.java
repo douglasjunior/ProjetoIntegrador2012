@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 @Stateless
 public class GenericDao {
 
-    @PersistenceContext(unitName = "pu")
+    @PersistenceContext(unitName = "ProjetoIntegradorIIPU")
     private EntityManager em;
 
     private EntityManager getEntityManager() {
