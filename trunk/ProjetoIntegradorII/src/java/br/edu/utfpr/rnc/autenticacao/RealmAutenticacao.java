@@ -14,8 +14,8 @@ import org.apache.shiro.realm.jdbc.JdbcRealm;
  */
 public class RealmAutenticacao extends JdbcRealm {
 
-    private final String AUTENTICATION_QUERY = "SELECT senha FROM Usuario WHERE login = ?";
-    private final String USER_NAME_QUERY = "SELECT nome FROM Usuario WHERE login = ?";
+    private final String AUTENTICATION_QUERY = "SELECT senha FROM USUARIO WHERE login = ?";
+    private final String USER_NAME_QUERY = "SELECT nome FROM USUARIO WHERE login = ?";
 
     public RealmAutenticacao() {
         super();

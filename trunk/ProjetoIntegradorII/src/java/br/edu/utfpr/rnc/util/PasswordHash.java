@@ -45,5 +45,8 @@ public class PasswordHash {
         return hash.toString(16);
 
     }
+    public static void main(String[] args) {
+        System.out.println(new PasswordHash().hash512("admin"));
+    }
     
 }
