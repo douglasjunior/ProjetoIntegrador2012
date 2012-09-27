@@ -39,6 +39,9 @@ public class Rnc implements Serializable {
     private Usuario emitente;
     @ManyToOne
     private Departamento setorEmitente;
+    private String disposicao;
+    private String causaProvavel;
+    private String abrangenciaDaAcao;
 
     public Rnc() {
     }
@@ -170,6 +173,32 @@ public class Rnc implements Serializable {
     public void setSetorResponsavel(Departamento setorResponsavel) {
         this.setorResponsavel = setorResponsavel;
     }
+
+    public String getDisposicao() {
+        return disposicao;
+    }
+
+    public void setDisposicao(String Disposicao) {
+        this.disposicao = Disposicao;
+    }
+
+    public String getCausaProvavel() {
+        return causaProvavel;
+    }
+
+    public void setCausaProvavel(String causaProvavel) {
+        this.causaProvavel = causaProvavel;
+    }
+
+    public String getAbrangenciaDaAcao() {
+        return abrangenciaDaAcao;
+    }
+
+    public void setAbrangenciaDaAcao(String abrangenciaDaAcao) {
+        this.abrangenciaDaAcao = abrangenciaDaAcao;
+    }
+    
+    
 
     @Override
     public boolean equals(Object obj) {

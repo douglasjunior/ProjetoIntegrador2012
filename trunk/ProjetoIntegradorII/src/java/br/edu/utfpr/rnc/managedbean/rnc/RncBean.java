@@ -78,4 +78,10 @@ public class RncBean {
     public void setRnc(Rnc rnc) {
         this.rnc = rnc;
     }
+    public void salvar(){
+        
+    }
+    public void clearFields(){
+        
+    }
 }

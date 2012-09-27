@@ -4,126 +4,203 @@
      xmlns:f="http://java.sun.com/jsf/core"
      xmlns:p="http://primefaces.org/ui"> 
 
+
     <h:form id="formRnc" prependId="false">
-        <p:growl id="messages" showDetail="true" globalOnly="true" life="3000" />
-        <h3 class="tituloCadastro"><h:outputText value="Cadastro de RNC"/></h3>
-        <h:inputHidden value="#{rncBean.rnc.id}" id="id" />
+        <p:tabView id="tabView">  
+            <p:tab id="tabCabecalho" title="Dados da RNC">  
 
-        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
-            <h:outputLabel for="data" value="Data:"><span class="required">*</span></h:outputLabel>
-            <h:panelGrid columns="2">
-                <p:calendar value="#{rncBean.rnc.data}" id="data" maxlength="10" 
-                            title="Data de abertura." required="true" requiredMessage="Campo obrigatório" size="45"
-                            pattern="dd/MM/yyyy"/>
-                <p:message for="data"/>
-            </h:panelGrid>
+                <p:growl id="messages" showDetail="true" globalOnly="true" life="3000" />
+                <h3 class="tituloCadastro"><h:outputText value="Cadastro de RNC"/></h3>
+                <h:inputHidden value="#{rncBean.rnc.id}" id="id" />
 
-        </h:panelGrid>
-        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
-            <h:outputLabel for="emitente" value="Emitente:"><span class="required">*</span></h:outputLabel>
-            <h:panelGrid columns="2">
-                <p:selectOneMenu id="emitente" required="true" requiredMessage="Informe o usuário emitente."
-                                 value="#{rncBean.rnc.emitente}" converter="#{usuarioBean.converter}">
-                    <f:selectItem itemLabel="" itemValue="#{rncBean.rnc.emitente}"/>
-                    <f:selectItems var="usuario" itemLabel="#{usuario.nome}" value="#{usuarioBean.todosUsuarios}"/>
-                </p:selectOneMenu>
-                <p:message for="emitente"/>
-            </h:panelGrid>
-        </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+                    <h:outputLabel for="data" value="Data:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:calendar value="#{rncBean.rnc.data}" id="data" maxlength="10" 
+                                    title="Data de abertura." required="true" requiredMessage="Campo obrigatório" size="45"
+                                    pattern="dd/MM/yyyy"/>
+                        <p:message for="data"/>
+                    </h:panelGrid>
 
-        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
-            <h:outputLabel for="setorEmitente" value="Setor/Empresa:"><span class="required">*</span></h:outputLabel>
-            <h:panelGrid columns="2">
-                <p:selectOneMenu id="setorEmitente" required="true" requiredMessage="Informe o setor emitente."
-                                 value="#{rncBean.rnc.emitente}" converter="#{usuarioBean.converter}">
-                    <f:selectItem itemLabel="" itemValue="#{rncBean.rnc.setorEmitente}"/>
-                    <f:selectItems var="departamento" itemLabel="#{departamento.nome}" value="#{departamentoBean.todosDepartamentos}"/>
-                </p:selectOneMenu>
-                <p:message for="setorEmitente"/>
-            </h:panelGrid>
-        </h:panelGrid>
+                </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+                    <h:outputLabel for="emitente" value="Emitente:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:selectOneMenu id="emitente" required="true" requiredMessage="Informe o usuário emitente."
+                                         value="#{rncBean.rnc.emitente}" converter="#{usuarioBean.converter}">
+                            <f:selectItem itemLabel="" itemValue="#{rncBean.rnc.emitente}"/>
+                            <f:selectItems var="usuario" itemLabel="#{usuario.nome}" value="#{usuarioBean.todosUsuarios}"/>
+                        </p:selectOneMenu>
+                        <p:message for="emitente"/>
+                    </h:panelGrid>
+                </h:panelGrid>
 
-        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
-            <h:outputLabel for="codigoProduto" value="Código do Produto:"><span class="required">*</span></h:outputLabel>
-            <h:panelGrid columns="2">
-                <p:inputText value="#{rncBean.rnc.codigoProduto}" id="codigoProduto" maxlength="45" 
-                             title="Código do produto." required="true" requiredMessage="Campo obrigatório" size="45" />
-                <p:message for="codigoProduto"/>
-            </h:panelGrid>
-        </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+                    <h:outputLabel for="setorEmitente" value="Setor/Empresa:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:selectOneMenu id="setorEmitente" required="true" requiredMessage="Informe o setor emitente."
+                                         value="#{rncBean.rnc.setorEmitente}" converter="#{departamentoBean.converter}">
+                            <f:selectItem itemLabel="" itemValue="#{rncBean.rnc.setorEmitente}"/>
+                            <f:selectItems var="departamento" itemLabel="#{departamento.nome}" value="#{departamentoBean.todosDepartamentos}"/>
+                        </p:selectOneMenu>
+                        <p:message for="setorEmitente"/>
+                    </h:panelGrid>
+                </h:panelGrid>
 
-        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
-            <h:outputLabel for="descricaoProduto" value="Descrição do Produto:"><span class="required">*</span></h:outputLabel>
-            <h:panelGrid columns="2">
-                <p:inputText value="#{rncBean.rnc.descricaoProduto}" id="descricaoProduto" maxlength="255" 
-                             title="Descrição do produto." required="true" requiredMessage="Campo obrigatório" size="45" />
-                <p:message for="descricaoProduto"/>
-            </h:panelGrid>
-        </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+                    <h:outputLabel for="codigoProduto" value="Código do Produto:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:inputText value="#{rncBean.rnc.codigoProduto}" id="codigoProduto" maxlength="45" 
+                                     title="Código do produto." required="true" requiredMessage="Campo obrigatório" size="45" />
+                        <p:message for="codigoProduto"/>
+                    </h:panelGrid>
+                </h:panelGrid>
 
-        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
-            <h:outputLabel for="qtdeReprovada" value="Qtde Reprovada:"><span class="required">*</span></h:outputLabel>
-            <h:panelGrid columns="2">
-                <p:spinner value="#{rncBean.rnc.quantidadeReprovada}" id="qtdeReprovada" min="0"
-                           title="Quantidade reprovada do produto." required="true" requiredMessage="Campo obrigatório" size="45" />
-                <p:message for="qtdeReprovada"/>
-            </h:panelGrid>
-        </h:panelGrid>
-        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
-            <h:outputLabel for="qtdeRecebida" value="Qtde Recebida:"><span class="required">*</span></h:outputLabel>
-            <h:panelGrid columns="2">
-                <p:spinner value="#{rncBean.rnc.quantidadeRecebida}" id="qtdeRecebida" min="0"
-                           title="Quantidade recebida do produto." required="true" requiredMessage="Campo obrigatório" size="45" />
-                <p:message for="qtdeRecebida"/>
-            </h:panelGrid>
-        </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+                    <h:outputLabel for="descricaoProduto" value="Descrição do Produto:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:inputText value="#{rncBean.rnc.descricaoProduto}" id="descricaoProduto" maxlength="255" 
+                                     title="Descrição do produto." required="true" requiredMessage="Campo obrigatório" size="45" />
+                        <p:message for="descricaoProduto"/>
+                    </h:panelGrid>
+                </h:panelGrid>
 
-        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
-            <h:outputLabel for="docOrigem" value="Documento Origem:"><span class="required">*</span></h:outputLabel>
-            <h:panelGrid columns="2">
-                <p:inputText value="#{rncBean.rnc.documentoOrigem}" id="docOrigem" maxlength="255"
-                             title="Documento de Origem." required="true" requiredMessage="Campo obrigatório" size="45" />
-                <p:message for="docOrigem"/>
-            </h:panelGrid>
-        </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+                    <h:outputLabel for="qtdeReprovada" value="Qtde Reprovada:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:spinner value="#{rncBean.rnc.quantidadeReprovada}" id="qtdeReprovada" min="0"
+                                   title="Quantidade reprovada do produto." required="true" requiredMessage="Campo obrigatório" size="45" />
+                        <p:message for="qtdeReprovada"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+                    <h:outputLabel for="qtdeRecebida" value="Qtde Recebida:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:spinner value="#{rncBean.rnc.quantidadeRecebida}" id="qtdeRecebida" min="0"
+                                   title="Quantidade recebida do produto." required="true" requiredMessage="Campo obrigatório" size="45" />
+                        <p:message for="qtdeRecebida"/>
+                    </h:panelGrid>
+                </h:panelGrid>
 
-        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
-            <h:outputLabel for="numLote" value="Nº Lote/Série/O.P."><span class="required">*</span></h:outputLabel>
-            <h:panelGrid columns="2">
-                <p:inputText value="#{rncBean.rnc.numeroLote}" id="numLote" maxlength="255"
-                             title="Número do lote/Série/O.P." required="true" requiredMessage="Campo obrigatório" size="45" />
-                <p:message for="numLote"/>
-            </h:panelGrid>
-        </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+                    <h:outputLabel for="docOrigem" value="Documento Origem:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:inputText value="#{rncBean.rnc.documentoOrigem}" id="docOrigem" maxlength="255"
+                                     title="Documento de Origem." required="true" requiredMessage="Campo obrigatório" size="45" />
+                        <p:message for="docOrigem"/>
+                    </h:panelGrid>
+                </h:panelGrid>
 
-        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
-            <h:outputLabel for="placa" value="Placa"><span class="required">*</span></h:outputLabel>
-            <h:panelGrid columns="2">
-                <p:inputText value="#{rncBean.rnc.placa}" id="placa" maxlength="255"
-                             title="Placa" required="true" requiredMessage="Campo obrigatório" size="45" />
-                <p:message for="placa"/>
-            </h:panelGrid>
-        </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+                    <h:outputLabel for="numLote" value="Nº Lote/Série/O.P."><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:inputText value="#{rncBean.rnc.numeroLote}" id="numLote" maxlength="255"
+                                     title="Número do lote/Série/O.P." required="true" requiredMessage="Campo obrigatório" size="45" />
+                        <p:message for="numLote"/>
+                    </h:panelGrid>
+                </h:panelGrid>
 
-        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Selecione uma das opções ou digite a origem da rnc.">
-            <h:outputLabel for="origemRnc" value="Setor/Empresa:"><span class="required">*</span></h:outputLabel>
-            <h:panelGrid columns="2">
-                <p:selectOneMenu id="origemRnc" required="true" requiredMessage="Informe o setor emitente."
-                                 value="#{rncBean.rnc.origemRnc}" editable="true">
-                    <f:selectItem itemLabel="" itemValue=""/>
-                    <f:selectItem itemLabel="Reclamação de Cliente" itemValue="Reclamação de Cliente" />  
-                    <f:selectItem itemLabel="Auditoria de Qualidade" itemValue="Auditoria de Qualidade" />  
-                    <f:selectItem itemLabel="Interna" itemValue="Interna" />
-                    <f:selectItem itemLabel="Fornecedor" itemValue="Fornecedor" />
-                    <f:selectItem itemLabel="Metas" itemValue="Metas" />
-                    <f:selectItem itemLabel="Melhorias" itemValue="Melhorias" />
-                    <f:selectItem itemLabel="Pesqisa de Satisfação" itemValue="Pesqisa de Satisfação" />
-                </p:selectOneMenu>
-                <p:message for="origemRnc"/>
-            </h:panelGrid>
-        </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+                    <h:outputLabel for="placa" value="Placa"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:inputText value="#{rncBean.rnc.placa}" id="placa" maxlength="255"
+                                     title="Placa" required="true" requiredMessage="Campo obrigatório" size="45" />
+                        <p:message for="placa"/>
+                    </h:panelGrid>
+                </h:panelGrid>
 
-
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Selecione uma das opções ou digite a origem da rnc.">
+                    <h:outputLabel for="origemRnc" value="Origem RNC:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:selectOneMenu id="origemRnc" required="true" requiredMessage="Informe o setor emitente."
+                                         value="#{rncBean.rnc.origemRnc}" editable="true">
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItem itemLabel="Reclamação de Cliente" itemValue="Reclamação de Cliente" />  
+                            <f:selectItem itemLabel="Auditoria de Qualidade" itemValue="Auditoria de Qualidade" />  
+                            <f:selectItem itemLabel="Interna" itemValue="Interna" />
+                            <f:selectItem itemLabel="Fornecedor" itemValue="Fornecedor" />
+                            <f:selectItem itemLabel="Metas" itemValue="Metas" />
+                            <f:selectItem itemLabel="Melhorias" itemValue="Melhorias" />
+                            <f:selectItem itemLabel="Pesquisa de Satisfação" itemValue="Pesqisa de Satisfação" />
+                        </p:selectOneMenu>
+                        <p:message for="origemRnc"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:tab>  
+            <p:tab id="tabDisposicao" title="Disposição"> 
+                <h:panelGrid columns="1" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Selecione uma das opções para disposição do material não conforme.">
+                    <h:outputLabel for="disposicao" value="Destino dado ao material não conforme:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:selectOneMenu id="disposicao" style="width: 700px" requiredMessage="Informe a disposição."
+                                         value="#{rncBean.rnc.disposicao}" editable="true">
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItem itemLabel="Aceito com Desvio" itemValue="Aceito com Desvio" />  
+                            <f:selectItem itemLabel="Sucatar" itemValue="Sucatar" />  
+                            <f:selectItem itemLabel="Devolver" itemValue="Devolver" />
+                            <f:selectItem itemLabel="Retrabalho Interno" itemValue="Retrabalho Interno" />
+                            <f:selectItem itemLabel="Retrabalho Externo" itemValue="Retrabalho Externo" />                          
+                        </p:selectOneMenu>
+                        <p:message for="disposicao"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:tab>  
+             <p:tab id="tabContencao" title="Ação de Contenção"> 
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Informe as ações de contenção a serem executadas.">
+                    <h:outputLabel for="contencao" value="Informe as ações de contenção:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">                       
+                        <p:inputText id="contencao"></p:inputText>
+                        
+                        <p:message for="contencao"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:tab>  
+            <p:tab id="tabCausaProvavel" title="Causa Provável"> 
+                <h:panelGrid columns="1" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Definição da causa após analise.">
+                    <h:outputLabel for="causaProvavel" value="Informe a causa provável:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">                       
+                        <p:inputTextarea id="causaProvavel" style="width: 700px"  value="#{rncBean.rnc.causaProvavel}"></p:inputTextarea>
+                        
+                        <p:message for="causaProvavel"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:tab>  
+            <p:tab id="tabAcaoProposta" title="Ação Proposta"> 
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Ações para evitar que a falha ou problema ocorra.">
+                    <h:outputLabel for="acoesPropostas" value="Informe as ações propostas:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">                       
+                        <p:inputText id="acoesPropostas"></p:inputText>
+                        
+                        <p:message for="acoesPropostas"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:tab>  
+            <p:tab id="tabAbrangenciaDaAcao" title="Abrangencia da Ação"> 
+                <h:panelGrid columns="1" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Demais produtos ou processos afetados pelas ações corretivas.">
+                    <h:outputLabel for="abrangenciaDaAcao" value="Informe a abrangencia da ação:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">                       
+                        <p:inputTextarea id="abrangenciaDaAcao" style="width: 700px"  value="#{rncBean.rnc.abrangenciaDaAcao}"></p:inputTextarea>
+                        
+                        <p:message for="abrangenciaDaAcao"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:tab>  
+            <p:tab id="tabEficacia" title="Análise da Eficácia"> 
+                <h:panelGrid columns="1" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Analise das ações realizadas e encerramento.">
+                    <h:outputLabel for="eficacia" value="Analise da Eficácia das Ações:"><span class="required">*</span></h:outputLabel>
+                    <h:panelGrid columns="2">                       
+                       <p:inputText id="eficacia"></p:inputText>
+                        
+                        <p:message for="eficacia"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </p:tab>  
+        </p:tabView> 
+         <p:commandButton value="Salvar" styleClass="saveButton" id="save" ajax="false" title="Salvar alterações"
+                         action="#{rncBean.salvar}" image="ui-icon ui-icon-disk" style="margin-left: 100px;"/>
+        
+        <p:commandButton value="Limpar" id="cancel" styleClass="cancelButton" update="@all" title="Limpar formulário"
+                         immediate="true" actionListener="#{rncBean.clearFields()}" image="ui-icon ui-icon-close"
+                         style="margin-left: 80px;" />
     </h:form>
 
 </div>

@@ -9,10 +9,14 @@ xmlns:p="http://primefaces.org/ui">
                 <p:submenu label="Cadastros" icon="ui-icon ui-icon-document" id="subCadastros">
                     <p:menuitem action="#{gerenciadorPaginas.cadastroDepartamento}" ajax="false" value="Departamento" id="itemCadDepartamento"></p:menuitem>
                     <p:menuitem action="#{gerenciadorPaginas.cadastroUsuario}" ajax="false" value="Usuario" id="itemCadUsuario"></p:menuitem>
-                </p:submenu>
+                </p:submenu>                
                 <p:submenu label="Consultas" icon="ui-icon ui-icon-document" id="subConsultas">
                     <p:menuitem action="#{gerenciadorPaginas.consultaDepartamento}" ajax="false" value="Departamento" id="itemConsDepartamento"></p:menuitem>
                     <p:menuitem action="#{gerenciadorPaginas.consultaUsuario}" ajax="false" value="Usuario" id="itemConsUsuario"></p:menuitem>
+                </p:submenu>
+                <p:submenu label="Operações" icon="ui-icon ui-icon-document" id="subOperacoes">
+                    <p:menuitem action="#{gerenciadorPaginas.cadastroRNC}" ajax="false" value="Rnc" id="itemCadRNC"></p:menuitem>
+                    
                 </p:submenu>
                 <p:menuitem action="#{usuarioBean.logout()}" ajax="false" value="Sair" id="itemSair" icon="ui-icon ui-icon-power"></p:menuitem>
             </p:menubar>

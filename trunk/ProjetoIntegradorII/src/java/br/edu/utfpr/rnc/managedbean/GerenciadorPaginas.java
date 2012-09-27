@@ -50,6 +50,10 @@ public class GerenciadorPaginas implements Serializable {
         this.conteudo = "./paginas/usuario/cadastro.xhtml";
         return "refreshPage";
     }
+    public String cadastroRNC() {
+        this.conteudo = "./paginas/rnc/cadastro.xhtml";
+        return "refreshPage";
+    }
 
     public String consultaUsuario() {
         this.conteudo = "./paginas/usuario/listar.xhtml";
