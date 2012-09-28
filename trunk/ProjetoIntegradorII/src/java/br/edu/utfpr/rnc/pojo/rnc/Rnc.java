@@ -13,13 +13,14 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 public class Rnc implements Serializable {
+
     @Id
     @NotNull
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;// numero da rnc
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    private Date data;
+    private Date dataRnc;
     @NotNull
     private String origemRnc;
     private String descricaoNc;
@@ -42,6 +43,8 @@ public class Rnc implements Serializable {
     private String disposicao;
     private String causaProvavel;
     private String abrangenciaDaAcao;
+    private String empresaEmitente;
+    private boolean rrc;
 
     public Rnc() {
     }
@@ -55,11 +58,11 @@ public class Rnc implements Serializable {
     }
 
     public Date getData() {
-        return data;
+        return dataRnc;
     }
 
     public void setData(Date data) {
-        this.data = data;
+        this.dataRnc = data;
     }
 
     public String getDescricaoNc() {
@@ -197,8 +200,30 @@ public class Rnc implements Serializable {
     public void setAbrangenciaDaAcao(String abrangenciaDaAcao) {
         this.abrangenciaDaAcao = abrangenciaDaAcao;
     }
-    
-    
+
+    public Date getDataRnc() {
+        return dataRnc;
+    }
+
+    public void setDataRnc(Date dataRnc) {
+        this.dataRnc = dataRnc;
+    }
+
+    public String getEmpresaEmitente() {
+        return empresaEmitente;
+    }
+
+    public void setEmpresaEmitente(String empresaEmitente) {
+        this.empresaEmitente = empresaEmitente;
+    }
+
+    public boolean isRrc() {
+        return rrc;
+    }
+
+    public void setRrc(boolean rrc) {
+        this.rrc = rrc;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -221,6 +246,4 @@ public class Rnc implements Serializable {
         hash = 29 * hash + this.id;
         return hash;
     }
-    
-    
 }
