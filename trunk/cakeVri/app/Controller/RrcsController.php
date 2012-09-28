@@ -169,7 +169,6 @@ class RrcsController extends AppController {
         if (!$this->Rrc->exists()) {
             throw new NotFoundException(__('Invalid rrc'));
         }
-
         $this->redirect(array('controller' => 'rncs', 'action' => 'aprovar', $id));
     }
 

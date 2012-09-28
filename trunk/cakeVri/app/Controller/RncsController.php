@@ -100,22 +100,26 @@ class RncsController extends AppController {
         $rrcController = new RrcsController();
         $rrcAAprovar = $rrcController->getRccByID($id);
 
-        debug($rrcAAprovar);
+        $this->request->data['Rnc']['CODIGOPRODUTO'] = $rrcAAprovar['Rrc']['produto'];
+        $this->request->data['Rnc']['DATARNC'] = $rrcAAprovar['Rrc']['dataCriacao'];
+        $this->request->data['Rnc']['DESCRICAONC'] = $rrcAAprovar['Rrc']['descricao'];
+        $this->request->data['Rnc']['DOCUMENTOORIGEM'] = $rrcAAprovar['Rrc']['documentoOrigem'];
+        $this->request->data['Rnc']['NUMEROLOTE'] = $rrcAAprovar['Rrc']['numeroDeLote'];
+        $this->request->data['Rnc']['ORIGEMRNC'] = "Registro de Reclamação no Site. Cod: " . $id;
+        $this->request->data['Rnc']['QUANTIDADERECEBIDA'] = $rrcAAprovar['Rrc']['quantidadeRecebido'];
+        $this->request->data['Rnc']['QUANTIDADEREPROVADA'] = $rrcAAprovar['Rrc']['quantidadeReprovado'];
+        $this->request->data['Rnc']['RELATORIO'] = $rrcAAprovar['Rrc']['relatorio'];
+        $this->request->data['Rnc']['EMPRESAEMITENTE'] = $rrcAAprovar['User']['nome'];
+        $this->request->data['Rnc']['RRC'] = true;
 
-        echo $rrcAAprovar['Rrc']['produto'];
+        $result = $this->Rnc->save($this->request->data);
 
-        $this->Rnc->produto = $rrcAAprovar['Rrc']['produto'];
-
-        $result = $this->Rnc->save();
-        
-        debug($result);
-        
         if ($result) {
             $this->Session->setFlash(__('The rnc has been saved'));
-         //   $this->redirect(array('action' => 'index'));
+            $this->redirect(array('action' => 'index'));
         } else {
             $this->Session->setFlash(__('The rnc could not be saved. Please, try again.'));
-         //   $this->redirect(array('controller' => 'rrcs', 'action' => 'index'));
+            //   $this->redirect(array('controller' => 'rrcs', 'action' => 'index'));
         }
     }
 

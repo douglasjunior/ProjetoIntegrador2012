@@ -69,7 +69,7 @@ class DATABASE_CONFIG {
         'password' => 'aluno',
         'database' => 'cakevri',
         'prefix' => '',
-            //'encoding' => 'utf8',
+        'encoding' => 'utf8',
     );
     public $defaultjsf = array(
         'datasource' => 'Database/Mysql',
@@ -79,7 +79,7 @@ class DATABASE_CONFIG {
         'password' => 'aluno',
         'database' => 'aluno',
         'prefix' => '',
-            //'encoding' => 'utf8',
+        'encoding' => 'utf8',
     );
     public $test = array(
         'datasource' => 'Database/Mysql',
