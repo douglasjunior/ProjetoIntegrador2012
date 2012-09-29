@@ -13,16 +13,14 @@
         echo $this->Form->input('tipo', array('options' => array('interno' => 'Administrador', 'externo' => 'Cliente')));
         echo $this->Form->input('username', array('label' => 'Usuário'));
         echo $this->Form->input('password', array('type' => 'password', 'label' => 'Senha'));
-        echo $this->Form->input('confirm_password', array('type' => 'password', 'label' => 'Confirma Senha'));
+        echo $this->Form->input('confirm_password', array('type' => 'password', 'label' => 'Confirma Senha', 'allowEmpty' => false));
         ?>
     </fieldset>
     <?php echo $this->Form->end(__('Salvar')); ?>
 </div>
 <div class="actions">
-    <h3><?php echo __('Menu'); ?></h3>
+    <h3><?php echo __('Opções'); ?></h3>
     <ul>
-        <li><?php echo $this->Html->link(__('Usuários Cadastrados'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('RRCs Cadastradas'), array('controller' => 'rrcs', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('Cadastrar RRC'), array('controller' => 'rrcs', 'action' => 'add')); ?> </li>
+        <li><?php echo $this->Html->link(__('Voltar'), array('action' => 'index')); ?></li>
     </ul>
 </div>

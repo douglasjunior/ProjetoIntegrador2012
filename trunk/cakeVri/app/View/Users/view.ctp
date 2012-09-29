@@ -56,34 +56,23 @@
 <div class="actions">
     <h3><?php echo __('Menu'); ?></h3>
     <ul>
-        <li><?php echo $this->Html->link(__('Editar este usuário'), array('action' => 'edit', $user['User']['id'])); ?> </li>
-        <li><?php echo $this->Form->postLink(__('Excluir este usuário'), array('action' => 'delete', $user['User']['id']), null, __('Você realmente deseja excluir o usuário %s?', $user['User']['nome'])); ?> </li>
-        <li><?php echo $this->Html->link(__('Usuários Cadastrados'), array('action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('Cadastrar Usuário'), array('action' => 'add')); ?> </li>
-        <li><?php echo $this->Html->link(__('RRCs Cadastradas'), array('controller' => 'rrcs', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('Cadastrar RRC'), array('controller' => 'rrcs', 'action' => 'add')); ?> </li>
+        <li><?php echo $this->Html->link(__('Editar usuário'), array('action' => 'edit', $user['User']['id'])); ?> </li>
+        <li><?php echo $this->Form->postLink(__('Excluir usuário'), array('action' => 'delete', $user['User']['id']), null, __('Você realmente deseja excluir o usuário %s?', $user['User']['nome'])); ?> </li>
+        <li><?php echo $this->Html->link(__('Voltar'), array('action' => 'index')); ?> </li>
     </ul>
 </div>
 <div class="related">
-    <h3><?php echo __('RRCs deste usuário.'); ?></h3>
     <?php if (!empty($user['Rrc'])): ?>
+    <h3><?php echo __('RRCs deste usuário.'); ?></h3>
         <table cellpadding = "0" cellspacing = "0">
             <tr>
-                <th><?php echo __('Id'); ?></th>
-                <th><?php echo __('User Id'); ?></th>
-                <th><?php echo __('DataCriacao'); ?></th>
+                <th><?php echo __('Cód.'); ?></th>
+                <th><?php echo __('Data'); ?></th>
                 <th><?php echo __('Produto'); ?></th>
-                <th><?php echo __('QuantidadeReprovado'); ?></th>
-                <th><?php echo __('Contato'); ?></th>
-                <th><?php echo __('QuantidadeRecebido'); ?></th>
-                <th><?php echo __('DocumentoOrigem'); ?></th>
-                <th><?php echo __('NumeroDeLote'); ?></th>
                 <th><?php echo __('Placa'); ?></th>
-                <th><?php echo __('Descricao'); ?></th>
-                <th><?php echo __('Relatorio'); ?></th>
                 <th><?php echo __('Anexo'); ?></th>
-                <th><?php echo __('SetorOuEmpresa'); ?></th>
-                <th class="actions"><?php echo __('Actions'); ?></th>
+                <th><?php echo __('Setor/Empresa'); ?></th>
+                <th class="actions"><?php echo __(' '); ?></th>
             </tr>
             <?php
             $i = 0;
@@ -91,18 +80,10 @@
                 ?>
                 <tr>
                     <td><?php echo $rrc['id']; ?></td>
-                    <td><?php echo $rrc['user_id']; ?></td>
-                    <td><?php echo $rrc['dataCriacao']; ?></td>
+                    <td><?php echo formata_data($rrc['dataCriacao']); ?></td>
                     <td><?php echo $rrc['produto']; ?></td>
-                    <td><?php echo $rrc['quantidadeReprovado']; ?></td>
-                    <td><?php echo $rrc['contato']; ?></td>
-                    <td><?php echo $rrc['quantidadeRecebido']; ?></td>
-                    <td><?php echo $rrc['documentoOrigem']; ?></td>
-                    <td><?php echo $rrc['numeroDeLote']; ?></td>
                     <td><?php echo $rrc['placa']; ?></td>
-                    <td><?php echo $rrc['descricao']; ?></td>
-                    <td><?php echo $rrc['relatorio']; ?></td>
-                    <td><?php echo $rrc['anexo']; ?></td>
+                    <td> <a href="../../<?php echo h($rrc['anexo']); ?>" > <?php echo $rrc['anexo']; ?> </a></td> 
                     <td><?php echo $rrc['setorOuEmpresa']; ?></td>
                     <td class="actions">
                         <?php echo $this->Html->link(__('Visualizar'), array('controller' => 'rrcs', 'action' => 'view', $rrc['id'])); ?>
@@ -113,10 +94,4 @@
             <?php endforeach; ?>
         </table>
     <?php endif; ?>
-
-    <div class="actions">
-        <ul>
-            <li><?php echo $this->Html->link(__('Cadastrar RRC'), array('controller' => 'rrcs', 'action' => 'add')); ?> </li>
-        </ul>
-    </div>
 </div>

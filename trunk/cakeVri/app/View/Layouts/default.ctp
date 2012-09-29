@@ -43,10 +43,11 @@ $cakeDescription = __d('cake_dev', 'Sistema de registro de reclamação de clien
             <div id="header">
                 <h1>Sistema automatizado para reclamações de clientes insatisfeitos!!!</h1>
             </div>
+            <div id="menu">
+                <?php echo $this->element('menu'); ?>
+            </div>
             <div id="content">
-
                 <?php echo $this->Session->flash(); ?>
-
                 <?php echo $this->fetch('content'); ?>
             </div>
             <div id="footer">

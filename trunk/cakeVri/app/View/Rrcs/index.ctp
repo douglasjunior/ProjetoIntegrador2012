@@ -1,46 +1,32 @@
 <div class="rrcs index">
-    <h2><?php echo __('Rrcs'); ?></h2>
+    <h2><?php echo __('Registros de Reclamações de Clientes'); ?></h2>
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th><?php echo $this->Paginator->sort('id'); ?></th>
-            <th><?php echo $this->Paginator->sort('user_id'); ?></th>
-            <th><?php echo $this->Paginator->sort('dataCriacao'); ?></th>
-            <th><?php echo $this->Paginator->sort('produto'); ?></th>
-            <th><?php echo $this->Paginator->sort('quantidadeReprovado'); ?></th>
-            <th><?php echo $this->Paginator->sort('contato'); ?></th>
-            <th><?php echo $this->Paginator->sort('quantidadeRecebido'); ?></th>
-            <th><?php echo $this->Paginator->sort('documentoOrigem'); ?></th>
-            <th><?php echo $this->Paginator->sort('numeroDeLote'); ?></th>
-            <th><?php echo $this->Paginator->sort('placa'); ?></th>
-            <th><?php echo $this->Paginator->sort('descricao'); ?></th>
-            <th><?php echo $this->Paginator->sort('relatorio'); ?></th>
-            <th><?php echo $this->Paginator->sort('anexo'); ?></th>
-            <th><?php echo $this->Paginator->sort('setorOuEmpresa'); ?></th>
-            <th class="actions"><?php echo __('Actions'); ?></th>
+            <th><?php echo $this->Paginator->sort('Cód.'); ?></th>
+            <th><?php echo $this->Paginator->sort('Dono/Cliente'); ?></th>
+            <th><?php echo $this->Paginator->sort('Data'); ?></th>
+            <th><?php echo $this->Paginator->sort('Produto'); ?></th>
+            <th><?php echo $this->Paginator->sort('Placa'); ?></th>
+            <th><?php echo $this->Paginator->sort('Anexo'); ?></th>
+            <th><?php echo $this->Paginator->sort('Setor/Empresa'); ?></th>
+            <th class="actions"><?php echo __(' '); ?></th>
         </tr>
         <?php foreach ($rrcs as $rrc): ?>
             <tr>
                 <td><?php echo h($rrc['Rrc']['id']); ?>&nbsp;</td>
                 <td>
-                    <?php echo $this->Html->link($rrc['User']['id'], array('controller' => 'users', 'action' => 'view', $rrc['User']['id'])); ?>
+                    <?php echo $this->Html->link($rrc['User']['nome'], array('controller' => 'users', 'action' => 'view', $rrc['User']['id'])); ?>
                 </td>
-                <td><?php echo h($rrc['Rrc']['dataCriacao']); ?>&nbsp;</td>
+                <td><?php echo h(formata_data($rrc['Rrc']['dataCriacao'])); ?>&nbsp;</td>
                 <td><?php echo h($rrc['Rrc']['produto']); ?>&nbsp;</td>
-                <td><?php echo h($rrc['Rrc']['quantidadeReprovado']); ?>&nbsp;</td>
-                <td><?php echo h($rrc['Rrc']['contato']); ?>&nbsp;</td>
-                <td><?php echo h($rrc['Rrc']['quantidadeRecebido']); ?>&nbsp;</td>
-                <td><?php echo h($rrc['Rrc']['documentoOrigem']); ?>&nbsp;</td>
-                <td><?php echo h($rrc['Rrc']['numeroDeLote']); ?>&nbsp;</td>
                 <td><?php echo h($rrc['Rrc']['placa']); ?>&nbsp;</td>
-                <td><?php echo h($rrc['Rrc']['descricao']); ?>&nbsp;</td>
-                <td><?php echo h($rrc['Rrc']['relatorio']); ?>&nbsp;</td>
                 <td> <a href="<?php echo h($rrc['Rrc']['anexo']); ?>" > <?php echo h($rrc['Rrc']['anexo']); ?> </a></td> 
                 <td><?php echo h($rrc['Rrc']['setorOuEmpresa']); ?>&nbsp;</td>
                 <td class="actions">
-                    <?php echo $this->Html->link(__('Add Anexo'), array('action' => 'addAnexo', $rrc['Rrc']['id'])); ?>
-                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $rrc['Rrc']['id'])); ?>
-                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $rrc['Rrc']['id'])); ?>
-                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $rrc['Rrc']['id']), null, __('Are you sure you want to delete # %s?', $rrc['Rrc']['id'])); ?>
+                    <?php echo $this->Html->link(__('Anexo'), array('action' => 'addAnexo', $rrc['Rrc']['id'])); ?>
+                    <?php echo $this->Html->link(__('Visualizar'), array('action' => 'view', $rrc['Rrc']['id'])); ?>
+                    <?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $rrc['Rrc']['id'])); ?>
+                    <?php echo $this->Form->postLink(__('Excluir'), array('action' => 'delete', $rrc['Rrc']['id']), null, __('Are you sure you want to delete # %s?', $rrc['Rrc']['id'])); ?>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -48,23 +34,21 @@
     <p>
         <?php
         echo $this->Paginator->counter(array(
-            'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
+            'format' => __('Página {:page} de {:pages}.')
         ));
         ?>	</p>
 
     <div class="paging">
         <?php
-        echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+        echo $this->Paginator->prev('< ' . __('Anterior'), array(), null, array('class' => 'prev disabled'));
         echo $this->Paginator->numbers(array('separator' => ''));
-        echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
+        echo $this->Paginator->next(__('Próximo') . ' >', array(), null, array('class' => 'next disabled'));
         ?>
     </div>
 </div>
 <div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
+    <h3><?php echo __('Opções'); ?></h3>
     <ul>
-        <li><?php echo $this->Html->link(__('New Rrc'), array('action' => 'add')); ?></li>
-        <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
+        <li><?php echo $this->Html->link(__('Cadastrar RRC'), array('action' => 'add')); ?></li>
     </ul>
 </div>
