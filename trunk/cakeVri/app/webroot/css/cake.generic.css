@@ -96,6 +96,11 @@ p {
     padding: 0px 30px;
     font-size: 24px;
 }
+#menu{
+    background: #fff;
+    height: 30px;
+    color: #333;
+}
 #content{
     background: #fff;
     clear: both;

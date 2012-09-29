@@ -8,13 +8,11 @@
         echo $this->Form->label('anexoAtual', "Anexo atual: " . h($rrc['Rrc']['anexo']));
         ?>
     </fieldset>
-    <?php echo $this->Form->end(__('Submit')); ?>
+    <?php echo $this->Form->end(__('Salvar')); ?>
 </div>
 <div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
+    <h3><?php echo __('Opções'); ?></h3>
     <ul> 
-        <li><?php echo $this->Html->link(__('List Rrcs'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
+        <li><?php echo $this->Html->link(__('Voltar'), array('action' => 'index')); ?></li>
     </ul>
 </div>
