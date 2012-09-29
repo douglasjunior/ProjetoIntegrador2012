@@ -27,3 +27,5 @@ a:link:hover, a:visited:hover  {
     text-align: center;
     font-size: 30px;
 }
+
+.required {color: red;}
