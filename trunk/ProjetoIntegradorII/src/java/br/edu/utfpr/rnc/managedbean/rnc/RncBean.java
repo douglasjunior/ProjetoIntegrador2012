@@ -6,14 +6,14 @@ import br.edu.utfpr.rnc.dao.usuario.UsuarioDao;
 import br.edu.utfpr.rnc.pojo.rnc.Rnc;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 @ManagedBean(name = "rncBean")
-@RequestScoped
+@SessionScoped
 public class RncBean {
 
     @EJB
@@ -78,10 +78,10 @@ public class RncBean {
     public void setRnc(Rnc rnc) {
         this.rnc = rnc;
     }
-    public void salvar(){
-        
+
+    public void salvar() {
     }
-    public void clearFields(){
-        
+
+    public void clearFields() {
     }
 }

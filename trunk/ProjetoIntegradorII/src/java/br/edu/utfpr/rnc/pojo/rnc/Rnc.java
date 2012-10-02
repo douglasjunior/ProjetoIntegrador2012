@@ -3,7 +3,9 @@ package br.edu.utfpr.rnc.pojo.rnc;
 import br.edu.utfpr.rnc.pojo.departamento.Departamento;
 import br.edu.utfpr.rnc.pojo.usuario.Usuario;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -45,8 +47,11 @@ public class Rnc implements Serializable {
     private String abrangenciaDaAcao;
     private String empresaEmitente;
     private boolean rrc;
+    @OneToMany(mappedBy = "rnc", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<AcaoContencao> acoesDeContencao;
 
     public Rnc() {
+        acoesDeContencao = new ArrayList<AcaoContencao>();
     }
 
     public String getCodigoProduto() {
@@ -225,6 +230,14 @@ public class Rnc implements Serializable {
         this.rrc = rrc;
     }
 
+    public List<AcaoContencao> getAcoesDeContencao() {
+        return acoesDeContencao;
+    }
+
+    public void setAcoesDeContencao(List<AcaoContencao> acoesDeContencao) {
+        this.acoesDeContencao = acoesDeContencao;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -245,5 +258,19 @@ public class Rnc implements Serializable {
         int hash = 5;
         hash = 29 * hash + this.id;
         return hash;
+    }
+
+    public boolean addAcaoContencao(AcaoContencao acao) {
+        if (!acoesDeContencao.contains(acao)) {
+            acoesDeContencao.add(acao);
+            acao.setRnc(this);
+            return true;
+        }
+        return false;
+    }
+
+    public void removeAcaoContencao(AcaoContencao acao) {
+        acoesDeContencao.remove(acao);
+        acao.setRnc(null);
     }
 }

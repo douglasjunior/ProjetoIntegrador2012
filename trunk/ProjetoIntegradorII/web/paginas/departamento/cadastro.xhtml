@@ -23,7 +23,7 @@
             <h:panelGrid columns="2">
                 <p:selectOneMenu value="#{departamentoBean.departamento.responsavel}" id="responsavel" effect="fade" converter="#{usuarioBean.converter}" required="false">  
                     <f:selectItem itemLabel="Selecione o usuário responsável" itemValue="" />  
-                    <f:selectItems value="#{departamentoBean.usuariosResponsaveis}" var="responsavel" itemLabel="#{responsavel.nome}" itemValue="#{responsavel}"/>  
+                    <f:selectItems value="#{usuarioBean.todosUsuarios}" var="responsavel" itemLabel="#{responsavel.nome}" itemValue="#{responsavel}"/>  
                 </p:selectOneMenu>   
                 <p:message for="responsavel"/>
             </h:panelGrid>
