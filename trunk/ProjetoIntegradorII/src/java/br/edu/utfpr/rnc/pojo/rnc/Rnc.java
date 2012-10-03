@@ -49,9 +49,12 @@ public class Rnc implements Serializable {
     private boolean rrc;
     @OneToMany(mappedBy = "rnc", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<AcaoContencao> acoesDeContencao;
+    @OneToMany(mappedBy = "rnc", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<AcaoProposta> acoesPropostas;
 
     public Rnc() {
         acoesDeContencao = new ArrayList<AcaoContencao>();
+        acoesPropostas = new ArrayList<AcaoProposta>();
     }
 
     public String getCodigoProduto() {
@@ -238,6 +241,14 @@ public class Rnc implements Serializable {
         this.acoesDeContencao = acoesDeContencao;
     }
 
+    public List<AcaoProposta> getAcoesPropostas() {
+        return acoesPropostas;
+    }
+
+    public void setAcoesPropostas(List<AcaoProposta> acoesPropostas) {
+        this.acoesPropostas = acoesPropostas;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -271,6 +282,19 @@ public class Rnc implements Serializable {
 
     public void removeAcaoContencao(AcaoContencao acao) {
         acoesDeContencao.remove(acao);
+        acao.setRnc(null);
+    }
+    public boolean addAcaoProposta(AcaoProposta acao) {
+        if (!acoesPropostas.contains(acao)) {
+            acoesPropostas.add(acao);
+            acao.setRnc(this);
+            return true;
+        }
+        return false;
+    }
+
+    public void removeAcaoProposta(AcaoProposta acao) {
+        acoesPropostas.remove(acao);
         acao.setRnc(null);
     }
 }

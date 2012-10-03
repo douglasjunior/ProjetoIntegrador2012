@@ -6,7 +6,7 @@
 
 
     <h:form id="formRnc" prependId="false">
-        <p:tabView id="tabView">  
+        <p:tabView id="tabView">
             <p:tab id="tabCabecalho" title="Dados da RNC">  
 
                 <p:growl id="messages" showDetail="true" globalOnly="true" life="3000" />
@@ -143,76 +143,73 @@
                         <p:message for="disposicao"/>
                     </h:panelGrid>
                 </h:panelGrid>
-            </p:tab>  
+            </p:tab>
+
             <p:tab id="tabContencao" title="Ação de Contenção"> 
                 <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Informe as ações de contenção a serem executadas.">
                     <h:panelGrid columns="2">                       
                         <p:panel header="Criar nova ação"> 
 
-                            <h:panelGrid columns="3" id="grid">  
+                            <h:panelGrid columns="3" id="gridAcaoContencao">  
 
-
-                                <h:outputLabel value="Descrição da ação: " for="descricaoAcao"><span class="required">*</span></h:outputLabel>  
-                                <p:inputText id="descricaoAcao"
+                                <h:outputLabel value="Descrição da ação: " for="descricaoAcaoContencao"><span class="required">*</span></h:outputLabel>  
+                                <p:inputText id="descricaoAcaoContencao"
                                              value="#{acaoContencaoBean.acao.descricao}" required="true" requiredMessage="Informe a descrição da ação."/>  
-                                <p:message for="descricaoAcao"/>
-                                <h:outputLabel value="Responsavel: " for="responsavelAcao"><span class="required">*</span></h:outputLabel>  
-                                <p:selectOneMenu id="responsavelAcao" required="true" requiredMessage="Informe o responsável pela ação."
+                                <p:message for="descricaoAcaoContencao"/>
+                                <h:outputLabel value="Responsavel: " for="responsavelAcaoContencao"><span class="required">*</span></h:outputLabel>  
+                                <p:selectOneMenu id="responsavelAcaoContencao" required="true" requiredMessage="Informe o responsável pela ação."
                                                  value="#{acaoContencaoBean.acao.responsavel}" converter="#{usuarioBean.converter}">
                                     <f:selectItem itemLabel="Selecione o usuário responsável" itemValue="" />  
-                                    <f:selectItems var="responsavelAcao" itemLabel="#{responsavelAcao.nome}" value="#{usuarioBean.todosUsuarios}"/>
+                                    <f:selectItems var="responsavelAcaoContencao" itemLabel="#{responsavelAcao.nome}" value="#{usuarioBean.todosUsuarios}"/>
                                 </p:selectOneMenu>
-                                <p:message for="responsavelAcao"/>
-                                <h:outputLabel value="Prazo: " for="prazoAcao"><span class="required">*</span></h:outputLabel>  
-                                <p:inputText id="prazoAcao"
+                                <p:message for="responsavelAcaoContencao"/>
+                                <h:outputLabel value="Prazo: " for="prazoAcaoContencao"><span class="required">*</span></h:outputLabel>  
+                                <p:inputText id="prazoAcaoContencao"
                                              value="#{acaoContencaoBean.acao.prazo}" required="false" requiredMessage="Informe o prazo."/>  
-                                <p:message for="prazoAcao"/>
-                                <p:commandButton id="btn_add"  value="Add"  actionListener="#{acaoContencaoBean.add}" update="acoesList" >  
+                                <p:message for="prazoAcaoContencao"/>
+                                <p:commandButton id="btn_add_acaoContencao" value="Add" actionListener="#{acaoContencaoBean.add()}" update="acoesContencoesTable messages" 
+                                                 process="@this,descricaoAcaoContencao,responsavelAcaoContencao,prazoAcaoContencao">
                                 </p:commandButton>  
 
                             </h:panelGrid>  
                         </p:panel>
-                        <p:outputPanel id="acoesList">  
-                            <p:dataTable id="acoesTable" value="#{acaoContencaoBean.acoes}" var="acaoContencao">  
-                                <p:column>  
-                                    <f:facet name="header">  
-                                        <h:outputText value="Descrição" />  
-                                    </f:facet>  
-                                    <h:outputText value="#{acaoContencao.descricao}" />  
-                                </p:column>  
 
-                                <p:column>
-                                    <f:facet name="header">  
-                                        <h:outputText value="Responsável" />  
-                                    </f:facet>  
-                                    <h:outputText value="#{acaoContencao.responsavel.nome}"/>
-                                </p:column>  
-                                <p:column>
-                                    <f:facet name="header">  
-                                        <h:outputText value="Prazo" />  
-                                    </f:facet>  
-                                    <h:outputText value="#{acaoContencao.prazo}" />  
-                                </p:column>  
-                                <p:column>
-                                    <f:facet name="header">  
-                                        <h:outputText value="Concluído" />  
-                                    </f:facet>  
-                                    <p:selectBooleanCheckbox value="#{acaoContencao.concluido}" />
-                                </p:column>  
+                        <p:dataTable id="acoesContencoesTable" value="#{acaoContencaoBean.acoes}" var="acaoContencao">  
+                            <p:column>  
+                                <f:facet name="header">  
+                                    <h:outputText value="Descrição" />  
+                                </f:facet>  
+                                <h:outputText value="#{acaoContencao.descricao}" />  
+                            </p:column>  
 
-                                <p:column>  
-                                    <f:facet name="header">  
-                                        <h:outputText value="Opções" />  
-                                    </f:facet>  
-                                    <p:commandLink value="Excluir" update="acoesList" process="acoesList">  
-                                        <p:collector value="#{acaoContencao}"
-                                                     removeFrom="#{acaoContencaoBean.acoes}" />  
-                                    </p:commandLink>  
-                                </p:column>  
+                            <p:column>
+                                <f:facet name="header">  
+                                    <h:outputText value="Responsável" />  
+                                </f:facet>  
+                                <h:outputText value="#{acaoContencao.responsavel.nome}"/>
+                            </p:column>  
+                            <p:column>
+                                <f:facet name="header">  
+                                    <h:outputText value="Prazo" />  
+                                </f:facet>  
+                                <h:outputText value="#{acaoContencao.prazo}" />  
+                            </p:column>  
+                            <p:column>
+                                <f:facet name="header">  
+                                    <h:outputText value="Concluído" />  
+                                </f:facet>  
+                                <p:selectBooleanCheckbox value="#{acaoContencao.concluido}" />
+                            </p:column>  
 
-                            </p:dataTable>  
-                        </p:outputPanel> 
+                            <p:column>  
+                                <f:facet name="header">  
+                                    <h:outputText value="Opções" />  
+                                </f:facet>  
+                                <p:commandButton id="rmv" value="Excluir" update="@form" actionListener="#{acaoContencaoBean.remover(acaoContencao)}">  
+                                </p:commandButton>  
+                            </p:column>  
 
+                        </p:dataTable>
                     </h:panelGrid>
                 </h:panelGrid>
             </p:tab>  
@@ -227,12 +224,79 @@
                 </h:panelGrid>
             </p:tab>  
             <p:tab id="tabAcaoProposta" title="Ação Proposta"> 
-                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Ações para evitar que a falha ou problema ocorra.">
-                    <h:outputLabel for="acoesPropostas" value="Informe as ações propostas:"><span class="required">*</span></h:outputLabel>
+                <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Informe as ações de contenção a serem executadas.">
                     <h:panelGrid columns="2">                       
-                        <p:inputText id="acoesPropostas"></p:inputText>
+                        <p:panel header="Criar nova ação"> 
 
-                        <p:message for="acoesPropostas"/>
+                            <h:panelGrid columns="3" id="gridAcaoProposta">
+                                <h:outputLabel value="Tipo: " for="tipoAcaoProposta"><span class="required">*</span></h:outputLabel>  
+                                <p:selectOneMenu id="tipoAcaoProposta" required="true" requiredMessage="Informe o tipo da ação proposta."
+                                                 value="#{acaoPropostaBean.acao.tipo}" >
+                                    <f:selectItem itemLabel="Selecione o tipo da ação" itemValue="" />
+                                    <f:selectItem itemLabel="Corretiva" itemValue="Corretiva" />
+                                    <f:selectItem itemLabel="Melhoria" itemValue="Preventiva" />
+                                    <f:selectItem itemLabel="Melhoria" itemValue="Melhoria" />
+                                </p:selectOneMenu>
+                                <p:message for="tipoAcaoProposta"/>
+
+                                <h:outputLabel value="Descrição da ação: " for="descricaoAcaoProposta"><span class="required">*</span></h:outputLabel>  
+                                <p:inputText id="descricaoAcaoProposta"
+                                             value="#{acaoPropostaBean.acao.descricao}" required="true" requiredMessage="Informe a descrição da ação."/>  
+                                <p:message for="descricaoAcaoProposta"/>
+                                <h:outputLabel value="Responsavel: " for="responsavelAcaoProposta"><span class="required">*</span></h:outputLabel>  
+                                <p:selectOneMenu id="responsavelAcaoProposta" required="true" requiredMessage="Informe o responsável pela ação."
+                                                 value="#{acaoPropostaBean.acao.responsavel}" converter="#{usuarioBean.converter}">
+                                    <f:selectItem itemLabel="Selecione o usuário responsável" itemValue="" />  
+                                    <f:selectItems var="responsavelAcao" itemLabel="#{responsavelAcao.nome}" value="#{usuarioBean.todosUsuarios}"/>
+                                </p:selectOneMenu>
+                                <p:message for="responsavelAcaoProposta"/>
+                                <h:outputLabel value="Prazo: " for="prazoAcaoProposta"><span class="required">*</span></h:outputLabel>  
+                                <p:inputText id="prazoAcaoProposta"
+                                             value="#{acaoPropostaBean.acao.prazo}" required="false" requiredMessage="Informe o prazo."/>  
+                                <p:message for="prazoAcaoProposta"/>
+                                <p:commandButton id="btn_add_acaoProposta" value="Add" actionListener="#{acaoPropostaBean.add()}" update="acoesPropostasTable messages" 
+                                                 process="@this,tipoAcaoProposta,descricaoAcaoProposta,responsavelAcaoProposta,prazoAcaoProposta">
+                                </p:commandButton>  
+
+                            </h:panelGrid>  
+                        </p:panel>
+
+                        <p:dataTable id="acoesPropostasTable" value="#{acaoPropostaBean.acoes}" var="acaoProposta">  
+                            <p:column>  
+                                <f:facet name="header">  
+                                    <h:outputText value="Descrição" />  
+                                </f:facet>  
+                                <h:outputText value="#{acaoProposta.descricao}" />  
+                            </p:column>  
+
+                            <p:column>
+                                <f:facet name="header">  
+                                    <h:outputText value="Responsável" />  
+                                </f:facet>  
+                                <h:outputText value="#{acaoProposta.responsavel.nome}"/>
+                            </p:column>  
+                            <p:column>
+                                <f:facet name="header">  
+                                    <h:outputText value="Prazo" />  
+                                </f:facet>  
+                                <h:outputText value="#{acaoProposta.prazo}" />  
+                            </p:column>  
+                            <p:column>
+                                <f:facet name="header">  
+                                    <h:outputText value="Concluído" />  
+                                </f:facet>  
+                                <p:selectBooleanCheckbox value="#{acaoProposta.concluido}" />
+                            </p:column>  
+
+                            <p:column>  
+                                <f:facet name="header">  
+                                    <h:outputText value="Opções" />  
+                                </f:facet>  
+                                <p:commandButton id="rmv_ap" value="Excluir" update="@form" actionListener="#{acaoPropostaBean.remover(acaoProposta)}">  
+                                </p:commandButton>  
+                            </p:column>  
+
+                        </p:dataTable>
                     </h:panelGrid>
                 </h:panelGrid>
             </p:tab>  
