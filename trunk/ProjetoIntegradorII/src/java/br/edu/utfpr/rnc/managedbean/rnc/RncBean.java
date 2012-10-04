@@ -3,7 +3,10 @@ package br.edu.utfpr.rnc.managedbean.rnc;
 import br.edu.utfpr.rnc.dao.departamento.DepartamentoDao;
 import br.edu.utfpr.rnc.dao.rnc.RncDao;
 import br.edu.utfpr.rnc.dao.usuario.UsuarioDao;
+import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
 import br.edu.utfpr.rnc.pojo.rnc.Rnc;
+import br.edu.utfpr.rnc.util.JsfUtil;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -11,6 +14,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "rncBean")
 @SessionScoped
@@ -80,8 +84,52 @@ public class RncBean {
     }
 
     public void salvar() {
+        try {
+            System.out.println(rnc.getId());
+            if (rnc.getId() == 0) {
+                rncDao.criarEntidade(rnc);
+            } else {
+                rncDao.editar(rnc);
+                ((GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas")).listarRNCs();
+            }
+            rnc = new Rnc();
+            JsfUtil.addSuccessMessage("", "RNC salva com sucesso.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JsfUtil.addErrorMessage("", "Erro ao salvar RNC.");
+        }
     }
 
     public void clearFields() {
+    }
+
+    public void editar() {
+        Rnc rnc = (Rnc) JsfUtil.getObjectFromRequestParameter("rnc");
+        this.rnc = rnc;
+    }
+
+    public void remover() {
+        try {
+            Rnc rnc = (Rnc) JsfUtil.getObjectFromSession("rnc");
+            rncDao.remover(rnc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        removerRNCDaSessao();
+    }
+
+    public void adicionarRNCnaSessao() {
+        Rnc rnc = (Rnc) JsfUtil.getObjectFromRequestParameter("rnc");
+        HttpSession hs = JsfUtil.getSession(false);
+        hs.setAttribute("rnc", rnc);
+    }
+
+    public void removerRNCDaSessao() {
+        HttpSession hs = JsfUtil.getSession(false);
+        hs.removeAttribute("rnc");
+    }
+
+    public List<Rnc> getTodasRNCs() {
+        return rncDao.buscarTodos();
     }
 }

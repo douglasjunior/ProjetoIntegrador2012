@@ -40,7 +40,7 @@ public class GerenciadorPaginas implements Serializable {
     public String cadastroDepartamento() {
         this.conteudo = "./paginas/departamento/cadastro.xhtml";
         return "refreshPage";
-    }
+    } 
 
     public String consultaDepartamento() {
         this.conteudo = "./paginas/departamento/listar.xhtml";
@@ -52,6 +52,10 @@ public class GerenciadorPaginas implements Serializable {
     }
     public String cadastroRNC() {
         this.conteudo = "./paginas/rnc/cadastro.xhtml";
+        return "refreshPage";
+    }
+    public String listarRNCs() {
+        this.conteudo = "./paginas/rnc/listar.xhtml";
         return "refreshPage";
     }
 
