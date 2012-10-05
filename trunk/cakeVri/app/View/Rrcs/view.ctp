@@ -6,6 +6,17 @@
             <?php echo h($rrc['Rrc']['id']); ?>
             &nbsp;
         </dd>
+        <dt><?php echo __('Cód. RNC'); ?></dt>
+        <dd>
+            <?php
+            if ($rrc['Rrc']['rnc_id'] == NULL) {
+                echo "Aguardando aprovação";
+            } else {
+                echo $this->Html->link($rrc['Rrc']['rnc_id'], array('controller' => 'rncs', 'action' => 'view', $rrc['Rrc']['rnc_id']));
+            }
+            ?>
+            &nbsp;
+        </dd>
         <dt><?php echo __('Dono/Cliente'); ?></dt>
         <dd>
             <?php echo $this->Html->link($rrc['User']['nome'], array('controller' => 'users', 'action' => 'view', $rrc['User']['id'])); ?>
@@ -76,9 +87,11 @@
 <div class="actions">
     <h3><?php echo __('Opções'); ?></h3>
     <ul>
-        <li><?php echo $this->Form->postLink(__('Aprovar RRC'), array('action' => 'aprovar', $rrc['Rrc']['id']), null, __('Deseja aprovar a RRC # %s?', $rrc['Rrc']['id'])); ?> </li>
-        <li><?php echo $this->Html->link(__('Editar RRC'), array('action' => 'edit', $rrc['Rrc']['id'])); ?> </li>
-        <li><?php echo $this->Form->postLink(__('Excluir RRC'), array('action' => 'delete', $rrc['Rrc']['id']), null, __('Deseja excluir a RRC # %s?', $rrc['Rrc']['id'])); ?> </li>
+        <?php if ($rrc['Rrc']['rnc_id'] == NULL) { ?>
+            <li><?php echo $this->Form->postLink(__('Aprovar RRC'), array('action' => 'aprovar', $rrc['Rrc']['id']), null, __('Deseja aprovar a RRC # %s?', $rrc['Rrc']['id'])); ?></li>
+            <li><?php echo $this->Html->link(__('Editar RRC'), array('action' => 'edit', $rrc['Rrc']['id'])); ?> </li>
+            <li><?php echo $this->Form->postLink(__('Excluir RRC'), array('action' => 'delete', $rrc['Rrc']['id']), null, __('Deseja excluir a RRC # %s?', $rrc['Rrc']['id'])); ?> </li>
+        <?php } ?>
         <li><?php echo $this->Html->link(__('Voltar'), array('action' => 'index')); ?> </li>
     </ul>
 </div>

@@ -2,6 +2,7 @@
 
 App::uses('AppController', 'Controller');
 App::uses('RrcsController', 'Controller');
+App::uses('CakeEmail', 'Network/Email');
 
 /**
  * Rncs Controller
@@ -50,7 +51,6 @@ class RncsController extends AppController {
 //            }
 //        }
 //    }
-
 //    /**
 //     * edit method
 //     *
@@ -73,7 +73,6 @@ class RncsController extends AppController {
 //            $this->request->data = $this->Rnc->read(null, $id);
 //        }
 //    }
-
 //    /**
 //     * delete method
 //     *
@@ -115,12 +114,40 @@ class RncsController extends AppController {
         $result = $this->Rnc->save($this->request->data);
 
         if ($result) {
+            $rrcController->saveIdRnc($rrcAAprovar['Rrc']['id'], $this->Rnc->getID());
+            $this->enviarEmail($rrcAAprovar['User']['email'], $rrcAAprovar['Rrc']['id']);
             $this->Session->setFlash(__('The rnc has been saved'));
             $this->redirect(array('action' => 'index'));
         } else {
             $this->Session->setFlash(__('The rnc could not be saved. Please, try again.'));
             //   $this->redirect(array('controller' => 'rrcs', 'action' => 'index'));
         }
+    }
+
+    public function enviarEmail($emailCliente = NULL, $idRrc = NULL) {
+        $message = "Prezado cliente,
+                        
+                        Sua RRC número $idRrc foi aprovada e está em fase de análise, para acompanhar o andamento acesse o sistema de RRCs da VRI no seguinte link www.vri.com.br/rrc .
+                        
+                        --
+                        Atenciosamente
+                        Equipe VRI";
+
+        $config = array(
+            'host' => 'smtp.vri.com.br',
+            'port' => 25,
+            'username' => 'sistemarrc@vri.com.br',
+            'from' => array('sistemarrc@vri.com.br' => 'VRI - Sistema de Reclamação de Clientes'),
+            'password' => 'utfprrrc',
+            'transport' => 'Smtp',
+            'message' => $message
+        );
+
+        $mail = new CakeEmail($config);
+        $mail->addTo($emailCliente)
+                ->addTo("maiaraalcova@gmail.com")
+                ->subject("Sua RRC número $idRrc foi aprovada")
+                ->send();
     }
 
 }

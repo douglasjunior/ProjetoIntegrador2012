@@ -132,6 +132,4 @@ class UsersController extends AppController {
         $this->Session->setFlash(__('Usuário não pode ser excluído.'));
         $this->redirect(array('action' => 'index'));
     }
-
-
 }
