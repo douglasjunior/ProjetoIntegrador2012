@@ -1,5 +1,7 @@
 <?php
 
+require "Component/phpmailer/class.phpmailer.php";
+
 /**
  * Application level Controller
  *

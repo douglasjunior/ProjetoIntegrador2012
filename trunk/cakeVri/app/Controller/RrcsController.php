@@ -1,7 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
-App::uses('CakeEmail', 'Network/Email');
+
 
 /**
  * Rrcs Controller
@@ -10,54 +10,12 @@ App::uses('CakeEmail', 'Network/Email');
  */
 class RrcsController extends AppController {
 
-    public function beforeFilter() {
-        parent::beforeFilter();
-        $this->Auth->allow('index');
-    }
-
     /**
      * index method
      *
      * @return void
      */
     public function index() {
-//        $message = "Prezado cliente,
-//                        
-//                        Sua RRC número xx foi aprovada e está em fase de análise, para acompanhar o andamento acesse o sistema de RRCs da VRI no seguinte link www.vri.com.br/rrc .
-//                        
-//                        --
-//                        Atenciosamente
-//                        Equipe VRI";
-//
-//        $config = array(
-//            'host' => 'smtp.gmail.com',
-//            'port' => 465,
-//            'username' => 'importacaoautomatica@gmail.com',
-//            'from' => array('importacaoautomatica@gmail.com' => 'VRI - Sistema de Reclamação de Clientes'),
-//            'password' => 'danfeview951',
-//            'transport' => 'Smtp',
-//            'message' => $message,
-//            'tls' => true,
-//            'log' => true
-//        );
-//
-//        $mail = new CakeEmail("smtp");
-//        $mail->to("maiaraalcova@gmail.com")
-//                ->subject("Sua RRC número xx foi aprovada");
-//        debug($mail->send($message));
-
-        $to = "maiaraalcova@gmail.com";
-        $subject = "Hi!";
-        $body = "Hi,\n\nHow are you?";
-        $headers = "From: importacaoautomatica@gmail.com" . "\r\n";
-
-        if ($result == mail($to, $subject, $body, $headers)) {
-            debug($result);
-            echo ("Message successfully sent!");
-        } else {
-            echo ("Message delivery failed...");
-        }
-
         $this->Rrc->recursive = 0;
         $this->set('rrcs', $this->paginate());
     }

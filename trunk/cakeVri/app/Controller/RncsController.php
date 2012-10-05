@@ -2,7 +2,6 @@
 
 App::uses('AppController', 'Controller');
 App::uses('RrcsController', 'Controller');
-App::uses('CakeEmail', 'Network/Email');
 
 /**
  * Rncs Controller
@@ -35,66 +34,6 @@ class RncsController extends AppController {
         $this->set('rnc', $this->Rnc->read(null, $id));
     }
 
-//    /**
-//     * add method
-//     *
-//     * @return void
-//     */
-//    public function add() {
-//        if ($this->request->is('post')) {
-//            $this->Rnc->create();
-//            if ($this->Rnc->save($this->request->data)) {
-//                $this->Session->setFlash(__('The rnc has been saved'));
-//                $this->redirect(array('action' => 'index'));
-//            } else {
-//                $this->Session->setFlash(__('The rnc could not be saved. Please, try again.'));
-//            }
-//        }
-//    }
-//    /**
-//     * edit method
-//     *
-//     * @param string $id
-//     * @return void
-//     */
-//    public function edit($id = null) {
-//        $this->Rnc->id = $id;
-//        if (!$this->Rnc->exists()) {
-//            throw new NotFoundException(__('Invalid rnc'));
-//        }
-//        if ($this->request->is('post') || $this->request->is('put')) {
-//            if ($this->Rnc->save($this->request->data)) {
-//                $this->Session->setFlash(__('The rnc has been saved'));
-//                $this->redirect(array('action' => 'index'));
-//            } else {
-//                $this->Session->setFlash(__('The rnc could not be saved. Please, try again.'));
-//            }
-//        } else {
-//            $this->request->data = $this->Rnc->read(null, $id);
-//        }
-//    }
-//    /**
-//     * delete method
-//     *
-//     * @param string $id
-//     * @return void
-//     */
-//    public function delete($id = null) {
-//        if (!$this->request->is('post')) {
-//            throw new MethodNotAllowedException();
-//        }
-//        $this->Rnc->id = $id;
-//        if (!$this->Rnc->exists()) {
-//            throw new NotFoundException(__('Invalid rnc'));
-//        }
-//        if ($this->Rnc->delete()) {
-//            $this->Session->setFlash(__('Rnc deleted'));
-//            $this->redirect(array('action' => 'index'));
-//        }
-//        $this->Session->setFlash(__('Rnc was not deleted'));
-//        $this->redirect(array('action' => 'index'));
-//    }
-
     public function aprovar($id = null) {
         $rrcController = new RrcsController();
         $rrcAAprovar = $rrcController->getRccByID($id);
@@ -114,40 +53,81 @@ class RncsController extends AppController {
         $result = $this->Rnc->save($this->request->data);
 
         if ($result) {
-            $rrcController->saveIdRnc($rrcAAprovar['Rrc']['id'], $this->Rnc->getID());
-            $this->enviarEmail($rrcAAprovar['User']['email'], $rrcAAprovar['Rrc']['id']);
-            $this->Session->setFlash(__('The rnc has been saved'));
+            $rrcController->saveIdRnc($id, $this->Rnc->getID());
+            $this->enviarEmail($rrcAAprovar['User']['email'], $id);
+            $this->Session->setFlash(__("A RCC cód. $id foi aprovada com sucesso e gerou a RNC cód. " . $this->Rnc->getID() . "."));
             $this->redirect(array('action' => 'index'));
         } else {
-            $this->Session->setFlash(__('The rnc could not be saved. Please, try again.'));
-            //   $this->redirect(array('controller' => 'rrcs', 'action' => 'index'));
+            $this->Session->setFlash(__('Ocorreu um erro ao aprovar a RRC, por favor, tente novamente.'));
         }
     }
 
     public function enviarEmail($emailCliente = NULL, $idRrc = NULL) {
-        $message = "Prezado cliente,
-                        
-                        Sua RRC número $idRrc foi aprovada e está em fase de análise, para acompanhar o andamento acesse o sistema de RRCs da VRI no seguinte link www.vri.com.br/rrc .
-                        
-                        --
-                        Atenciosamente
-                        Equipe VRI";
+        $mensagem =
+                "Prezado cliente,<br />
+                <br />       
+                A RRC cód. <b>$idRrc</b> foi aprovada e está em fase de análise, para acompanhar o andamento acesse o sistema de RRCs da VRI no seguinte link www.vri.com.br/rrc .<br />
+                <br />
+                --<br />
+                Atenciosamente<br />
+                VRI Industria Eletrônica";
 
-        $config = array(
-            'host' => 'smtp.vri.com.br',
-            'port' => 25,
-            'username' => 'sistemarrc@vri.com.br',
-            'from' => array('sistemarrc@vri.com.br' => 'VRI - Sistema de Reclamação de Clientes'),
-            'password' => 'utfprrrc',
-            'transport' => 'Smtp',
-            'message' => $message
-        );
+        $msg = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+        $msg .= "<html>";
+        $msg .= "<head></head>";
+        $msg .= "<body style=\"background-color:#fff;\" >";
+        $msg .= $mensagem;
+        $msg .= "</body>";
+        $msg .= "</html>";
 
-        $mail = new CakeEmail($config);
-        $mail->addTo($emailCliente)
-                ->addTo("maiaraalcova@gmail.com")
-                ->subject("Sua RRC número $idRrc foi aprovada")
-                ->send();
+        $mail = new PHPMailer(); //
+// Define o método de envio
+        $mail->Mailer = "smtp";
+
+// Define que a mensagem poderá ter formatação HTML
+        $mail->IsHTML(true); 
+        
+// Define que a codificação do conteúdo da mensagem será utf-8
+        $mail->CharSet = "utf-8";
+
+// Define que os emails enviadas utilizarão SMTP Seguro tls
+//$mail->SMTPSecure = "tls";
+// Define que o Host que enviará a mensagem é o Gmail
+        $mail->Host = "mail.vri.com.br";
+
+//Define a porta utilizada pelo Gmail para o envio autenticado
+        $mail->Port = "25";
+
+// Deine que a mensagem utiliza método de envio autenticado
+        $mail->SMTPAuth = "true";
+
+// Defina o email e o nome que aparecerá como remetente no cabeçalho
+        $mail->From = "sistemarrc@vri.com.br";
+        $mail->FromName = "VRI - Sistema de Registro de Reclamação de Clientes";
+
+// Define o usuário do gmail autenticado responsável pelo envio
+        $mail->Username = "sistemarrc@vri.com.br";
+
+// Define a senha deste usuário citado acima
+        $mail->Password = "utfprrrc";
+
+// Define o destinatário que receberá a mensagem
+        $mail->AddAddress($emailCliente);
+
+        /*
+          Define o email que receberá resposta desta
+          mensagem, quando o destinatário responder
+         */
+        $mail->AddReplyTo($mail->From, $mail->FromName);
+
+// Assunto da mensagem
+        $mail->Subject = "Sua RRC cód. $idRrc foi aprovada";
+
+// Toda a estrutura HTML e corpo da mensagem
+        $mail->Body = $msg;
+ 
+// Controle de erro ou sucesso no envio
+        $mail->Send();
     }
 
 }
