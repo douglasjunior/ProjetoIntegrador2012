@@ -29,7 +29,9 @@
                 <h:outputText value="#{rnc.origemRnc}" />
             </p:column>
             <p:column filterBy="#{rnc.dataRnc}" styleClass="col_dataRNC" headerText="Data RNC" sortBy="#{rnc.dataRnc}">
-                <h:outputText value="#{rnc.dataRnc}" />
+                <h:outputText value="#{rnc.dataRnc}" >
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                </h:outputText>
             </p:column>
             <p:column filterBy="#{rnc.descricaoNc}" styleClass="col_descricaoNc" headerText="Descrição NC" sortBy="#{rnc.descricaoNc}">
                 <h:outputText value="#{rnc.descricaoNc}" />
