@@ -30,6 +30,7 @@ public class RncBean {
     private RncDao rncDao;
     private Rnc rnc;
     private List<String> origensRnc;
+    private List<String> disposicoesRnc;
     
     public RncBean() {
         this.rnc = new Rnc();
@@ -40,6 +41,11 @@ public class RncBean {
                 "Metas",
                 "Melhorias",
                 "Pesquisa de Satisfação"));
+        this.disposicoesRnc = new ArrayList<String>(Arrays.asList("Aceito com Desvio",
+                "Sucatar",
+                "Devolver",
+                "Retrabalho Interno",
+                "Retrabalho Externo"));
     }
     
     public List<String> getOrigensRnc() {
@@ -49,6 +55,15 @@ public class RncBean {
             }
         }
         return origensRnc;
+    }
+    
+    public List<String> getDisposicoesRnc() {
+        if (rnc.getDisposicao() != null && !rnc.getDisposicao().isEmpty()) {
+            if (!disposicoesRnc.contains(rnc.getDisposicao())) {
+                disposicoesRnc.add(rnc.getDisposicao());
+            }
+        }
+        return disposicoesRnc;
     }
     
     @FacesConverter(forClass = Rnc.class)

@@ -7,5 +7,5 @@
         <property name="keepgenerated" value="true">
             <description>Keep a copy of the generated servlet class' java code.</description>
         </property>
-    </jsp-config>
+    </jsp-config> 
 </glassfish-web-app>

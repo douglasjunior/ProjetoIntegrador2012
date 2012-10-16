@@ -99,11 +99,10 @@ public class AcaoPropostaBean {
         } else {
             acao = new AcaoProposta();
         }
-    }  
+    }
 
     public void remover(AcaoProposta ap) {
         System.out.println("remove: " + ap.getDescricao() + " " + ap.getResponsavel() + " " + ap.getPrazo());
-        
         rncBean.getRnc().removeAcaoProposta(ap);
     }
 }
