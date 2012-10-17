@@ -1,0 +1,70 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:p="http://primefaces.org/ui"> 
+
+    <h:form id="formMap" prependId="false">
+        <p:growl id="messages" showDetail="true" globalOnly="true" life="2000" />
+        <h3 class="tituloCadastro"><h:outputText value="Cadastro de Usuario"/></h3>
+        <h:inputHidden value="#{usuarioBean.usuario.id}" id="id" />
+
+        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+            <h:outputLabel for="nome" value="Nome:"><span class="required">*</span></h:outputLabel>
+            <h:panelGrid columns="2">
+                <p:inputText value="#{usuarioBean.usuario.nome}" id="nome" maxlength="45" 
+                             title="Nome do usuario." required="true" requiredMessage="Campo obrigatório" size="45" />
+                <p:message for="nome"/>
+            </h:panelGrid>
+
+        </h:panelGrid>
+
+        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+            <h:outputLabel for="login" value="Login:"><span class="required">*</span></h:outputLabel>
+            <h:panelGrid columns="2">
+                <p:inputText value="#{usuarioBean.usuario.login}" id="login" maxlength="10" 
+                             title="Login do Usuario." required="true" requiredMessage="Campo obrigatório" size="45" />
+                <p:message for="login"/>
+            </h:panelGrid>
+        </h:panelGrid>
+
+        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+            <h:outputLabel for="email" value="Email:"><span class="required">*</span></h:outputLabel>
+            <h:panelGrid columns="2">
+                <p:inputText value="#{usuarioBean.usuario.email}" id="email" maxlength="50" 
+                             title="Email do Usuario." required="true" requiredMessage="Campo obrigatório" size="45" validatorMessage="Email inválido">
+                    <f:validateRegex pattern="^(\w+[\-\.])*\w+@(\w+\.)+[A-Za-z]+$"/>
+                </p:inputText>
+                <p:message for="email"/>
+            </h:panelGrid>
+        </h:panelGrid>
+
+        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+            <h:outputLabel for="senha" value="Senha:"><span class="required">*</span></h:outputLabel>
+            <h:panelGrid columns="2">
+                <p:password value="#{usuarioBean.usuario.senha}" id="senha" maxlength="10" immediate="true"
+                            title="Senha do Usuario." required="false" requiredMessage="Campo obrigatório" size="45" />
+                <p:message for="senha"/>
+            </h:panelGrid>
+        </h:panelGrid>
+
+        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+            <h:outputLabel for="senha2" value="Confirme a Senha:"><span class="required">*</span></h:outputLabel>
+            <h:panelGrid columns="2">
+                <p:password value="#{usuarioBean.confirmaSenha}" id="senha2" maxlength="10" immediate="true" 
+                            title="Senha do Usuario." required="false" requiredMessage="Campo obrigatório" size="45" />
+                <p:message for="senha2"/>
+            </h:panelGrid>
+        </h:panelGrid>
+
+        <br/>
+
+        <p:commandButton value="Salvar" styleClass="saveButton" id="save" ajax="false" title="Salvar alterações"
+                         action="#{usuarioBean.salvar}" image="ui-icon ui-icon-disk" style="margin-left: 100px;"/>
+
+        <p:commandButton value="Limpar" id="cancel" styleClass="cancelButton" update="@form" title="Limpar formulário"
+                         immediate="true" actionListener="#{usuarioBean.limparCampos()}" image="ui-icon ui-icon-close"
+                         style="margin-left: 80px;" rendered="#{usuarioBean.usuario.id == 0}"/>
+    </h:form>
+
+</div>

@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<!-- ====================================================================== 
+teste ant para hudson Igor/Lucio                                                       
+     ====================================================================== -->
+<project name="ManuLab" default="compile">
+
+    <property name="src" value="${basedir}/src" />
+    <property name="bin" value="${basedir}/bin" description="diretorio existendo somento no hudson"/> 
+    <property name="lib.home" value="${basedir}/lib" />
+    <property name="test" value="${basedir}/test" />
+    <property name="jar.dir" value="${basedir}"/>
+    <property name="jar.name" value="framework"/>
+
+	<!-- ================================= 
+          Bibliotecas utilizadas. Utiliza busca recursiva.
+         ================================= -->
+
+    <path id="lib.classpath">
+        <fileset dir="${lib.home}">
+            <include name="*.jar" />
+            <include name="junit/*.jar"/>
+            <include name="junit_4/*.jar"/>
+            <include name="primefaces/*.jar"/>
+
+
+            <include name="Commons/*.jar"/>
+            <include name="CopyLibs/*.jar"/>
+            <include name="Manulab/*.jar"/>
+            <include name="MySqlDriver/*.jar"/>
+            <include name="Spring3.1/*.jar"/>
+            <include name="hibernate-persistence/*.jar"/>
+            <include name="hibernate-support/*.jar"/>
+            <include name="javaee-api-6.0/*.jar"/>
+            <include name="javaee-endorsed-api-6.0/*.jar"/>
+            <include name="javaee-web-api-6.0/*.jar"/>
+            <include name="jsf20/*.jar"/>
+            <include name="jstl11/*.jar"/>
+            <include name="Log4j/*.jar"/>
+            <include name="spring-framewor300/*.jar"/>     
+
+
+     
+    </fileset>
+</path>
+
+	<!-- ================================= 
+          target: compile              
+         ================================= -->
+<target name="compile" description="--> Compila os arquivos fonte">
+    <mkdir dir="${bin}" description="criando o diretorio destino"/>
+    <javac srcdir="${src}" destdir="${bin}" debug="off" encoding="UTF-8" failonerror="off">
+        <classpath refid="lib.classpath" />
+    </javac>
+
+    <javac srcdir="${test}" destdir="${bin}" debug="off" encoding="UTF-8" failonerror="off">
+        <classpath refid="lib.classpath" />
+    </javac>
+</target>
+
+	<!-- ================================= 
+          target: spring   
+          
+          Montando um único XML com vários projetos:
+          Com a utilização de vários 'fileset' é possível fazer com o Spring
+          analise os diretórios de projetos relacionados e construa um único
+          arquivo .xml de toda a aplicação.
+         ================================= 
+<target name="spring" depends="compile">
+    <description>Os Simpsons</description>
+    <taskdef name="springdoclet" classname="xdoclet.modules.spring.SpringDocletTask">
+        <classpath refid="lib.classpath" />
+
+        <classpath location="${bin}" />
+    </taskdef>
+
+    <springdoclet destdir="${basedir}"  excludedtags="@version,@author,@todo" verbose="true" force="true" mergedir="${basedir}">
+        <configparam name="default-autowire" value="byType"/>
+        <fileset dir="${src}">
+            <include name="**/*.java" />
+        </fileset>
+        <springxml destinationFile="applicationContext.xml" />
+
+    </springdoclet>
+</target>
+-->
+
+	<!-- ================================= 
+          target: javadoc              
+         ================================= -->
+<target name="javadoc" depends="compile" description="--> Gera a documentação automatica dos codigos do projeto">
+    <mkdir dir="${basedir}/javadoc" />
+    <javadoc destdir="${basedir}/javadoc" classpathref="lib.classpath">
+        <fileset dir="${src}">
+            <include name="**/*.java" />
+        </fileset>
+
+    </javadoc>
+</target>
+
+	<!-- ================================= 
+          target: junit              
+         ================================= -->
+<target name="junit" depends="compile" description="--> Roda todos os testes do sistema">
+    <junit printsummary="yes" fork="yes">
+        <formatter type="brief" usefile="false" />
+        <classpath refid="lib.classpath" />
+        <classpath>
+            <pathelement path="${bin}" />
+
+        </classpath>
+        <test name="${test}"></test>
+        <batchtest>
+            <fileset dir="${test}">
+                <include name="**/*Test.java" />
+            </fileset>
+        </batchtest>
+    </junit>
+</target>
+
+    <!-- ================================= 
+          target: Jar       
+          Cria o jar do componente e envia para o projeto Library/OrionSoft, que contém
+          todas as bibliotecas centralizadas.
+         ================================= 
+<target name="make jar" depends="compile" description="Gera arquivo jar do Framework">
+    	
+    <jar destfile="${lib.home}/OrionSoft/${jar.name}.jar" >
+        <fileset dir="${bin}">
+            <include name="**/*"/>
+        </fileset>
+    </jar>
+</target>
+-->
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: clear                      
+         - - - - - - - - - - - - - - - - - -->
+
+<target name="clear" description="Apaga arquivos e diretorios automaticamente gerados">
+    <delete file="*.sql" />
+    <delete dir="${basedir}/javadoc"/>
+    <delete dir="${basedir}/war"/>
+</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+<target name="depends" description="Gera diretórios necessários para entrega de arquivos automaticamente criados">
+    <mkdir dir="${bin}" />
+</target>
+
+</project>
+
+

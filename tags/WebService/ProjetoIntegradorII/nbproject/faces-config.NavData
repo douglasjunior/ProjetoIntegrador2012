@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="paginas/menu.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="paginas/departamento/View.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="paginas/cabecalho.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="index.xhtml" x="258" y="59" zoom="true"/>
+        <Node id="template.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="paginas/rodape.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="template/TemplatePrincipal.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="paginas/home.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="paginas/departamento/cadastro.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="paginas/departamento/List.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="paginas/departamento/Edit.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="paginas/departamento/Create.xhtml" x="400" y="450" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

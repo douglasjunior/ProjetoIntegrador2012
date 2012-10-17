@@ -1,0 +1,96 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:p="http://primefaces.org/ui">
+    <h:form id="listarRNCs">
+        <p:growl globalOnly="true" id="messages" />
+        <p:ajaxStatus style="width:16px;height:20px;margin-top: 3px;">
+            <f:facet name="start">
+                <h:graphicImage value="./resources/images/ajaxloading.gif" />
+            </f:facet>
+
+            <f:facet name="complete">
+                <h:outputText value="" />
+            </f:facet>
+        </p:ajaxStatus>
+        <p:dataTable var="rnc" value="#{rncBean.todasRNCs}" id="rncLista" rows="10"
+                     emptyMessage="Nenhum registro encontrado!" paginator="true" paginatorPosition="bottom"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15">
+
+            <f:facet name="header">
+                <h:outputText value="Lista de RNCs"/>
+            </f:facet>
+
+            <p:column styleClass="col_codigo" headerText="Código">
+                <h:outputText value="#{rnc.id}" />
+            </p:column>
+            <p:column filterBy="#{rnc.origemRnc}" styleClass="col_origemRnc" headerText="Origem RNC" sortBy="#{rnc.origemRnc}">
+                <h:outputText value="#{rnc.origemRnc}" />
+            </p:column>
+            <p:column filterBy="#{rnc.dataRnc}" styleClass="col_dataRNC" headerText="Data RNC" sortBy="#{rnc.dataRnc}">
+                <h:outputText value="#{rnc.dataRnc}" >
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                </h:outputText>
+            </p:column>
+            <p:column filterBy="#{rnc.descricaoNc}" styleClass="col_descricaoNc" headerText="Descrição NC" sortBy="#{rnc.descricaoNc}">
+                <h:outputText value="#{rnc.descricaoNc}" />
+            </p:column>
+            <p:column filterBy="#{rnc.setorResponsavel}" styleClass="col_setorResponsavel" headerText="Setor Responsável" sortBy="#{rnc.setorResponsavel}">
+                <h:outputText value="#{rnc.setorResponsavel.nome}" />
+            </p:column>
+
+            <p:column headerText="Opções">
+                <p:commandButton actionListener="#{rncBean.editar()}" icon="ui-icon-pencil"
+                               action="#{gerenciadorPaginas.cadastroRNC()}" ajax="false"
+                               title="Editar esta RNC"  id="editar"/>
+
+                <p:commandButton  icon="ui-icon-trash" title="Excluir esta RNC"  actionListener="#{rncBean.adicionarRNCnaSessao()}"
+                                id="excluir" oncomplete="confirmation.show()"/>
+                
+                <p:commandButton  icon="ui-icon-search" title="Visualizar Cabeçalho da RNC" 
+                                id="visualizarCabecalhoRNC" oncomplete="CabecalhoRNC.show()">
+                    <f:setPropertyActionListener value="#{rnc}" target="#{rncBean.cabRNC}"/>
+                </p:commandButton>
+            </p:column>
+
+        </p:dataTable>
+
+        <p:confirmDialog message="Deseja realmente excluir esta RNC?"
+                         header="Confirmação" severity="alert" widgetVar="confirmation" closable="false" id="confirmExcluir">
+
+            <p:commandButton value="Sim" id="confirmSim" update="rncLista messages" oncomplete="confirmation.hide()" style="position: relative;left: 45px;"
+                             actionListener="#{rncBean.remover()}">
+            </p:commandButton>
+            <p:commandButton value="Não" id="confirmNao" oncomplete="confirmation.hide()" style="position: relative;left: 115px;"
+                             actionListener="#{rncBean.removerRNCDaSessao()}"/>
+
+        </p:confirmDialog>
+        
+        <p:dialog header="Dados da RNC" widgetVar="CabecalhoRNC" modal="true" showEffect="fade">
+            <h:panelGrid columns="2" cellpadding="2" >
+            <h:outputLabel for="cabCodigoRNC" value="Código: " style="font-weight: bold"/>
+            <h:outputText id="cabCodigoRNC" value="#{rncBean.cabRNC.id}"/>
+            
+             <h:outputLabel for="cabDescricaoRNC" value="Descriçao: " style="font-weight: bold"/>
+             <h:outputText id="cabDescricaoRNC" value="#{rncBean.cabRNC.descricaoNc}"/>
+             
+             <h:outputLabel for="cabDataRNC" value="Data Abertura: " style="font-weight: bold"/>
+             <h:outputText id="cabDataRNC" value="#{rncBean.cabRNC.dataRnc}">
+             <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />             
+             </h:outputText>
+             
+             <h:outputLabel for="cabOrigemRNC" value="Origem: " style="font-weight: bold"/>
+             <h:outputText id="cabOrigemRNC" value="#{rncBean.cabRNC.origemRnc}"/>
+             
+              <h:outputLabel for="cabSetorResponsavelRNC" value="Setor Responsável: " style="font-weight: bold"/>
+             <h:outputText id="cabOrigemRNC" value="#{rncBean.cabRNC.origemRnc}"/>
+            
+             
+            
+            </h:panelGrid>
+        </p:dialog>
+        
+        
+    </h:form>
+</div>
