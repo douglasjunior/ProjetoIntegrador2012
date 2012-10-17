@@ -47,6 +47,7 @@ public class Rnc implements Serializable {
     private String abrangenciaDaAcao;
     private String empresaEmitente;
     private boolean rrc;
+    private String tipoAcaoProposta;
     @OneToMany(mappedBy = "rnc", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<AcaoContencao> acoesDeContencao;
     @OneToMany(mappedBy = "rnc", orphanRemoval = true, cascade = CascadeType.ALL)
@@ -65,6 +66,15 @@ public class Rnc implements Serializable {
         this.codigoProduto = codigoProduto;
     }
 
+    public String getTipoAcaoProposta() {
+        return tipoAcaoProposta;
+    }
+
+    public void setTipoAcaoProposta(String tipoAcaoProposta) {
+        this.tipoAcaoProposta = tipoAcaoProposta;
+    }
+
+    
     public Date getData() {
         return dataRnc;
     }

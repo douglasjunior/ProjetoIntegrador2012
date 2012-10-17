@@ -31,6 +31,7 @@ public class RncBean {
     private Rnc rnc;
     private List<String> origensRnc;
     private List<String> disposicoesRnc;
+    private Rnc cabRNC;
     
     public RncBean() {
         this.rnc = new Rnc();
@@ -165,5 +166,13 @@ public class RncBean {
     
     public List<Rnc> getTodasRNCs() {
         return rncDao.buscarTodos();
+    }
+
+    public Rnc getCabRNC() {
+        return cabRNC;
+    }
+
+    public void setCabRNC(Rnc cabRNC) {
+        this.cabRNC = cabRNC;
     }
 }

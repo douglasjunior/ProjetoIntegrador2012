@@ -22,7 +22,7 @@ public class AcaoProposta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String descricao;
-    private String tipo;
+  
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date prazo;
     private boolean concluido;
@@ -80,16 +80,7 @@ public class AcaoProposta implements Serializable {
     
     public void setRnc(Rnc rnc) {
         this.rnc = rnc;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-    
+    }    
     
     @Override
     public boolean equals(Object obj) {
