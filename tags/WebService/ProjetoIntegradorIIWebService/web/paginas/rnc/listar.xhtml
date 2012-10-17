@@ -42,14 +42,14 @@
 
             <p:column headerText="Opções">
                 <p:commandButton actionListener="#{rncBean.editar()}" icon="ui-icon-pencil"
-                               action="#{gerenciadorPaginas.cadastroRNC()}" ajax="false"
-                               title="Editar esta RNC"  id="editar"/>
+                                 action="#{gerenciadorPaginas.cadastroRNC()}" ajax="false"
+                                 title="Editar esta RNC"  id="editar"/>
 
                 <p:commandButton  icon="ui-icon-trash" title="Excluir esta RNC"  actionListener="#{rncBean.adicionarRNCnaSessao()}"
-                                id="excluir" oncomplete="confirmation.show()"/>
-                
+                                  id="excluir" oncomplete="confirmation.show()"/>
+
                 <p:commandButton  icon="ui-icon-search" title="Visualizar Cabeçalho da RNC" 
-                                id="visualizarCabecalhoRNC" oncomplete="CabecalhoRNC.show()">
+                                  id="visualizarCabecalhoRNC" oncomplete="CabecalhoRNC.show()">
                     <f:setPropertyActionListener value="#{rnc}" target="#{rncBean.cabRNC}"/>
                 </p:commandButton>
             </p:column>
@@ -66,31 +66,29 @@
                              actionListener="#{rncBean.removerRNCDaSessao()}"/>
 
         </p:confirmDialog>
-        
+
         <p:dialog header="Dados da RNC" widgetVar="CabecalhoRNC" modal="true" showEffect="fade">
             <h:panelGrid columns="2" cellpadding="2" >
-            <h:outputLabel for="cabCodigoRNC" value="Código: " style="font-weight: bold"/>
-            <h:outputText id="cabCodigoRNC" value="#{rncBean.cabRNC.id}"/>
-            
-             <h:outputLabel for="cabDescricaoRNC" value="Descriçao: " style="font-weight: bold"/>
-             <h:outputText id="cabDescricaoRNC" value="#{rncBean.cabRNC.descricaoNc}"/>
-             
-             <h:outputLabel for="cabDataRNC" value="Data Abertura: " style="font-weight: bold"/>
-             <h:outputText id="cabDataRNC" value="#{rncBean.cabRNC.dataRnc}">
-             <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />             
-             </h:outputText>
-             
-             <h:outputLabel for="cabOrigemRNC" value="Origem: " style="font-weight: bold"/>
-             <h:outputText id="cabOrigemRNC" value="#{rncBean.cabRNC.origemRnc}"/>
-             
-              <h:outputLabel for="cabSetorResponsavelRNC" value="Setor Responsável: " style="font-weight: bold"/>
-             <h:outputText id="cabOrigemRNC" value="#{rncBean.cabRNC.origemRnc}"/>
-            
-             
-            
+                <h:outputLabel for="cabCodigoRNC" value="Código: " style="font-weight: bold"/>
+                <h:outputText id="cabCodigoRNC" value="#{rncBean.cabRNC.id}"/>
+
+                <h:outputLabel for="cabDescricaoRNC" value="Descriçao: " style="font-weight: bold"/>
+                <h:outputText id="cabDescricaoRNC" value="#{rncBean.cabRNC.descricaoNc}"/>
+
+                <h:outputLabel for="cabDataRNC" value="Data Abertura: " style="font-weight: bold"/>
+                <h:outputText id="cabDataRNC" value="#{rncBean.cabRNC.dataRnc}">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />             
+                </h:outputText>
+
+                <h:outputLabel for="cabOrigemRNC" value="Origem: " style="font-weight: bold"/>
+                <h:outputText id="cabOrigemRNC" value="#{rncBean.cabRNC.origemRnc}"/>
+
+                <h:outputLabel for="cabSetorResponsavelRNC" value="Setor Responsável: " style="font-weight: bold"/>
+                <h:outputText id="cabSetorResponsavelRNC" value="#{rncBean.cabRNC.setorResponsavel}"/>
+
             </h:panelGrid>
         </p:dialog>
-        
-        
+
+
     </h:form>
 </div>

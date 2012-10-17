@@ -74,7 +74,6 @@ public class Rnc implements Serializable {
         this.tipoAcaoProposta = tipoAcaoProposta;
     }
 
-    
     public Date getData() {
         return dataRnc;
     }
@@ -294,6 +293,7 @@ public class Rnc implements Serializable {
         acoesDeContencao.remove(acao);
         acao.setRnc(null);
     }
+
     public boolean addAcaoProposta(AcaoProposta acao) {
         if (!acoesPropostas.contains(acao)) {
             acoesPropostas.add(acao);
@@ -306,5 +306,10 @@ public class Rnc implements Serializable {
     public void removeAcaoProposta(AcaoProposta acao) {
         acoesPropostas.remove(acao);
         acao.setRnc(null);
+    }
+
+    @Override
+    public String toString() {
+        return "br.edu.utfpr.rnc.pojo.rnc.Rnc[ id=" + id + " ]";
     }
 }

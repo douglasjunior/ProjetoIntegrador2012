@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 @ManagedBean(name = "rncBean")
 @SessionScoped
 public class RncBean {
-    
+
     @EJB
     private DepartamentoDao departamentoDao;
     @EJB
@@ -32,7 +32,7 @@ public class RncBean {
     private List<String> origensRnc;
     private List<String> disposicoesRnc;
     private Rnc cabRNC;
-    
+
     public RncBean() {
         this.rnc = new Rnc();
         this.origensRnc = new ArrayList<String>(Arrays.asList("Reclamação de Cliente",
@@ -48,7 +48,7 @@ public class RncBean {
                 "Retrabalho Interno",
                 "Retrabalho Externo"));
     }
-    
+
     public List<String> getOrigensRnc() {
         if (rnc.getOrigemRnc() != null && !rnc.getOrigemRnc().isEmpty()) {
             if (!origensRnc.contains(rnc.getOrigemRnc())) {
@@ -57,7 +57,7 @@ public class RncBean {
         }
         return origensRnc;
     }
-    
+
     public List<String> getDisposicoesRnc() {
         if (rnc.getDisposicao() != null && !rnc.getDisposicao().isEmpty()) {
             if (!disposicoesRnc.contains(rnc.getDisposicao())) {
@@ -66,10 +66,10 @@ public class RncBean {
         }
         return disposicoesRnc;
     }
-    
+
     @FacesConverter(forClass = Rnc.class)
     public static class RncConverter implements Converter {
-        
+
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0 || value.equals("null")) {
@@ -79,19 +79,19 @@ public class RncBean {
                     getValue(facesContext.getELContext(), null, "rncBean");
             return rncBean.rncDao.buscar(getKey(value));
         }
-        
+
         java.lang.Integer getKey(String value) {
             java.lang.Integer key;
             key = Integer.valueOf(value);
             return key;
         }
-        
+
         String getStringKey(java.lang.Integer value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
         }
-        
+
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
@@ -105,19 +105,19 @@ public class RncBean {
             }
         }
     }
-    
+
     public RncBean.RncConverter getConverter() {
         return new RncBean.RncConverter();
     }
-    
+
     public Rnc getRnc() {
         return rnc;
     }
-    
+
     public void setRnc(Rnc rnc) {
         this.rnc = rnc;
     }
-    
+
     public void salvar() {
         try {
             System.out.println(rnc.getId());
@@ -134,15 +134,15 @@ public class RncBean {
             JsfUtil.addErrorMessage("", "Erro ao salvar RNC.");
         }
     }
-    
+
     public void clearFields() {
     }
-    
+
     public void editar() {
         Rnc rnc = (Rnc) JsfUtil.getObjectFromRequestParameter("rnc");
         this.rnc = rnc;
     }
-    
+
     public void remover() {
         try {
             Rnc rnc = (Rnc) JsfUtil.getObjectFromSession("rnc");
@@ -152,18 +152,18 @@ public class RncBean {
         }
         removerRNCDaSessao();
     }
-    
+
     public void adicionarRNCnaSessao() {
         Rnc rnc = (Rnc) JsfUtil.getObjectFromRequestParameter("rnc");
         HttpSession hs = JsfUtil.getSession(false);
         hs.setAttribute("rnc", rnc);
     }
-    
+
     public void removerRNCDaSessao() {
         HttpSession hs = JsfUtil.getSession(false);
         hs.removeAttribute("rnc");
     }
-    
+
     public List<Rnc> getTodasRNCs() {
         return rncDao.buscarTodos();
     }
@@ -173,6 +173,7 @@ public class RncBean {
     }
 
     public void setCabRNC(Rnc cabRNC) {
+        System.out.println("setou:" + cabRNC);
         this.cabRNC = cabRNC;
     }
 }
