@@ -2,7 +2,7 @@
      xmlns:h="http://java.sun.com/jsf/html"
      xmlns:f="http://java.sun.com/jsf/core"
      xmlns:p="http://primefaces.org/ui">
-    <h:form id="listarRNCs">
+    <h:form id="listarRNCs" prependId="false">
         <p:growl globalOnly="true" id="messages" />
         <p:ajaxStatus style="width:16px;height:20px;margin-top: 3px;">
             <f:facet name="start">
@@ -30,7 +30,7 @@
             </p:column>
             <p:column filterBy="#{rnc.dataRnc}" styleClass="col_dataRNC" headerText="Data RNC" sortBy="#{rnc.dataRnc}">
                 <h:outputText value="#{rnc.dataRnc}" >
-                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
                 </h:outputText>
             </p:column>
             <p:column filterBy="#{rnc.descricaoNc}" styleClass="col_descricaoNc" headerText="Descrição NC" sortBy="#{rnc.descricaoNc}">
@@ -38,6 +38,9 @@
             </p:column>
             <p:column filterBy="#{rnc.setorResponsavel}" styleClass="col_setorResponsavel" headerText="Setor Responsável" sortBy="#{rnc.setorResponsavel}">
                 <h:outputText value="#{rnc.setorResponsavel.nome}" />
+            </p:column>
+            <p:column styleClass="col_setorResponsavel" headerText="Status">
+                <h:outputText value="#{rnc.aprovado?'Aprovado':'Pendente'}" />
             </p:column>
 
             <p:column headerText="Opções">
@@ -48,8 +51,8 @@
                 <p:commandButton  icon="ui-icon-trash" title="Excluir esta RNC"  actionListener="#{rncBean.adicionarRNCnaSessao()}"
                                   id="excluir" oncomplete="confirmation.show()"/>
 
-                <p:commandButton  icon="ui-icon-search" title="Visualizar Cabeçalho da RNC" 
-                                  id="visualizarCabecalhoRNC" oncomplete="CabecalhoRNC.show()">
+                <p:commandButton  icon="ui-icon-search" title="Visualizar Cabeçalho da RNC" actionListener="#{rncBean.adicionarRNCnaSessao()}"
+                                  id="visualizarCabecalhoRNC" update=":listarRNCs:cabecalhoRNC" oncomplete="CabecalhoRNC.show()">
                     <f:setPropertyActionListener value="#{rnc}" target="#{rncBean.cabRNC}"/>
                 </p:commandButton>
             </p:column>
@@ -67,7 +70,7 @@
 
         </p:confirmDialog>
 
-        <p:dialog header="Dados da RNC" widgetVar="CabecalhoRNC" modal="true" showEffect="fade">
+        <p:dialog id="cabecalhoRNC" header="Dados da RNC" widgetVar="CabecalhoRNC" modal="true" showEffect="fade" closable="false">
             <h:panelGrid columns="2" cellpadding="2" >
                 <h:outputLabel for="cabCodigoRNC" value="Código: " style="font-weight: bold"/>
                 <h:outputText id="cabCodigoRNC" value="#{rncBean.cabRNC.id}"/>
@@ -77,15 +80,20 @@
 
                 <h:outputLabel for="cabDataRNC" value="Data Abertura: " style="font-weight: bold"/>
                 <h:outputText id="cabDataRNC" value="#{rncBean.cabRNC.dataRnc}">
-                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />             
+                    <f:convertDateTime pattern="dd/MM/yyyy" />             
                 </h:outputText>
 
                 <h:outputLabel for="cabOrigemRNC" value="Origem: " style="font-weight: bold"/>
                 <h:outputText id="cabOrigemRNC" value="#{rncBean.cabRNC.origemRnc}"/>
 
                 <h:outputLabel for="cabSetorResponsavelRNC" value="Setor Responsável: " style="font-weight: bold"/>
-                <h:outputText id="cabSetorResponsavelRNC" value="#{rncBean.cabRNC.setorResponsavel}"/>
-
+                <h:outputText id="cabSetorResponsavelRNC" value="#{rncBean.cabRNC.setorResponsavel.nome}"/>
+                
+                <p:commandButton value="Aprovar RNC" id="confirmAprovar" update="rncLista messages" oncomplete="CabecalhoRNC.hide()" style="position: relative;left: 45px;" rendered="#{not rnc.aprovado}"
+                             actionListener="#{rncBean.aprovar()}">
+                </p:commandButton>
+                            <p:commandButton value="Fechar" id="confirmFecharVisualizacao" oncomplete="CabecalhoRNC.hide()" style="position: relative;left: 115px;"
+                             actionListener="#{rncBean.removerRNCDaSessao()}"/>
             </h:panelGrid>
         </p:dialog>
 
