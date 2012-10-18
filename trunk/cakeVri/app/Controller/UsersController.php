@@ -17,7 +17,7 @@ class UsersController extends AppController {
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirect());
+                return $this->redirect(array('controller' => 'rrcs', 'action' => 'index'));
             } else {
                 $this->Session->setFlash(__('Usuário ou senha Inválidos, tente novamente.'));
             }
@@ -132,4 +132,9 @@ class UsersController extends AppController {
         $this->Session->setFlash(__('Usuário não pode ser excluído.'));
         $this->redirect(array('action' => 'index'));
     }
+    
+    public function getAuthUser(){
+        return $this->Auth;
+    }
+
 }

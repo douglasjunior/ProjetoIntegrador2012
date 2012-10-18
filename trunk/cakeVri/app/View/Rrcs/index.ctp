@@ -29,8 +29,10 @@
                 <td> <a href="<?php echo h($rrc['Rrc']['anexo']); ?>" > <?php echo h($rrc['Rrc']['anexo']); ?> </a></td> 
                 <td><?php echo h($rrc['Rrc']['setorOuEmpresa']); ?>&nbsp;</td>
                 <td class="actions" style="text-align: left;" >
-                    <?php echo $this->Html->link(__('Visualizar'), array('action' => 'view', $rrc['Rrc']['id'])); ?>
-                    <?php if ($rrc['Rrc']['rnc_id'] == NULL) { ?>
+                    <?php echo $this->Html->link(__('Visualizar RRC'), array('action' => 'view', $rrc['Rrc']['id'])); ?>      
+                    <?php if ($rrc['Rrc']['rnc_id'] != NULL) { ?>
+                        <?php echo $this->Html->link(__('Visualizar RNC'), array('controller' => 'rncs', 'action' => 'view', $rrc['Rrc']['rnc_id'])); ?>      
+                    <?php } else { ?>
                         <?php echo $this->Html->link(__('Anexo'), array('action' => 'addAnexo', $rrc['Rrc']['id'])); ?>
                         <?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $rrc['Rrc']['id'])); ?>
                         <?php echo $this->Form->postLink(__('Excluir'), array('action' => 'delete', $rrc['Rrc']['id']), null, __('Are you sure you want to delete # %s?', $rrc['Rrc']['id'])); ?>

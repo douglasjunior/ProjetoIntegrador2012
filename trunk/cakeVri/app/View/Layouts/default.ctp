@@ -40,9 +40,9 @@ $cakeDescription = __d('cake_dev', 'Sistema de registro de reclamação de clien
             <div id="header">
                 <h1>Sistema automatizado para reclamações de clientes insatisfeitos!!!</h1>
             </div>
-            <?php if (true) { ?>
+            <?php if (AuthComponent::user() != NULL) { ?>
                 <div id="opcoes">
-                    <a href="users/logout">Sair</a>
+                    <?php echo $this->Html->link('Sair', array('controller' => 'users', 'action' => 'logout')); ?>
                 </div>
                 <div id="menu">
                     <?php echo $this->element('menu'); ?>

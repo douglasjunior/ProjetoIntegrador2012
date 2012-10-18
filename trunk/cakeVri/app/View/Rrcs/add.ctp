@@ -3,7 +3,9 @@
     <fieldset>
         <legend><?php echo __('Add Rrc'); ?></legend>
         <?php
-        echo $this->Form->input('user_id');
+        if (AuthComponent::user('tipo') == 'interno') {
+            echo $this->Form->input('user_id', array('label' => 'Usuário'));
+        }
         echo $this->Form->input('dataCriacao', array('dateFormat' => 'DMY', 'type' => 'hidden', 'separator' => '/', 'empty' => false));
         echo $this->Form->input('produto');
         echo $this->Form->input('quantidadeReprovado');

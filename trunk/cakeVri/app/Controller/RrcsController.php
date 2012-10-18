@@ -2,7 +2,6 @@
 
 App::uses('AppController', 'Controller');
 
-
 /**
  * Rrcs Controller
  *
@@ -15,14 +14,21 @@ class RrcsController extends AppController {
      *
      * @return void
      */
-    public function index() {
+    public function index($param = NULL) {
         $this->Rrc->recursive = 0;
-        $this->set('rrcs', $this->paginate());
-    }
-
-    public function minhasRrcs() {
-        $this->Rrc->recursive = 0;
-        $this->set('rrcs', $this->paginate());
+        if ($param == 'minhas') {
+            $this->set(
+                    'rrcs', $this->paginate(
+                            'Rrc', array('Rrc.user_id =' => $this->Auth->User('id'))
+                    )
+            );
+        } else {
+            if ($this->Auth->User('tipo') == 'externo') {
+                $this->redirect(array('action' => 'index', 'minhas'));
+            } else {
+                $this->set('rrcs', $this->paginate());
+            }
+        }
     }
 
     /**
@@ -49,7 +55,9 @@ class RrcsController extends AppController {
             //$this->Rrc->create();
             date_default_timezone_set('Brazil/East');
             $this->request->data['Rrc']['dataCriacao'] = date('Y-m-d H:i:s');
-
+            if ($this->Auth->User('tipo') == 'externo') {
+                $this->request->data['Rrc']['user_id'] = $this->Auth->User('id');
+            }
             if ($this->Rrc->save($this->request->data)) {
                 $this->Session->setFlash(__('The rrc has been saved'));
                 $this->redirect(array('action' => 'index'));
@@ -57,7 +65,7 @@ class RrcsController extends AppController {
                 $this->Session->setFlash(__('The rrc could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Rrc->User->find('list');
+        $users = $this->Rrc->User->find('list', array('fields' => 'nome'));
         $this->set(compact('users'));
     }
 
