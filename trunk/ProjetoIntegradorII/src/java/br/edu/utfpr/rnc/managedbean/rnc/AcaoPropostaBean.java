@@ -104,5 +104,7 @@ public class AcaoPropostaBean {
     public void remover(AcaoProposta ap) {
         System.out.println("remove: " + ap.getDescricao() + " " + ap.getResponsavel() + " " + ap.getPrazo());
         rncBean.getRnc().removeAcaoProposta(ap);
+            
     }
+
 }

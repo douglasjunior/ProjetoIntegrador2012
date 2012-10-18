@@ -189,7 +189,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="Opções" />
                                 </f:facet>
-                                <p:commandButton id="rmv" value="Excluir" update="@form" immediate="true" actionListener="#{acaoContencaoBean.remover(acaoContencao)}">
+                                <p:commandButton id="rmv" value="Excluir" update="@form" actionListener="#{acaoContencaoBean.remover(acaoContencao)}">
                                 </p:commandButton>
                             </p:column>
 
@@ -289,7 +289,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="Opções" />
                                 </f:facet>
-                                <p:commandButton id="rmv_ap" value="Excluir" update="@form" immediate="true" actionListener="#{acaoPropostaBean.remover(acaoProposta)}">
+                                <p:commandButton id="rmv_ap" value="Excluir" update="@form" actionListener="#{acaoPropostaBean.remover(acaoProposta)}">
                                 </p:commandButton>
                             </p:column>
 
