@@ -117,6 +117,14 @@ public class RncBean {
     public void setRnc(Rnc rnc) {
         this.rnc = rnc;
     }
+    
+    public void aprovar(){
+        Rnc rnc = (Rnc) JsfUtil.getObjectFromSession("rnc");
+        this.rnc = rnc;
+        this.rnc.setAprovado(true);
+        this.salvar();       
+        
+    }
 
     public void salvar() {
         try {
