@@ -48,6 +48,7 @@ public class Rnc implements Serializable {
     private String empresaEmitente;
     private boolean rrc;
     private boolean aprovado;
+    private boolean finalizado;
     private String tipoAcaoProposta;
     @OneToMany(mappedBy = "rnc", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<AcaoContencao> acoesDeContencao;
@@ -266,7 +267,14 @@ public class Rnc implements Serializable {
     public void setAprovado(boolean aprovado) {
         this.aprovado = aprovado;
     }
-    
+
+    public boolean isFinalizado() {
+        return finalizado;
+    }
+
+    public void setFinalizado(boolean finalizado) {
+        this.finalizado = finalizado;
+    }
 
     @Override
     public boolean equals(Object obj) {
