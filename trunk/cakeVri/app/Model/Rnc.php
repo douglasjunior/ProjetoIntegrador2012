@@ -22,4 +22,25 @@ class Rnc extends AppModel {
      */
     public $useTable = 'rnc';
 
+    /**
+     * hasMany associations
+     *
+     * @var array
+     */
+    public $hasMany = array(
+        'Rrc' => array(
+            'className' => 'Rrc',
+            'foreignKey' => 'rnc_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        )
+    );
+
 }

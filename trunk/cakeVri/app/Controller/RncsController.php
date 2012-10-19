@@ -10,14 +10,18 @@ App::uses('RrcsController', 'Controller');
  */
 class RncsController extends AppController {
 
-    /**
-     * index method
-     *
-     * @return void
-     */
-    public function index() {
-        $this->Rnc->recursive = 0;
-        $this->set('rncs', $this->paginate());
+    public function isAuthorized($user) {
+        if (parent::isAuthorized($user) == FALSE) {
+            if (in_array($this->action, array('view'))) {
+                $rncId = $this->request->params['pass']['0'];
+                $rnc = $this->Rnc->read(null, $rncId);
+                if ($rnc['Rrc']['0']['user_id'] == $user['id']) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -38,6 +42,10 @@ class RncsController extends AppController {
         $rrcController = new RrcsController();
         $rrcAAprovar = $rrcController->getRccByID($id);
 
+        if ($rrcAAprovar['Rrc']['rnc_id'] != null) {
+            throw new NotFoundException(__('Esta RRC já foi aprovada.'));
+        }
+
         $this->request->data['Rnc']['CODIGOPRODUTO'] = $rrcAAprovar['Rrc']['produto'];
         $this->request->data['Rnc']['DATARNC'] = $rrcAAprovar['Rrc']['dataCriacao'];
         $this->request->data['Rnc']['DESCRICAONC'] = $rrcAAprovar['Rrc']['descricao'];
@@ -56,7 +64,7 @@ class RncsController extends AppController {
             $rrcController->saveIdRnc($id, $this->Rnc->getID());
             $this->enviarEmail($rrcAAprovar['User']['email'], $id);
             $this->Session->setFlash(__("A RCC cód. $id foi aprovada com sucesso e gerou a RNC cód. " . $this->Rnc->getID() . "."));
-            $this->redirect(array('action' => 'index'));
+            $this->redirect(array('controller' => 'rrcs', 'action' => 'index'));
         } else {
             $this->Session->setFlash(__('Ocorreu um erro ao aprovar a RRC, por favor, tente novamente.'));
         }
@@ -85,8 +93,8 @@ class RncsController extends AppController {
         $mail->Mailer = "smtp";
 
 // Define que a mensagem poderá ter formatação HTML
-        $mail->IsHTML(true); 
-        
+        $mail->IsHTML(true);
+
 // Define que a codificação do conteúdo da mensagem será utf-8
         $mail->CharSet = "utf-8";
 
@@ -125,7 +133,7 @@ class RncsController extends AppController {
 
 // Toda a estrutura HTML e corpo da mensagem
         $mail->Body = $msg;
- 
+
 // Controle de erro ou sucesso no envio
         $mail->Send();
     }

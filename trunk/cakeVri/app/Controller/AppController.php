@@ -38,10 +38,18 @@ class AppController extends Controller {
     public $components = array(
         'Session',
         'Auth' => array(
-            'loginRedirect' => array('controller' => 'rrcs', 'action' => 'add'),
-            'logoutRedirect' => array('controller' => 'users', 'action' => 'login')
+            'loginRedirect' => array('controller' => 'rrcs', 'action' => 'index', 'minhas'),
+            'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
+            'authorize' => array('Controller')
         )
     );
+
+    public function isAuthorized($user) {
+        if (isset($user['tipo']) && $user['tipo'] === 'interno') {
+            return true;
+        }
+        return false;
+    }
 
     public function beforeFilter() {
         

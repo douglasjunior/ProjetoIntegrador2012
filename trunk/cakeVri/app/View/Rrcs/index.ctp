@@ -1,5 +1,13 @@
 <div class="rrcs index">
-    <h2><?php echo __('Registros de Reclamações de Clientes'); ?></h2>
+    <h2>
+        <?php
+        if ($minhas == true) {
+            echo __('Meus Registros de Reclamações de Cliente');
+        } else {
+            echo __('Registros de Reclamações de Clientes');
+        }
+        ?>
+    </h2>
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th><?php echo $this->Paginator->sort('Cód.'); ?></th>
@@ -15,18 +23,24 @@
         <?php foreach ($rrcs as $rrc): ?>
             <tr>
                 <td><?php echo h($rrc['Rrc']['id']); ?>&nbsp;</td>
-                <?php if ($rrc['Rrc']['rnc_id'] == NULL) { ?>
-                    <td>Aguardando aprovação</td>
-                <?php } else { ?>
-                    <td>Aprovada</td>
-                <?php } ?>
+                <td>
+                    <?php
+                    if ($rrc['Rrc']['rnc_id'] == NULL) {
+                        echo 'Aguardando aprovação';
+                    } else if ($rrc['Rnc']['FINALIZADO']) {
+                        echo 'Finalizado';
+                    } else {
+                        echo 'Aprovado';
+                    }
+                    ?>
+                </td>
                 <td>
                     <?php echo $this->Html->link($rrc['User']['nome'], array('controller' => 'users', 'action' => 'view', $rrc['User']['id'])); ?>
                 </td>
                 <td><?php echo h(formata_data($rrc['Rrc']['dataCriacao'])); ?>&nbsp;</td>
                 <td><?php echo h($rrc['Rrc']['produto']); ?>&nbsp;</td>
                 <td><?php echo h($rrc['Rrc']['placa']); ?>&nbsp;</td>
-                <td> <a href="<?php echo h($rrc['Rrc']['anexo']); ?>" > <?php echo h($rrc['Rrc']['anexo']); ?> </a></td> 
+                <td> <a href="../../<?php echo h($rrc['Rrc']['anexo']); ?>" > <?php echo h($rrc['Rrc']['anexo']); ?> </a></td> 
                 <td><?php echo h($rrc['Rrc']['setorOuEmpresa']); ?>&nbsp;</td>
                 <td class="actions" style="text-align: left;" >
                     <?php echo $this->Html->link(__('Visualizar RRC'), array('action' => 'view', $rrc['Rrc']['id'])); ?>      

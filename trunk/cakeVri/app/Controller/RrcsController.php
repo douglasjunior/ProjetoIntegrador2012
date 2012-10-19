@@ -9,6 +9,22 @@ App::uses('AppController', 'Controller');
  */
 class RrcsController extends AppController {
 
+    public function isAuthorized($user) {
+        if (parent::isAuthorized($user) == FALSE) {
+            if (in_array($this->action, array('add', 'index'))) {
+                return true;
+            }
+            if (in_array($this->action, array('edit', 'delete', 'view', 'addAnexo'))) {
+                $rrcId = $this->request->params['pass']['0'];
+                if ($this->Rrc->ehDono($rrcId, $user['id'])) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
+    }
+
     /**
      * index method
      *
@@ -22,12 +38,13 @@ class RrcsController extends AppController {
                             'Rrc', array('Rrc.user_id =' => $this->Auth->User('id'))
                     )
             );
+            $this->set('minhas', true);
         } else {
             if ($this->Auth->User('tipo') == 'externo') {
-                $this->redirect(array('action' => 'index', 'minhas'));
-            } else {
-                $this->set('rrcs', $this->paginate());
+                return $this->redirect(array('action' => 'index', 'minhas'));
             }
+            $this->set('rrcs', $this->paginate());
+            $this->set('minhas', false);
         }
     }
 
@@ -69,7 +86,7 @@ class RrcsController extends AppController {
         $this->set(compact('users'));
     }
 
-    public function salvarAnexo($arrayAnexo, $id) {
+    private function salvarAnexo($arrayAnexo, $id) {
         $fileTmp = $arrayAnexo['tmp_name'];
         $fileName = $arrayAnexo['name'];
         $diretorioDestino = "anexos/" . $id . "/";
@@ -113,7 +130,7 @@ class RrcsController extends AppController {
         } else {
             $this->request->data = $this->Rrc->read(null, $id);
         }
-        $users = $this->Rrc->User->find('list');
+        $users = $this->Rrc->User->find('list', array('fields' => 'nome'));
         $this->set(compact('users'));
     }
 
@@ -176,7 +193,11 @@ class RrcsController extends AppController {
     public function aprovar($id = null) {
         $this->Rrc->id = $id;
         if (!$this->Rrc->exists()) {
-            throw new NotFoundException(__('Invalid rrc'));
+            throw new NotFoundException(__('RRC não encontrada.'));
+        }
+        $rrc = $this->Rrc->read(null, $id);
+        if ($rrc['Rrc']['rnc_id'] != null) {
+            throw new NotFoundException(__('Esta RRC já foi aprovada.'));
         }
         $this->redirect(array('controller' => 'rncs', 'action' => 'aprovar', $id));
     }
@@ -184,10 +205,9 @@ class RrcsController extends AppController {
     public function getRccByID($id) {
         $this->Rrc->id = $id;
         if (!$this->Rrc->exists()) {
-            throw new NotFoundException(__('Invalid rrc'));
+            throw new NotFoundException(__('RRC não encontrada.'));
         }
         return $this->Rrc->read(null, $id);
-        ;
     }
 
     public function saveIdRnc($idRrc = NULL, $idRnc = NULL) {

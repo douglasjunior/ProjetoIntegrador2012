@@ -9,15 +9,29 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
+    public function isAuthorized($user) {
+        if (parent::isAuthorized($user) == FALSE) {
+            if (in_array($this->action, array('login', 'logout'))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add');
+        //  $this->Auth->allow('add');
     }
 
     public function login() {
+        if ($this->Auth->user() != NULL) {
+            return $this->redirect(array('controller' => 'rrcs', 'action' => 'index', 'minhas'));
+        }
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect(array('controller' => 'rrcs', 'action' => 'index'));
+                return $this->redirect(array('controller' => 'rrcs', 'action' => 'index', 'minhas'));
             } else {
                 $this->Session->setFlash(__('Usuário ou senha Inválidos, tente novamente.'));
             }
@@ -132,8 +146,8 @@ class UsersController extends AppController {
         $this->Session->setFlash(__('Usuário não pode ser excluído.'));
         $this->redirect(array('action' => 'index'));
     }
-    
-    public function getAuthUser(){
+
+    public function getAuthUser() {
         return $this->Auth;
     }
 
