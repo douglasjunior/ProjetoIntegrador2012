@@ -43,9 +43,9 @@ class Rrc extends AppModel {
         'descricao' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
+                'message' => 'Informe a descrição.',
+                'allowEmpty' => false,
+                'required' => true,
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
@@ -53,9 +53,9 @@ class Rrc extends AppModel {
         'setorOuEmpresa' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
-            //'allowEmpty' => false,
-            //'required' => false,
+                'message' => 'Informe o setor ou empresa.',
+                'allowEmpty' => false,
+                'required' => true,
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
@@ -88,10 +88,6 @@ class Rrc extends AppModel {
 
     public function ehDono($rrcId, $userId) {
         return $this->field('id', array('id' => $rrcId, 'user_id' => $userId)) === $rrcId;
-    }
-
-    public function ehDonoRNC($rncId, $userId) {
-        return $this->field('id', array('rnc_id' => $rncId, 'user_id' => $userId)) === $rrcId;
     }
 
 }

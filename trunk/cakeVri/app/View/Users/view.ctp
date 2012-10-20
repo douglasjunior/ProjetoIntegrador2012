@@ -1,5 +1,5 @@
 <div class="users view">
-    <h2><?php echo __('Usuário'); ?></h2>
+    <h2><?php echo __('Visualização dos dados do Usuário'); ?></h2>
     <dl>
         <dt><?php echo __('Id'); ?></dt>
         <dd>
@@ -54,16 +54,18 @@
     </dl>
 </div>
 <div class="actions">
-    <h3><?php echo __('Menu'); ?></h3>
+    <h3><?php echo __('Opções'); ?></h3>
     <ul>
-        <li><?php echo $this->Html->link(__('Editar usuário'), array('action' => 'edit', $user['User']['id'])); ?> </li>
-        <li><?php echo $this->Form->postLink(__('Excluir usuário'), array('action' => 'delete', $user['User']['id']), null, __('Você realmente deseja excluir o usuário %s?', $user['User']['nome'])); ?> </li>
-        <li><?php echo $this->Html->link(__('Voltar'), array('action' => 'index')); ?> </li>
+        <?php if (AuthComponent::user('tipo') == 'interno') { ?>
+            <li><?php echo $this->Html->link(__('Editar usuário'), array('action' => 'edit', $user['User']['id'])); ?> </li>
+            <li><?php echo $this->Form->postLink(__('Excluir usuário'), array('action' => 'delete', $user['User']['id']), null, __('Você realmente deseja excluir o usuário %s?', $user['User']['nome'])); ?> </li>
+        <?php } ?>
+        <li><a href="#" onclick="javascript:history.back(2)" >Voltar</a></li>
     </ul>
 </div>
 <div class="related">
     <?php if (!empty($user['Rrc'])): ?>
-    <h3><?php echo __('RRCs deste usuário.'); ?></h3>
+        <h3><?php echo __('RRCs deste usuário.'); ?></h3>
         <table cellpadding = "0" cellspacing = "0">
             <tr>
                 <th><?php echo __('Cód.'); ?></th>

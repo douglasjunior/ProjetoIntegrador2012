@@ -67,3 +67,9 @@
         </dd>
     </dl>
 </div>
+<div class="actions">
+    <h3><?php echo __('Opções'); ?></h3>
+    <ul>
+        <li><a href="#" onclick="javascript:history.back(2)" >Voltar</a></li>
+    </ul>
+</div>

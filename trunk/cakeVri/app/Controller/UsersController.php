@@ -13,16 +13,20 @@ class UsersController extends AppController {
         if (parent::isAuthorized($user) == FALSE) {
             if (in_array($this->action, array('login', 'logout'))) {
                 return true;
-            } else {
-                return false;
             }
+            if (in_array($this->action, array('view', 'edit'))) {
+                if ($user['id'] == $this->request->params['pass']['0']) {
+                    return true;
+                }
+            }
+            return false;
         }
         return true;
     }
 
     public function beforeFilter() {
         parent::beforeFilter();
-        //  $this->Auth->allow('add');
+        $this->Auth->allow('login');
     }
 
     public function login() {
@@ -79,7 +83,7 @@ class UsersController extends AppController {
             if ($senha != $senha2) {
                 $this->Session->setFlash(__('Senhas não conferem.'));
             } else {
-                // $this->request->data['User']['password'] = $this->Auth->password($senha);
+                // $this->request->data['User']['password'] = $this->Auth->password($senha); // como criptografar senha
                 if ($this->User->save($this->request->data)) {
                     $this->Session->setFlash(__('Usuário cadastrado com sucesso!'));
                     $this->redirect(array('action' => 'index'));
@@ -101,7 +105,6 @@ class UsersController extends AppController {
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Usuário Inválido.'));
         }
-
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('Usuário salvo com sucesso!'));
@@ -116,7 +119,45 @@ class UsersController extends AppController {
                 $this->redirect(array('action' => 'index'));
             } else {
                 $this->request->data = $userSelecionado;
+                $this->set('user', $userSelecionado);
             }
+        }
+    }
+
+    /**
+     * meotodo para alterar senha
+     *
+     * @param string $id
+     * @return void
+     */
+    public function alterarSenha($id = null) {
+        $this->User->id = $id;
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__('Usuário Inválido.'));
+        }
+        $userSelecionado = $this->User->read(null, $id);
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $senhaAtual = $this->request->data['User']['current_password'];
+            $novaSenha = $this->request->data['User']['new_password'];
+            $confirmaSenha = $this->request->data['User']['confirm_password'];
+            if($this->Auth->password($senhaAtual) != $userSelecionado['User']['password']){
+                $this->Session->setFlash(__('Senha atual não confere.'));
+                return;
+            }
+            if($novaSenha != $confirmaSenha){
+                $this->Session->setFlash(__('Novas senhas não conferem.'));
+                return;
+            }
+            $userSelecionado['User']['password'] = $novaSenha;
+            if ($this->User->save($userSelecionado)) {
+                $this->Session->setFlash(__('Senha alterada com sucesso!'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('Ocorreu um erro ao alterar a senha do Usuário. Tente novamente.'));
+            }
+        } else {
+            $this->request->data = $userSelecionado;
+            $this->set('user', $userSelecionado);
         }
     }
 

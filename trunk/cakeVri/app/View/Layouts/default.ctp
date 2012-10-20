@@ -16,10 +16,17 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 $cakeDescription = __d('cake_dev', 'Sistema de registro de reclamação de clientes');
+
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        <style type="text/css">
+            body{
+                overflow-y: scroll;
+            }
+        </style>
         <?php echo $this->Html->charset(); ?>
         <title>
             <?php echo $cakeDescription ?>:
@@ -42,6 +49,7 @@ $cakeDescription = __d('cake_dev', 'Sistema de registro de reclamação de clien
             </div>
             <?php if (AuthComponent::user() != NULL) { ?>
                 <div id="opcoes">
+                    <?php echo $this->Html->link('(' . AuthComponent::user('nome') . ')', array('controller' => 'users', 'action' => 'edit', AuthComponent::user('id'))); ?>
                     <?php echo $this->Html->link('Sair', array('controller' => 'users', 'action' => 'logout')); ?>
                 </div>
                 <div id="menu">

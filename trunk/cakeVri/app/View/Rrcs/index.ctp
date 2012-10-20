@@ -40,7 +40,11 @@
                 <td><?php echo h(formata_data($rrc['Rrc']['dataCriacao'])); ?>&nbsp;</td>
                 <td><?php echo h($rrc['Rrc']['produto']); ?>&nbsp;</td>
                 <td><?php echo h($rrc['Rrc']['placa']); ?>&nbsp;</td>
-                <td> <a href="../../<?php echo h($rrc['Rrc']['anexo']); ?>" > <?php echo h($rrc['Rrc']['anexo']); ?> </a></td> 
+                <td>
+                    <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . '/../' . h($rrc['Rrc']['anexo']); ?>" target="new" > 
+                        <?php echo h($rrc['Rrc']['anexo']); ?> 
+                    </a>
+                </td> 
                 <td><?php echo h($rrc['Rrc']['setorOuEmpresa']); ?>&nbsp;</td>
                 <td class="actions" style="text-align: left;" >
                     <?php echo $this->Html->link(__('Visualizar RRC'), array('action' => 'view', $rrc['Rrc']['id'])); ?>      

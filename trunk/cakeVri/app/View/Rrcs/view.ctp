@@ -74,7 +74,9 @@
         </dd>
         <dt><?php echo __('Anexo'); ?></dt>
         <dd>
-            <a href="../../<?php echo h($rrc['Rrc']['anexo']); ?>" > <?php echo h($rrc['Rrc']['anexo']); ?> </a>
+            <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . '/../' . h($rrc['Rrc']['anexo']); ?>" target="new" > 
+                <?php echo h($rrc['Rrc']['anexo']); ?> 
+            </a>
             &nbsp;
         </dd>
         <dt><?php echo __('Setor/Empresa'); ?></dt>
@@ -91,7 +93,7 @@
             <li><?php echo $this->Form->postLink(__('Aprovar RRC'), array('action' => 'aprovar', $rrc['Rrc']['id']), null, __('Deseja aprovar a RRC # %s?', $rrc['Rrc']['id'])); ?></li>
             <li><?php echo $this->Html->link(__('Editar RRC'), array('action' => 'edit', $rrc['Rrc']['id'])); ?> </li>
             <li><?php echo $this->Form->postLink(__('Excluir RRC'), array('action' => 'delete', $rrc['Rrc']['id']), null, __('Deseja excluir a RRC # %s?', $rrc['Rrc']['id'])); ?> </li>
-        <?php } ?>
-        <li><?php echo $this->Html->link(__('Voltar'), array('action' => 'index')); ?> </li>
+        <?php } ?>    
+        <li><a href="#" onclick="javascript:history.back(2)" >Voltar</a></li>
     </ul>
 </div>

@@ -21,6 +21,6 @@
 <div class="actions">
     <h3><?php echo __('Opções'); ?></h3>
     <ul>
-        <li><?php echo $this->Html->link(__('Voltar'), array('action' => 'index')); ?></li>
+        <li><a href="#" onclick="javascript:history.back(2)" >Voltar</a></li>
     </ul>
 </div>
