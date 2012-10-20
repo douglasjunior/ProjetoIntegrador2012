@@ -15,7 +15,7 @@
 
                 <h:panelGrid columns="3" cellpadding="5">
                     <h:outputLabel for="data" value="Data:"><span class="required">*</span></h:outputLabel>
-                    <p:calendar value="#{rncBean.rnc.data}" id="data" size="10"
+                    <p:calendar value="#{rncBean.rnc.dataRnc}" id="data" size="10"
                                 title="Data de abertura." required="true" requiredMessage="Informe a data de abertura da RNC" 
                                 pattern="dd/MM/yyyy"/>
                     <p:message for="data"/>
@@ -310,11 +310,39 @@
             </p:tab>
             <p:tab id="tabEficacia" title="Análise da Eficácia">
                 <h:panelGrid columns="1" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Analise das ações realizadas e encerramento.">
-                    <h:outputLabel for="eficacia" value="Analise da Eficácia das Ações:"><span class="required">*</span></h:outputLabel>
+                    <h:outputLabel for="comentario" value="Comentários:"></h:outputLabel>
                     <h:panelGrid columns="2">
-                        <p:inputText id="eficacia"></p:inputText>
+                        <p:inputTextarea id="comentario" style="width: 700px" value="#{rncBean.rnc.comentarioAnalise}"></p:inputTextarea>
 
-                        <p:message for="eficacia"/>
+                        <p:message for="comentario"/>
+                    </h:panelGrid>
+
+                    <h:outputLabel for="eficaz" value="Foi eficaz?"></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:selectOneMenu id="eficaz" value="#{rncBean.rnc.eficaz}"  >
+                            <f:selectItem itemLabel="Selecione" itemValue="" />
+                            <f:selectItem itemLabel="Sim" itemValue="Sim" />
+                            <f:selectItem itemLabel="Não" itemValue="Não" />
+                        </p:selectOneMenu>
+                        <p:message for="eficaz"/>
+                    </h:panelGrid>
+                    <h:outputLabel for="verificadoPor" value="Verificado por:"></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:inputText id="verificadoPor" style="width: 700px" value="#{authUser.nome}" disabled="true" />
+                        <p:message for="verificadoPor"/>
+                    </h:panelGrid>
+                    <h:outputLabel for="dataAnalise" value="Data:"></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:inputText id="dataAnalise" value="#{rncBean.dataAtual}" disabled="true">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </p:inputText>
+                        <p:message for="dataAnalise"/>
+                    </h:panelGrid>
+
+                    <h:outputLabel for="novaRnc" value="No nova RNC:"></h:outputLabel>
+                    <h:panelGrid columns="2">
+                        <p:inputText id="novaRnc" value="#{rncBean.novaRnc.id}" disabled="true"/>
+                        <p:message for="novaRnc"/>
                     </h:panelGrid>
                 </h:panelGrid>
             </p:tab>
