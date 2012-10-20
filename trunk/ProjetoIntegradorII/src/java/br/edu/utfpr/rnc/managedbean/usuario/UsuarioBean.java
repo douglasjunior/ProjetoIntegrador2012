@@ -183,6 +183,9 @@ public class UsuarioBean {
 
             subject.getSession().setTimeout(600000l);
             
+            Usuario u = usuarioDao.buscarLogin(usuario.getLogin());            
+            subject.getSession().setAttribute("authUser", u);
+
             ((GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas")).home();
             JsfUtil.redirect("index.xhtml");
         } catch (Exception e) {

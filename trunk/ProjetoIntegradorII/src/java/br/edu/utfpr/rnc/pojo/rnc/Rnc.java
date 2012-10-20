@@ -54,6 +54,12 @@ public class Rnc implements Serializable {
     private List<AcaoContencao> acoesDeContencao;
     @OneToMany(mappedBy = "rnc", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<AcaoProposta> acoesPropostas;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataAnalise;
+    private String comentarioAnalise;
+    private String eficaz;
+    @ManyToOne
+    private Usuario veficadoPor;
 
     public Rnc() {
         acoesDeContencao = new ArrayList<AcaoContencao>();
@@ -76,12 +82,12 @@ public class Rnc implements Serializable {
         this.tipoAcaoProposta = tipoAcaoProposta;
     }
 
-    public Date getData() {
-        return dataRnc;
+    public Date getDataAnalise() {
+        return dataAnalise;
     }
 
-    public void setData(Date data) {
-        this.dataRnc = data;
+    public void setDataAnalise(Date dataAnalise) {
+        this.dataAnalise = dataAnalise;
     }
 
     public String getDescricaoNc() {
@@ -274,6 +280,30 @@ public class Rnc implements Serializable {
 
     public void setFinalizado(boolean finalizado) {
         this.finalizado = finalizado;
+    }
+
+    public String getComentarioAnalise() {
+        return comentarioAnalise;
+    }
+
+    public void setComentarioAnalise(String comentarioAnalise) {
+        this.comentarioAnalise = comentarioAnalise;
+    }
+
+    public String getEficaz() {
+        return eficaz;
+    }
+
+    public void setEficaz(String eficaz) {
+        this.eficaz = eficaz;
+    }
+
+    public Usuario getVeficadoPor() {
+        return veficadoPor;
+    }
+
+    public void setVeficadoPor(Usuario veficadoPor) {
+        this.veficadoPor = veficadoPor;
     }
 
     @Override

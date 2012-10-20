@@ -8,6 +8,7 @@ import br.edu.utfpr.rnc.pojo.rnc.Rnc;
 import br.edu.utfpr.rnc.util.JsfUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -29,6 +30,7 @@ public class RncBean {
     @EJB
     private RncDao rncDao;
     private Rnc rnc;
+    private Rnc novaRnc;
     private List<String> origensRnc;
     private List<String> disposicoesRnc;
     private Rnc cabRNC;
@@ -117,13 +119,13 @@ public class RncBean {
     public void setRnc(Rnc rnc) {
         this.rnc = rnc;
     }
-    
-    public void aprovar(){
+
+    public void aprovar() {
         Rnc rnc = (Rnc) JsfUtil.getObjectFromSession("rnc");
         this.rnc = rnc;
         this.rnc.setAprovado(true);
-        this.salvar();       
-        
+        this.salvar();
+
     }
 
     public void salvar() {
@@ -183,5 +185,17 @@ public class RncBean {
     public void setCabRNC(Rnc cabRNC) {
         System.out.println("setou:" + cabRNC);
         this.cabRNC = cabRNC;
+    }
+
+    public Date getDataAtual() {
+        return new Date();
+    }
+
+    public Rnc getNovaRnc() {
+        return novaRnc;
+    }
+
+    public void setNovaRnc(Rnc novaRnc) {
+        this.novaRnc = novaRnc;
     }
 }
