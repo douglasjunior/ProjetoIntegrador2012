@@ -40,16 +40,16 @@
                 <h:outputText value="#{rnc.setorResponsavel.nome}" />
             </p:column>
             <p:column styleClass="col_setorResponsavel" headerText="Status">
-                <h:outputText value="#{rnc.aprovado?'Aprovado':'Pendente'}" />
+                <h:outputText value="#{rnc.status}" />
             </p:column>
 
             <p:column headerText="Opções">
                 <p:commandButton actionListener="#{rncBean.editar()}" icon="ui-icon-pencil"
                                  action="#{gerenciadorPaginas.cadastroRNC()}" ajax="false"
-                                 title="Editar esta RNC"  id="editar"/>
+                                 title="Editar esta RNC"  id="editar" rendered="#{not rnc.finalizado}"/>
 
                 <p:commandButton  icon="ui-icon-trash" title="Excluir esta RNC"  actionListener="#{rncBean.adicionarRNCnaSessao()}"
-                                  id="excluir" oncomplete="confirmation.show()"/>
+                                  id="excluir" oncomplete="confirmation.show()" rendered="#{not rnc.bound}"/>
 
                 <p:commandButton  icon="ui-icon-search" title="Visualizar Cabeçalho da RNC" actionListener="#{rncBean.adicionarRNCnaSessao()}"
                                   id="visualizarCabecalhoRNC" update=":listarRNCs:cabecalhoRNC" oncomplete="CabecalhoRNC.show()">

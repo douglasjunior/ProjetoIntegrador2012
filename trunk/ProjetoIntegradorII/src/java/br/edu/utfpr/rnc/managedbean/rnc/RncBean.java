@@ -30,7 +30,6 @@ public class RncBean {
     @EJB
     private RncDao rncDao;
     private Rnc rnc;
-    private Rnc novaRnc;
     private List<String> origensRnc;
     private List<String> disposicoesRnc;
     private Rnc cabRNC;
@@ -67,6 +66,22 @@ public class RncBean {
             }
         }
         return disposicoesRnc;
+    }
+
+    private void gerarNovaRnc() {
+        Rnc novaRnc = new Rnc(rnc);
+        novaRnc.setDataRnc(new Date());
+        rncDao.criarEntidade(novaRnc);
+        this.rnc.setNovaRnc(novaRnc);
+        rnc.setFinalizado(true);
+        rncDao.editar(this.rnc);
+        this.rnc = novaRnc;
+        ((GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas")).cadastroRNC();
+    }
+
+    private void finalizarRnc() {
+        rnc.setFinalizado(true);
+        rncDao.editar(rnc);
     }
 
     @FacesConverter(forClass = Rnc.class)
@@ -137,11 +152,19 @@ public class RncBean {
                 rncDao.editar(rnc);
                 ((GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas")).listarRNCs();
             }
-            rnc = new Rnc();
-            JsfUtil.addSuccessMessage("", "RNC salva com sucesso.");
+            if (rnc.getEficaz() != null) {
+                if (rnc.getEficaz().equals("Não")) {
+                    gerarNovaRnc();
+                } else if (rnc.getEficaz().equals("Sim")) {
+                    finalizarRnc();
+                }
+            } else {
+                rnc = new Rnc();
+                JsfUtil.addSuccessMessage("Concluído", "RNC salva com sucesso.");
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            JsfUtil.addErrorMessage("", "Erro ao salvar RNC.");
+            JsfUtil.addErrorMessage("ERRO", "Erro ao salvar RNC.");
         }
     }
 
@@ -189,13 +212,5 @@ public class RncBean {
 
     public Date getDataAtual() {
         return new Date();
-    }
-
-    public Rnc getNovaRnc() {
-        return novaRnc;
-    }
-
-    public void setNovaRnc(Rnc novaRnc) {
-        this.novaRnc = novaRnc;
     }
 }

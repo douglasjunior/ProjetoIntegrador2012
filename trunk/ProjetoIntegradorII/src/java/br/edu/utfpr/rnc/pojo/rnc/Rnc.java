@@ -23,7 +23,6 @@ public class Rnc implements Serializable {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataRnc;
-    @NotNull
     private String origemRnc;
     private String descricaoNc;
     private String relatorio;
@@ -60,7 +59,29 @@ public class Rnc implements Serializable {
     private String eficaz;
     @ManyToOne
     private Usuario veficadoPor;
+    @OneToOne
+    private Rnc novaRnc;
+    @OneToOne(mappedBy = "novaRnc")
+    private Rnc antigaRnc;
 
+    public Rnc(Rnc rnc) {
+        this.setorEmitente = rnc.getSetorEmitente();
+        this.emitente = rnc.getEmitente();
+        this.codigoProduto = rnc.getCodigoProduto();
+        this.descricaoProduto = rnc.getDescricaoProduto();
+        this.quantidadeReprovada = rnc.getQuantidadeReprovada();
+        this.quantidadeRecebida = rnc.getQuantidadeRecebida();
+        this.documentoOrigem = rnc.getDocumentoOrigem();
+        this.numeroLote = rnc.getNumeroLote();
+        this.placa = rnc.getPlaca();
+        this.origemRnc = rnc.getOrigemRnc();
+        this.descricaoNc = rnc.getDescricaoNc();
+        this.relatorio = rnc.getRelatorio();
+        this.setorResponsavel = rnc.getSetorResponsavel();
+        this.responsavel = rnc.getResponsavel();
+    }
+
+    
     public Rnc() {
         acoesDeContencao = new ArrayList<AcaoContencao>();
         acoesPropostas = new ArrayList<AcaoProposta>();
@@ -306,6 +327,26 @@ public class Rnc implements Serializable {
         this.veficadoPor = veficadoPor;
     }
 
+    public Rnc getAntigaRnc() {
+        return antigaRnc;
+    }
+
+    public void setAntigaRnc(Rnc antigaRnc) {
+        this.antigaRnc = antigaRnc;
+    }
+
+    public Rnc getNovaRnc() {
+        return novaRnc;
+    }
+
+    public void setNovaRnc(Rnc novaRnc) {
+        this.novaRnc = novaRnc;
+    }
+    
+    public boolean isBound(){
+        return (novaRnc != null) || (antigaRnc != null);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -359,5 +400,15 @@ public class Rnc implements Serializable {
     @Override
     public String toString() {
         return "br.edu.utfpr.rnc.pojo.rnc.Rnc[ id=" + id + " ]";
+    }
+    
+    public String getStatus(){
+        if(finalizado){
+            return "Finalizado";
+        } else if(aprovado){
+            return "Aprovado";
+        } else {
+            return "Pendente";
+        }
     }
 }
