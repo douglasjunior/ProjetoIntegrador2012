@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.2-b13 (branches/2.2-6964; 2012-01-09T18:04:18+0000) JAXWS-RI/2.2.6-promoted-b20 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://webService.rnc.utfpr.edu.br/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webService.rnc.utfpr.edu.br/">
+
+<xs:element name="hello" type="tns:hello"/>
+
+<xs:element name="helloResponse" type="tns:helloResponse"/>
+
+<xs:element name="listarRncs" type="tns:listarRncs"/>
+
+<xs:element name="listarRncsResponse" type="tns:listarRncsResponse"/>
+
+<xs:complexType name="listarRncs">
+<xs:sequence>
+<xs:element name="situacao" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listarRncsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:rnc" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rnc">
+<xs:sequence>
+<xs:element name="abrangenciaDaAcao" type="xs:string" minOccurs="0"/>
+<xs:element name="acoesDeContencao" type="tns:acaoContencao" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="acoesPropostas" type="tns:acaoProposta" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="causaProvavel" type="xs:string" minOccurs="0"/>
+<xs:element name="codigoProduto" type="xs:string" minOccurs="0"/>
+<xs:element name="data" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="dataRnc" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="descricaoNc" type="xs:string" minOccurs="0"/>
+<xs:element name="descricaoProduto" type="xs:string" minOccurs="0"/>
+<xs:element name="disposicao" type="xs:string" minOccurs="0"/>
+<xs:element name="documentoOrigem" type="xs:string" minOccurs="0"/>
+<xs:element name="emitente" type="tns:usuario" minOccurs="0"/>
+<xs:element name="empresaEmitente" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="numeroLote" type="xs:string" minOccurs="0"/>
+<xs:element name="origemRnc" type="xs:string" minOccurs="0"/>
+<xs:element name="placa" type="xs:string" minOccurs="0"/>
+<xs:element name="quantidadeRecebida" type="xs:int"/>
+<xs:element name="quantidadeReprovada" type="xs:int"/>
+<xs:element name="relatorio" type="xs:string" minOccurs="0"/>
+<xs:element name="responsavel" type="tns:usuario" minOccurs="0"/>
+<xs:element name="rrc" type="xs:boolean"/>
+<xs:element name="setorEmitente" type="tns:departamento" minOccurs="0"/>
+<xs:element name="setorResponsavel" type="tns:departamento" minOccurs="0"/>
+<xs:element name="tipoAcaoProposta" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="acaoContencao">
+<xs:sequence>
+<xs:element name="concluido" type="xs:boolean"/>
+<xs:element name="descricao" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="prazo" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="responsavel" type="tns:usuario" minOccurs="0"/>
+<xs:element name="rnc" type="tns:rnc" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="usuario">
+<xs:sequence>
+<xs:element name="departamentos" type="tns:departamento" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="login" type="xs:string" minOccurs="0"/>
+<xs:element name="nome" type="xs:string" minOccurs="0"/>
+<xs:element name="senha" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="departamento">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="nome" type="xs:string" minOccurs="0"/>
+<xs:element name="responsavel" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="acaoProposta">
+<xs:sequence>
+<xs:element name="concluido" type="xs:boolean"/>
+<xs:element name="descricao" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="prazo" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="responsavel" type="tns:usuario" minOccurs="0"/>
+<xs:element name="rnc" type="tns:rnc" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="hello">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="helloResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
