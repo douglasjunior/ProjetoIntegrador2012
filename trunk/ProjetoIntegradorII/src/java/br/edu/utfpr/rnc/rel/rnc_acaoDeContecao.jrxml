@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="proposta_gruposNaProposta" language="groovy" pageWidth="516" pageHeight="802" whenNoDataType="NoDataSection" columnWidth="516" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b544f528-2c05-4409-a1ac-b966222d4e40">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="valorFixoMensalidade" class="java.lang.Double">
+		<fieldDescription><![CDATA[valorFixoMensalidade]]></fieldDescription>
+	</field>
+	<field name="idGrupoBase" class="java.lang.Long">
+		<fieldDescription><![CDATA[idGrupoBase]]></fieldDescription>
+	</field>
+	<field name="posicao" class="java.lang.Integer">
+		<fieldDescription><![CDATA[posicao]]></fieldDescription>
+	</field>
+	<field name="proposta" class="br.com.unimake.src.proposta.EntidadeProposta">
+		<fieldDescription><![CDATA[proposta]]></fieldDescription>
+	</field>
+	<field name="valorPorHoraImplantacao" class="java.lang.Double">
+		<fieldDescription><![CDATA[valorPorHoraImplantacao]]></fieldDescription>
+	</field>
+	<field name="totalValorFixoMensalidade" class="java.lang.Double">
+		<fieldDescription><![CDATA[totalValorFixoMensalidade]]></fieldDescription>
+	</field>
+	<field name="horasUsuario" class="java.lang.Double">
+		<fieldDescription><![CDATA[horasUsuario]]></fieldDescription>
+	</field>
+	<field name="valorUsuarioMensalidade" class="java.lang.Double">
+		<fieldDescription><![CDATA[valorUsuarioMensalidade]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<field name="valorFixoImplantacao" class="java.lang.Double">
+		<fieldDescription><![CDATA[valorFixoImplantacao]]></fieldDescription>
+	</field>
+	<field name="apelido" class="java.lang.String">
+		<fieldDescription><![CDATA[apelido]]></fieldDescription>
+	</field>
+	<field name="horasFixa" class="java.lang.Double">
+		<fieldDescription><![CDATA[horasFixa]]></fieldDescription>
+	</field>
+	<field name="totalValorFixoImplantacao" class="java.lang.Double">
+		<fieldDescription><![CDATA[totalValorFixoImplantacao]]></fieldDescription>
+	</field>
+	<field name="modulosNaPropostaSeIncluso" class="java.util.List">
+		<fieldDescription><![CDATA[modulosNaPropostaSeIncluso]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="idGrupoNaTabela" class="java.lang.Long">
+		<fieldDescription><![CDATA[idGrupoNaTabela]]></fieldDescription>
+	</field>
+	<field name="modulosNaProposta" class="java.util.List">
+		<fieldDescription><![CDATA[modulosNaProposta]]></fieldDescription>
+	</field>
+	<field name="incluso" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[incluso]]></fieldDescription>
+	</field>
+	<group name="grupoNaProposta">
+		<groupExpression><![CDATA[$F{idGrupoNaTabela}]]></groupExpression>
+		<groupHeader>
+			<band height="55">
+				<printWhenExpression><![CDATA[$F{incluso}]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement uuid="7209fdce-6f52-4466-86f8-b3fd66d643d9" mode="Opaque" x="0" y="0" width="516" height="25" isRemoveLineWhenBlank="true" forecolor="#FFFFFF" backcolor="#AAA06B">
+						<printWhenExpression><![CDATA[$F{incluso}]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="16" isBold="true"/>
+						<paragraph leftIndent="1" rightIndent="1"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				</textField>
+				<subreport>
+					<reportElement uuid="0630292d-25c3-4a8f-85bc-0017646aa5b2" isPrintRepeatedValues="false" mode="Transparent" x="0" y="33" width="516" height="13" backcolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$F{incluso}]]></printWhenExpression>
+					</reportElement>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(br.com.unimake.src.modulo.ModuloNaPropostaServices.getSomenteModulosInclusos($F{modulosNaProposta}))]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "proposta_gruposNaProposta_modulosNaProposta.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

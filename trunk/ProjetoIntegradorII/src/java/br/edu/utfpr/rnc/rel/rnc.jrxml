@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="20" bottomMargin="50" uuid="ec554c7e-eb5c-431e-91e3-34004c2fcea7">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="estilo1" markup="styled" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="zebrado" mode="Opaque" backcolor="#E2FAE2" fill="Solid" markup="styled" pattern=""/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="5e66054c-362c-4f21-96a3-6c73e1908c14"/>
+	<parameter name="proposta" class="br.com.unimake.src.proposta.EntidadeProposta"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="papelTimbrado" class="java.lang.Boolean">
+		<parameterDescription><![CDATA[papelTimbrado]]></parameterDescription>
+		<defaultValueExpression><![CDATA[false]]></defaultValueExpression>
+	</parameter>
+	<parameter name="rnc" class="br.edu.utfpr.rnc.pojo.rnc.Rnc"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<variable name="gruposNaProposta" class="java.util.List" resetType="None">
+		<variableExpression><![CDATA[$P{proposta}.gruposNaProposta]]></variableExpression>
+	</variable>
+	<variable name="tabelaDePreco" class="br.com.unimake.src.tabelaDePreco.EntidadeTabelaDePreco" resetType="None">
+		<variableExpression><![CDATA[$P{proposta}.getTabela()]]></variableExpression>
+	</variable>
+	<variable name="produto" class="br.com.unimake.src.produto.EntidadeProduto" resetType="None">
+		<variableExpression><![CDATA[$V{tabelaDePreco}.getProduto()]]></variableExpression>
+	</variable>
+	<variable name="dataCabecalho" class="java.lang.String"/>
+	<variable name="unidadeUsuario" class="br.com.unimake.src.unidade.EntidadeUnidade" resetType="None">
+		<variableExpression><![CDATA[$P{proposta}.getUnidadeUsuario()]]></variableExpression>
+	</variable>
+	<variable name="gruposNaPropostaSeInclusos" class="java.util.List" resetType="None">
+		<variableExpression><![CDATA[$P{proposta}.getGruposNaPropostaSeInclusos()]]></variableExpression>
+	</variable>
+	<variable name="usuario" class="br.com.unimake.src.usuario.EntidadeUsuario" resetType="None">
+		<variableExpression><![CDATA[$P{proposta}.getUsuario()]]></variableExpression>
+	</variable>
+	<variable name="qtdPaginas" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="condicaoPagamentoMensalidade" class="br.com.unimake.src.condicaoDePagamento.mensalidade.EntidadeCondicaoDePagamentoMensalidade" resetType="None">
+		<variableExpression><![CDATA[$P{proposta}.getCondicaoPagamentoMensalidade()]]></variableExpression>
+	</variable>
+	<variable name="segmento" class="br.com.unimake.src.segmento.EntidadeSegmento" resetType="None">
+		<variableExpression><![CDATA[$V{tabelaDePreco}.getSegmento()]]></variableExpression>
+	</variable>
+	<variable name="customizacoes" class="br.com.unimake.src.customizacoes.EntidadeCustomizacoes" resetType="None">
+		<variableExpression><![CDATA[$P{proposta}.getCustomizacoes()]]></variableExpression>
+	</variable>
+	<group name="historico">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<staticText>
+					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="0" width="515" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
+					<box>
+						<pen lineWidth="1.5"/>
+						<topPen lineWidth="1.5"/>
+						<leftPen lineWidth="1.5"/>
+						<bottomPen lineWidth="1.5"/>
+						<rightPen lineWidth="1.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="false" isStrikeThrough="false"/>
+						<paragraph leftIndent="1" rightIndent="1"/>
+					</textElement>
+					<text><![CDATA[<b>Histórico da RNC.</b> <i>(Dados para rastreabilidade e histórico do relatório)</i>]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="origem">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="51">
+				<staticText>
+					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="0" width="515" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
+					<box>
+						<pen lineWidth="1.5"/>
+						<topPen lineWidth="1.5"/>
+						<leftPen lineWidth="1.5"/>
+						<bottomPen lineWidth="1.5"/>
+						<rightPen lineWidth="1.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="false" isStrikeThrough="false"/>
+						<paragraph leftIndent="1" rightIndent="1"/>
+					</textElement>
+					<text><![CDATA[<b>Origem da RNC.</b> <i>(Onde foi originada a não conformidade)</i>]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="descricao">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="44">
+				<staticText>
+					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="0" width="515" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
+					<box>
+						<pen lineWidth="1.5"/>
+						<topPen lineWidth="1.5"/>
+						<leftPen lineWidth="1.5"/>
+						<bottomPen lineWidth="1.5"/>
+						<rightPen lineWidth="1.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="false" isStrikeThrough="false"/>
+						<paragraph leftIndent="1" rightIndent="1"/>
+					</textElement>
+					<text><![CDATA[<b>Descrição da Não Conformidade.</b> <i>(Descrição da falha ou problema observado)</i>]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="relatorio">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="49">
+				<staticText>
+					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="0" width="515" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
+					<box>
+						<pen lineWidth="1.5"/>
+						<topPen lineWidth="1.5"/>
+						<leftPen lineWidth="1.5"/>
+						<bottomPen lineWidth="1.5"/>
+						<rightPen lineWidth="1.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="false" isStrikeThrough="false"/>
+						<paragraph leftIndent="1" rightIndent="1"/>
+					</textElement>
+					<text><![CDATA[<b>Relatório.</b> <i>(Foto, Referencia de documento, Comentários, etc.)</i>]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="disposicao">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="55">
+				<staticText>
+					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="0" width="515" height="15" forecolor="#000000" backcolor="#FFCC99"/>
+					<box>
+						<pen lineWidth="1.5"/>
+						<topPen lineWidth="1.5"/>
+						<leftPen lineWidth="1.5"/>
+						<bottomPen lineWidth="1.5"/>
+						<rightPen lineWidth="1.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="false" isStrikeThrough="false"/>
+						<paragraph leftIndent="1" rightIndent="1"/>
+					</textElement>
+					<text><![CDATA[<b>Disposição.</b> <i>(Destino dado ao material não conforme)</i>]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="acaoContecao">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<staticText>
+					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="0" width="515" height="15" forecolor="#000000" backcolor="#FFCC99"/>
+					<box>
+						<pen lineWidth="1.5"/>
+						<topPen lineWidth="1.5"/>
+						<leftPen lineWidth="1.5"/>
+						<bottomPen lineWidth="1.5"/>
+						<rightPen lineWidth="1.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="false" isStrikeThrough="false"/>
+						<paragraph leftIndent="1" rightIndent="1"/>
+					</textElement>
+					<text><![CDATA[<b>Ação de Contenção.</b> <i>(Ações para conter o problema em produtos ainda em processo)</i>]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="causaProvavel">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<staticText>
+					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="0" width="515" height="15" forecolor="#000000" backcolor="#FFCC99"/>
+					<box>
+						<pen lineWidth="1.5"/>
+						<topPen lineWidth="1.5"/>
+						<leftPen lineWidth="1.5"/>
+						<bottomPen lineWidth="1.5"/>
+						<rightPen lineWidth="1.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="false" isStrikeThrough="false"/>
+						<paragraph leftIndent="1" rightIndent="1"/>
+					</textElement>
+					<text><![CDATA[<b>Causa Provável.</b> <i>(Definição da causa após análise)</i>]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="acaoProposta">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<staticText>
+					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="0" width="515" height="15" forecolor="#000000" backcolor="#FFCC99"/>
+					<box>
+						<pen lineWidth="1.5"/>
+						<topPen lineWidth="1.5"/>
+						<leftPen lineWidth="1.5"/>
+						<bottomPen lineWidth="1.5"/>
+						<rightPen lineWidth="1.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="false" isStrikeThrough="false"/>
+						<paragraph leftIndent="1" rightIndent="1"/>
+					</textElement>
+					<text><![CDATA[<b>Ação proposta.</b> <i>(Ações para evitar que a falha ou problema ocorra)</i>]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="abrangenciaAcao">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<staticText>
+					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="0" width="515" height="15" forecolor="#000000" backcolor="#FFCC99"/>
+					<box>
+						<pen lineWidth="1.5"/>
+						<topPen lineWidth="1.5"/>
+						<leftPen lineWidth="1.5"/>
+						<bottomPen lineWidth="1.5"/>
+						<rightPen lineWidth="1.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="false" isStrikeThrough="false"/>
+						<paragraph leftIndent="1" rightIndent="1"/>
+					</textElement>
+					<text><![CDATA[<b>Abrangência da Ação.</b> <i>(Demais produtos ou processos afetados pelas ações corretivas)</i>]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="analiseEficacia">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<staticText>
+					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="0" width="515" height="15" forecolor="#000000" backcolor="#99CCFF"/>
+					<box>
+						<pen lineWidth="1.5"/>
+						<topPen lineWidth="1.5"/>
+						<leftPen lineWidth="1.5"/>
+						<bottomPen lineWidth="1.5"/>
+						<rightPen lineWidth="1.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="10" isBold="false" isStrikeThrough="false"/>
+						<paragraph leftIndent="1" rightIndent="1"/>
+					</textElement>
+					<text><![CDATA[<b>Análise de Eficácia das Ações.</b> <i>(Analise das ações realizadas e encerramento)</i>]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="gruposDeModulos">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="88">
+				<subreport>
+					<reportElement uuid="deef0a33-976f-4487-aaaa-3c1fc2d8440f" mode="Opaque" x="0" y="40" width="516" height="40" isRemoveLineWhenBlank="true" backcolor="#FFFFFF"/>
+					<subreportParameter name="SUBREPORT_DIR">
+						<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+					</subreportParameter>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{proposta}.getGruposNaPropostaSeInclusos())]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "proposta_gruposNaProposta.jasper"]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement uuid="6bde938b-57a4-4c18-9693-15edc76cb36e" mode="Opaque" x="0" y="2" width="516" height="30" forecolor="#FFFFFF" backcolor="#30598C"/>
+					<box>
+						<pen lineWidth="1.5"/>
+						<topPen lineWidth="1.5"/>
+						<leftPen lineWidth="1.5"/>
+						<bottomPen lineWidth="1.5"/>
+						<rightPen lineWidth="1.5"/>
+					</box>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="18" isBold="true" isStrikeThrough="false"/>
+						<paragraph leftIndent="1" rightIndent="1"/>
+					</textElement>
+					<text><![CDATA[Módulos a serem implantados pelo projeto:]]></text>
+				</staticText>
+				<break>
+					<reportElement uuid="cb1142ab-76ea-4225-9121-41bafed85d38" positionType="Float" x="0" y="1" width="515" height="1"/>
+				</break>
+			</band>
+		</groupHeader>
+	</group>
+	<pageHeader>
+		<band height="61">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} != 1]]></printWhenExpression>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle" isLazy="true" onErrorType="Blank">
+				<reportElement uuid="c191fce9-a432-4f10-b7ac-b0360b8d5046" mode="Opaque" x="0" y="0" width="131" height="61"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+				<imageExpression><![CDATA[$V{unidadeUsuario}.getImageLogotipoEmpresa()]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="7eac04e8-fd88-4e1c-9ea6-b00e4234d0eb" x="103" y="0" width="323" height="61">
+					<printWhenExpression><![CDATA[$P{proposta}.getLogotipoCliente() == null]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE NÃO-CONFORMIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="71559d22-f0f3-475e-b296-309e2d711b42" mode="Opaque" x="427" y="0" width="87" height="32" backcolor="#FFFFCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RNC Nº]]></text>
+			</staticText>
+			<textField pattern="00000#">
+				<reportElement uuid="8ad02125-5aa0-4a67-994f-4b6c18628778" x="426" y="32" width="88" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{rnc}.getId()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+</jasperReport>
