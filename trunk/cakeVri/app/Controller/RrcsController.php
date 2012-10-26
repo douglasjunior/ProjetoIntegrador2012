@@ -76,10 +76,10 @@ class RrcsController extends AppController {
                 $this->request->data['Rrc']['user_id'] = $this->Auth->User('id');
             }
             if ($this->Rrc->save($this->request->data)) {
-                $this->Session->setFlash(__('The rrc has been saved'));
+                $this->Session->setFlash(__('RRC cadastrada com sucesso!'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The rrc could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('Ocorreu um erro ao salvar esta RRC. Tente novamente.'));
             }
         }
         $users = $this->Rrc->User->find('list', array('fields' => 'nome'));
@@ -92,8 +92,9 @@ class RrcsController extends AppController {
         $diretorioDestino = "anexos/" . $id . "/";
 
         // cria diretorio se nao existir
-        mkdir($diretorioDestino, 0777, true);
-
+        if (!file_exists($diretorioDestino)) {
+            mkdir($diretorioDestino, 0777, true);
+        }
         // apaga a anexos ja existentes se existirem
         foreach ($anexos = scandir("$diretorioDestino") as $arquivoParaDeletar) {
             @unlink($diretorioDestino . $arquivoParaDeletar);
@@ -102,7 +103,6 @@ class RrcsController extends AppController {
         $diretorioDestino = $diretorioDestino . $fileName;
 
         if ($resultado = move_uploaded_file($fileTmp, $diretorioDestino)) {
-            debug($resultado);
             return $diretorioDestino;
         } else {
             return "";
@@ -118,14 +118,14 @@ class RrcsController extends AppController {
     public function edit($id = null) {
         $this->Rrc->id = $id;
         if (!$this->Rrc->exists()) {
-            throw new NotFoundException(__('Invalid rrc'));
+            throw new NotFoundException(__('RRC Inválida'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Rrc->save($this->request->data)) {
-                $this->Session->setFlash(__('The rrc has been saved'));
+                $this->Session->setFlash(__('RRC salvo com sucesso!'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The rrc could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('Ocorreu um erro ao salvar esta RRC. Tente novamente.'));
             }
         } else {
             $this->request->data = $this->Rrc->read(null, $id);
@@ -137,18 +137,20 @@ class RrcsController extends AppController {
     public function addAnexo($id = null) {
         $this->Rrc->id = $id;
         if (!$this->Rrc->exists()) {
-            throw new NotFoundException(__('Invalid rrc'));
+            throw new NotFoundException(__('RRC Inválida'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
+            // coleta o arquivo temporario e move para o diretorio correto
             $anexoSalvo = $this->salvarAnexo($this->request->data['Rrc']['anexo'], $id);
 
+            // troca o caminho do arquivo temporario pelo caminho do arquivo correto
             $this->request->data['Rrc']['anexo'] = $anexoSalvo;
 
             if ($this->Rrc->save($this->request->data)) {
-                $this->Session->setFlash(__('The rrc has been saved'));
+                $this->Session->setFlash(__('Anexo adicionado com sucesso!'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The rrc could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('Ocorreu um erro ao adicionar o anexo. Tente novamente.'));
             }
         } else {
             $this->request->data = $this->Rrc->read(null, $id);
@@ -170,7 +172,7 @@ class RrcsController extends AppController {
 
         $this->Rrc->id = $id;
         if (!$this->Rrc->exists()) {
-            throw new NotFoundException(__('Invalid rrc'));
+            throw new NotFoundException(__('RRC Inválida'));
         }
 
         $diretorioAnexos = "anexos/$id/";
@@ -183,10 +185,10 @@ class RrcsController extends AppController {
         rmdir($diretorioAnexos);
 
         if ($this->Rrc->delete()) {
-            $this->Session->setFlash(__('Rrc deleted'));
+            $this->Session->setFlash(__('RRC excluída do sistema com sucesso!'));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Rrc was not deleted'));
+        $this->Session->setFlash(__('RRC não pode ser excluída.'));
         $this->redirect(array('action' => 'index'));
     }
 
@@ -213,7 +215,7 @@ class RrcsController extends AppController {
     public function saveIdRnc($idRrc = NULL, $idRnc = NULL) {
         $this->Rrc->id = $idRrc;
         if (!$this->Rrc->exists()) {
-            throw new NotFoundException(__('Invalid rrc'));
+            throw new NotFoundException(__('RRC Inválida'));
         }
         $this->request->data['Rrc']['rnc_id'] = $idRnc;
         $this->Rrc->save($this->request->data);

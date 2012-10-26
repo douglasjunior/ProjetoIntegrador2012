@@ -61,19 +61,19 @@ class User extends AppModel {
 //            ),
 //        ),
         'email' => array(
-            'email' => array(
-                'rule' => array('email'),
-                'message' => 'Informe um e-mail válido.',
-            //'allowEmpty' => false,
-            //'required' => false,
-            //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
-            ),
             'notempty' => array(
                 'rule' => array('notempty'),
                 'message' => 'Informe o e-mail.',
                 'allowEmpty' => false,
                 'required' => true,
+            //'last' => false, // Stop validation after this rule
+            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            ),
+            'email' => array(
+                'rule' => array('email'),
+                'message' => 'Informe um e-mail válido.',
+                'allowEmpty' => false,
+                'required' => false,
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
@@ -101,7 +101,7 @@ class User extends AppModel {
                 'rule' => array('notempty'),
                 'message' => 'Informe a senha.',
                 'allowEmpty' => false,
-                'required' => true,
+             //   'required' => true,
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
@@ -119,7 +119,7 @@ class User extends AppModel {
                 'rule' => array('notempty'),
                 'message' => 'Repita sua senha.',
                 'allowEmpty' => false,
-                'required' => true,
+            //    'required' => true,
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
@@ -138,7 +138,7 @@ class User extends AppModel {
                 'rule' => array('notempty'),
                 'message' => 'Informe a nova senha.',
                 'allowEmpty' => false,
-                'required' => true,
+            //    'required' => true,
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
@@ -157,7 +157,7 @@ class User extends AppModel {
                 'rule' => array('notempty'),
                 'message' => 'Informe a senha atual.',
                 'allowEmpty' => false,
-                'required' => true,
+            //    'required' => true,
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),

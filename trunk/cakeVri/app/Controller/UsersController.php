@@ -14,7 +14,7 @@ class UsersController extends AppController {
             if (in_array($this->action, array('login', 'logout'))) {
                 return true;
             }
-            if (in_array($this->action, array('view', 'edit'))) {
+            if (in_array($this->action, array('view', 'edit', 'alterarSenha'))) {
                 if ($user['id'] == $this->request->params['pass']['0']) {
                     return true;
                 }
@@ -140,18 +140,18 @@ class UsersController extends AppController {
             $senhaAtual = $this->request->data['User']['current_password'];
             $novaSenha = $this->request->data['User']['new_password'];
             $confirmaSenha = $this->request->data['User']['confirm_password'];
-            if($this->Auth->password($senhaAtual) != $userSelecionado['User']['password']){
+            if ($this->Auth->password($senhaAtual) != $userSelecionado['User']['password']) {
                 $this->Session->setFlash(__('Senha atual não confere.'));
                 return;
             }
-            if($novaSenha != $confirmaSenha){
+            if ($novaSenha != $confirmaSenha) {
                 $this->Session->setFlash(__('Novas senhas não conferem.'));
                 return;
             }
             $userSelecionado['User']['password'] = $novaSenha;
             if ($this->User->save($userSelecionado)) {
                 $this->Session->setFlash(__('Senha alterada com sucesso!'));
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(array('action' => 'edit', $userSelecionado['User']['id']));
             } else {
                 $this->Session->setFlash(__('Ocorreu um erro ao alterar a senha do Usuário. Tente novamente.'));
             }

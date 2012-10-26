@@ -45,7 +45,7 @@ class Rrc extends AppModel {
                 'rule' => array('notempty'),
                 'message' => 'Informe a descrição.',
                 'allowEmpty' => false,
-                'required' => true,
+            //    'required' => true,
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
@@ -55,7 +55,7 @@ class Rrc extends AppModel {
                 'rule' => array('notempty'),
                 'message' => 'Informe o setor ou empresa.',
                 'allowEmpty' => false,
-                'required' => true,
+            //    'required' => true,
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
