@@ -63,36 +63,4 @@
 	<field name="incluso" class="java.lang.Boolean">
 		<fieldDescription><![CDATA[incluso]]></fieldDescription>
 	</field>
-	<group name="grupoNaProposta">
-		<groupExpression><![CDATA[$F{idGrupoNaTabela}]]></groupExpression>
-		<groupHeader>
-			<band height="55">
-				<printWhenExpression><![CDATA[$F{incluso}]]></printWhenExpression>
-				<textField isBlankWhenNull="true">
-					<reportElement uuid="7209fdce-6f52-4466-86f8-b3fd66d643d9" mode="Opaque" x="0" y="0" width="516" height="25" isRemoveLineWhenBlank="true" forecolor="#FFFFFF" backcolor="#AAA06B">
-						<printWhenExpression><![CDATA[$F{incluso}]]></printWhenExpression>
-					</reportElement>
-					<box>
-						<pen lineWidth="1.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
-					</box>
-					<textElement verticalAlignment="Middle">
-						<font size="16" isBold="true"/>
-						<paragraph leftIndent="1" rightIndent="1"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<subreport>
-					<reportElement uuid="0630292d-25c3-4a8f-85bc-0017646aa5b2" isPrintRepeatedValues="false" mode="Transparent" x="0" y="33" width="516" height="13" backcolor="#FFFFFF">
-						<printWhenExpression><![CDATA[$F{incluso}]]></printWhenExpression>
-					</reportElement>
-					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(br.com.unimake.src.modulo.ModuloNaPropostaServices.getSomenteModulosInclusos($F{modulosNaProposta}))]]></dataSourceExpression>
-					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "proposta_gruposNaProposta_modulosNaProposta.jasper"]]></subreportExpression>
-				</subreport>
-			</band>
-		</groupHeader>
-	</group>
 </jasperReport>
