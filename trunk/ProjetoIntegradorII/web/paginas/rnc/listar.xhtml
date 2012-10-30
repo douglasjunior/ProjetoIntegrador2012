@@ -47,7 +47,12 @@
                 <p:commandButton actionListener="#{rncBean.editar()}" icon="ui-icon-pencil"
                                  action="#{gerenciadorPaginas.cadastroRNC()}" ajax="false"
                                  title="Editar esta RNC"  id="editar" rendered="#{not rnc.finalizado}"/>
-
+                
+                
+                <p:commandButton actionListener="#{rncBean.imprimir(rnc)}" icon="ui-icon-print"
+                                 ajax="false" title="Imprimir a RNC"  id="imprimir" />                
+                
+                
                 <p:commandButton  icon="ui-icon-trash" title="Excluir esta RNC"  actionListener="#{rncBean.adicionarRNCnaSessao()}"
                                   id="excluir" oncomplete="confirmation.show()" rendered="#{not rnc.bound}"/>
 

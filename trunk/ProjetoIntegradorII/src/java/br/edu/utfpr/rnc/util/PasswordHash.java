@@ -46,7 +46,7 @@ public class PasswordHash {
 
     }
     public static void main(String[] args) {
-        System.out.println(new PasswordHash().hash512("admin"));
+        System.out.println(new PasswordHash().hash512("123"));
     }
     
 }

@@ -6,10 +6,11 @@ import br.edu.utfpr.rnc.dao.usuario.UsuarioDao;
 import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
 import br.edu.utfpr.rnc.pojo.rnc.Rnc;
 import br.edu.utfpr.rnc.util.JsfUtil;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -17,7 +18,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRParameter;
+import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.util.SimpleFileResolver;
 
 @ManagedBean(name = "rncBean")
 @SessionScoped
@@ -206,11 +213,54 @@ public class RncBean {
     }
 
     public void setCabRNC(Rnc cabRNC) {
-        System.out.println("setou:" + cabRNC);
         this.cabRNC = cabRNC;
     }
 
     public Date getDataAtual() {
         return new Date();
+    }
+    public void imprimir(Rnc rnc){
+        Map parametros = new HashMap();
+        parametros.put("rnc", rnc);
+        
+        try {
+            HttpServletResponse response = ((HttpServletResponse) JsfUtil.getContext().getExternalContext().getResponse());
+
+            // Carregando o modelo do relatório
+            InputStream resource = this.getClass().getResourceAsStream("../../../jasper/");
+            // Configurando o FileResolver para caminhos relativos
+            String reportsDirPath = JsfUtil.getContext().getExternalContext().getRealPath("/jasper/") + "/";
+            File reportsDir = new File(reportsDirPath);
+            if (!reportsDir.exists()) {
+                throw new FileNotFoundException(String.valueOf(reportsDir));
+            }
+            //params.put(JRParameter.REPORT_FILE_RESOLVER, new SimpleFileResolver(reportsDir));
+
+            // Compilando o modelo em pdf e convertendo para array de bytes
+            byte[] bytes = JasperRunManager.runReportToPdf(resource, parametros);
+
+            // adicionando informações do relatório ao cabeçalho da resposta
+            response.setContentType("application/pdf");
+            response.addHeader("Content-Disposition", "attachment;filename=rnc.pdf");
+            response.setContentLength(bytes.length);
+
+            // Obtendo o fluxo de saída do servlet
+            ServletOutputStream servletOutputStream = response.getOutputStream();
+            // Escrevendo no fluxo de saída do servlet
+            servletOutputStream.write(bytes, 0, bytes.length);
+            servletOutputStream.flush();
+            servletOutputStream.close();
+
+            JsfUtil.getContext().responseComplete();
+
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        
     }
 }

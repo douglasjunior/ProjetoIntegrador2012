@@ -24,7 +24,7 @@ public class RealmAutenticacao extends JdbcRealm {
 
         InitialContext ic;
         DataSource ds;
-
+ 
         try {
             ic = new InitialContext();
             ds = (DataSource) ic.lookup("aluno"); // jndi-name do arquivo glassfish-resources.xml
