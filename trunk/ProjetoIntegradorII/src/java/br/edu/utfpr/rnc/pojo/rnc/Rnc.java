@@ -81,7 +81,6 @@ public class Rnc implements Serializable {
         this.responsavel = rnc.getResponsavel();
     }
 
-    
     public Rnc() {
         acoesDeContencao = new ArrayList<AcaoContencao>();
         acoesPropostas = new ArrayList<AcaoProposta>();
@@ -309,7 +308,7 @@ public class Rnc implements Serializable {
 
     public void setComentarioAnalise(String comentarioAnalise) {
         this.comentarioAnalise = comentarioAnalise;
-    }
+    } 
 
     public String getEficaz() {
         return eficaz;
@@ -342,8 +341,8 @@ public class Rnc implements Serializable {
     public void setNovaRnc(Rnc novaRnc) {
         this.novaRnc = novaRnc;
     }
-    
-    public boolean isBound(){
+
+    public boolean isBound() {
         return (novaRnc != null) || (antigaRnc != null);
     }
 
@@ -401,11 +400,11 @@ public class Rnc implements Serializable {
     public String toString() {
         return "br.edu.utfpr.rnc.pojo.rnc.Rnc[ id=" + id + " ]";
     }
-    
-    public String getStatus(){
-        if(finalizado){
+
+    public String getStatus() {
+        if (finalizado) {
             return "Finalizado";
-        } else if(aprovado){
+        } else if (aprovado) {
             return "Aprovado";
         } else {
             return "Pendente";

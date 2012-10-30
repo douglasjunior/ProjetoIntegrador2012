@@ -10,7 +10,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -22,9 +25,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperRunManager;
-import net.sf.jasperreports.engine.util.SimpleFileResolver;
 
 @ManagedBean(name = "rncBean")
 @SessionScoped
@@ -219,21 +220,29 @@ public class RncBean {
     public Date getDataAtual() {
         return new Date();
     }
-    public void imprimir(Rnc rnc){
+
+    public void imprimir(Rnc rnc) {
         Map parametros = new HashMap();
         parametros.put("rnc", rnc);
-        
+
         try {
             HttpServletResponse response = ((HttpServletResponse) JsfUtil.getContext().getExternalContext().getResponse());
 
-            // Carregando o modelo do relatório
-            InputStream resource = this.getClass().getResourceAsStream("../../../jasper/");
+            String caminho = "../../../../../../../../relatorios/rnc/rnc.jasper";
+            try {
+                // Carregando o modelo do relatório
+                System.out.println("1:" + getClass().getResource("").toURI().toString());
+                System.out.println("2:" + getClass().getResource(caminho).toURI().toString());
+            } catch (URISyntaxException ex) {
+                ex.printStackTrace();
+            } 
+            InputStream resource = this.getClass().getResourceAsStream(caminho);
             // Configurando o FileResolver para caminhos relativos
-            String reportsDirPath = JsfUtil.getContext().getExternalContext().getRealPath("/jasper/") + "/";
-            File reportsDir = new File(reportsDirPath);
-            if (!reportsDir.exists()) {
-                throw new FileNotFoundException(String.valueOf(reportsDir));
-            }
+//            String reportsDirPath = JsfUtil.getContext().getExternalContext().getRealPath("/relatorios/rnc") + "/";
+//            File reportsDir = new File(reportsDirPath);
+//            if (!reportsDir.exists()) {
+//                throw new FileNotFoundException(String.valueOf(reportsDir));
+//            }
             //params.put(JRParameter.REPORT_FILE_RESOLVER, new SimpleFileResolver(reportsDir));
 
             // Compilando o modelo em pdf e convertendo para array de bytes
@@ -258,9 +267,5 @@ public class RncBean {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
-        
-        
-        
     }
 }
