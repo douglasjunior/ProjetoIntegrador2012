@@ -2,6 +2,7 @@ package br.edu.utfpr.rnc.dao;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 public abstract class DaoAbstrato<T> {
 
@@ -50,5 +51,24 @@ public abstract class DaoAbstrato<T> {
         cq.select(getEntityManager().getCriteriaBuilder().count(rt));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
+    }
+
+    public List<T> executeNamedQueryComParametros(String namedQuery, String[] parametros, Object[] objetos) {
+        Query query = getEntityManager().createNamedQuery(namedQuery);
+        if (parametros.length != objetos.length) {
+            System.err.println("A quantidade de parametros difere da quantidade de atributos.");
+            return null;
+        }
+        for (int i = 0; i < parametros.length; i++) {
+            String atributo = parametros[i];
+            Object parametro = objetos[i];
+            query.setParameter(atributo, parametro);
+        }
+        List<T> list = query.getResultList();
+        return list;
+    }
+
+    public List<T> executeNamedQuery(String namedQuery) {
+        return getEntityManager().createNamedQuery(namedQuery).getResultList();
     }
 }
