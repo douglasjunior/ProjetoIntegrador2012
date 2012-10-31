@@ -14,6 +14,12 @@ import javax.validation.constraints.NotNull;
  * @author marcelo
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "RNC.buscaTodos", query = "SELECT r FROM Rnc r ORDER BY r.id"),
+    @NamedQuery(name = "RNC.buscaPendente", query = "SELECT r FROM Rnc r WHERE r.aprovado = false AND r.finalizado = false ORDER BY r.id"),
+    @NamedQuery(name = "RNC.buscaAprovado", query = "SELECT r FROM Rnc r WHERE r.aprovado = true AND r.finalizado = false ORDER BY r.id"),
+    @NamedQuery(name = "RNC.buscaFinalizado", query = "SELECT r FROM Rnc r WHERE r.finalizado = true ORDER BY r.id")
+})
 public class Rnc implements Serializable {
 
     @Id
@@ -308,7 +314,7 @@ public class Rnc implements Serializable {
 
     public void setComentarioAnalise(String comentarioAnalise) {
         this.comentarioAnalise = comentarioAnalise;
-    } 
+    }
 
     public String getEficaz() {
         return eficaz;
