@@ -7,13 +7,10 @@ import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
 import br.edu.utfpr.rnc.pojo.rnc.Rnc;
 import br.edu.utfpr.rnc.util.JsfUtil;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -24,8 +21,8 @@ import javax.faces.convert.FacesConverter;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 @ManagedBean(name = "rncBean")
 @SessionScoped
@@ -220,52 +217,94 @@ public class RncBean {
     public Date getDataAtual() {
         return new Date();
     }
-
+ 
     public void imprimir(Rnc rnc) {
+        String caminho = "/relatorios/rnc/rnc.jasper";
+
         Map parametros = new HashMap();
+
         parametros.put("rnc", rnc);
 
+        System.out.println(getClass().getResource("../../../../../../../../relatorios/rnc/").toString());
+
+        parametros.put("SUBREPORT_DIR", getClass().getResource("../../../../../../../../relatorios/rnc/").toString());
+
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+
+        //pega o caminho do arquivo .jasper da aplicação
+        InputStream reportStream = context.getExternalContext().getResourceAsStream(caminho);
+
+        /*
+         * //envia a resposta com o MIME Type
+         * if(tipoFormatoRelatorio.equals(TipoFormatoRelatorio.ACROBAT_PDF)){
+         * response.setContentType("application/pdf"); }else
+         * if(tipoFormatoRelatorio.equals(TipoFormatoRelatorio.PAGINA_HTML)){
+         * response.setContentType("application/html"); }
+         */
+        response.setHeader("Content-Disposition", "attachment; filename=rnc.pdf");
+        response.setContentType("application/download");
+        response.setHeader("Pragma", "no-cache");
         try {
-            HttpServletResponse response = ((HttpServletResponse) JsfUtil.getContext().getExternalContext().getResponse());
-
-            String caminho = "../../../../../../../../relatorios/rnc/rnc.jasper";
-            try {
-                // Carregando o modelo do relatório
-                System.out.println("1:" + getClass().getResource("").toURI().toString());
-                System.out.println("2:" + getClass().getResource(caminho).toURI().toString());
-            } catch (URISyntaxException ex) {
-                ex.printStackTrace();
-            } 
-            InputStream resource = this.getClass().getResourceAsStream(caminho);
-            // Configurando o FileResolver para caminhos relativos
-//            String reportsDirPath = JsfUtil.getContext().getExternalContext().getRealPath("/relatorios/rnc") + "/";
-//            File reportsDir = new File(reportsDirPath);
-//            if (!reportsDir.exists()) {
-//                throw new FileNotFoundException(String.valueOf(reportsDir));
-//            }
-            //params.put(JRParameter.REPORT_FILE_RESOLVER, new SimpleFileResolver(reportsDir));
-
-            // Compilando o modelo em pdf e convertendo para array de bytes
-            byte[] bytes = JasperRunManager.runReportToPdf(resource, parametros);
-
-            // adicionando informações do relatório ao cabeçalho da resposta
-            response.setContentType("application/pdf");
-            response.addHeader("Content-Disposition", "attachment;filename=rnc.pdf");
-            response.setContentLength(bytes.length);
-
-            // Obtendo o fluxo de saída do servlet
             ServletOutputStream servletOutputStream = response.getOutputStream();
-            // Escrevendo no fluxo de saída do servlet
-            servletOutputStream.write(bytes, 0, bytes.length);
+
+            //envia para o navegador o PDF gerado
+            JasperRunManager.runReportToPdfStream(reportStream, servletOutputStream, parametros, new JREmptyDataSource());
             servletOutputStream.flush();
             servletOutputStream.close();
 
-            JsfUtil.getContext().responseComplete();
-
-        } catch (JRException ex) {
-            ex.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            context.responseComplete();
         }
     }
+//    public void imprimir(Rnc rnc) {
+//        Map parametros = new HashMap();
+//        parametros.put("rnc", rnc);
+//
+//        try {
+//            HttpServletResponse response = ((HttpServletResponse) JsfUtil.getContext().getExternalContext().getResponse());
+//
+//            String caminho = "../../../../../../../../relatorios/rnc/rnc.jasper";
+//            try {
+//                // Carregando o modelo do relatório
+//                System.out.println("1:" + getClass().getResource("").toURI().toString());
+//                System.out.println("2:" + getClass().getResource(caminho).toURI().toString());
+//            } catch (URISyntaxException ex) {
+//                ex.printStackTrace();
+//            } 
+//            InputStream resource = this.getClass().getResourceAsStream(caminho);
+//            // Configurando o FileResolver para caminhos relativos
+////            String reportsDirPath = JsfUtil.getContext().getExternalContext().getRealPath("/relatorios/rnc") + "/";
+////            File reportsDir = new File(reportsDirPath);
+////            if (!reportsDir.exists()) {
+////                throw new FileNotFoundException(String.valueOf(reportsDir));
+////            }
+//            //params.put(JRParameter.REPORT_FILE_RESOLVER, new SimpleFileResolver(reportsDir));
+//
+//            // Compilando o modelo em pdf e convertendo para array de bytes
+//            byte[] bytes = JasperRunManager.runReportToPdf(resource, parametros);
+//
+//            // adicionando informações do relatório ao cabeçalho da resposta
+//            response.setContentType("application/pdf");
+//            response.addHeader("Content-Disposition", "attachment;filename=rnc.pdf");
+//            response.setContentLength(bytes.length);
+//
+//            // Obtendo o fluxo de saída do servlet
+//            ServletOutputStream servletOutputStream = response.getOutputStream();
+//            // Escrevendo no fluxo de saída do servlet
+//            servletOutputStream.write(bytes, 0, bytes.length);
+//            servletOutputStream.flush();
+//            servletOutputStream.close();
+//
+//            JsfUtil.getContext().responseComplete();
+//
+//        } catch (JRException ex) {
+//            ex.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

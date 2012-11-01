@@ -9,7 +9,131 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
+	<field name="concluido" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[concluido]]></fieldDescription>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="prazo" class="java.util.Date">
+		<fieldDescription><![CDATA[prazo]]></fieldDescription>
+	</field>
+	<field name="responsavel" class="br.edu.utfpr.rnc.pojo.usuario.Usuario">
+		<fieldDescription><![CDATA[responsavel]]></fieldDescription>
+	</field>
+	<title>
+		<band height="20">
+			<staticText>
+				<reportElement uuid="7503644e-ff99-438d-a56c-5dcd5fcb9466" x="0" y="0" width="125" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsável]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="606e5d99-6d45-4274-ad8e-40ccc95030a8" x="125" y="0" width="230" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9e47a5a7-9b57-4780-8d3a-b342f075a043" x="355" y="0" width="87" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prazo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="82a31d2e-7d6d-48d1-a8a9-9fef5abed038" x="442" y="0" width="74" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Concluido]]></text>
+			</staticText>
+		</band>
+	</title>
 	<detail>
-		<band height="50"/>
+		<band height="20">
+			<textField>
+				<reportElement uuid="c8a54937-5d6e-4593-b0e8-14f0ee1ee337" x="0" y="0" width="125" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{responsavel}.getNome()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="effd2652-cf17-45f8-a5f6-5f477f92a038" x="442" y="0" width="74" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{concluido} == true ? "Sim" : "Não"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="2d9a9b45-bfb5-4718-9238-37488ea6e1c9" x="355" y="0" width="87" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{prazo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c8a54937-5d6e-4593-b0e8-14f0ee1ee337" x="125" y="0" width="230" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 </jasperReport>

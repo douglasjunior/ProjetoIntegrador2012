@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="20" bottomMargin="50" uuid="ec554c7e-eb5c-431e-91e3-34004c2fcea7">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="32"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="399"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
@@ -94,7 +94,7 @@
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{rnc}.getData()]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$P{rnc}.getDataRnc()]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement uuid="e9270ebe-5f73-4032-9781-eb61a212f48f" mode="Transparent" x="93" y="30" width="152" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
@@ -293,7 +293,7 @@
 					</textElement>
 					<text><![CDATA[<b>Descrição da Não Conformidade.</b> <i>(Descrição da falha ou problema observado)</i>]]></text>
 				</staticText>
-				<textField>
+				<textField isStretchWithOverflow="true">
 					<reportElement uuid="b0b1ff0a-f2bf-48d8-9b9a-7b30ef185581" mode="Transparent" x="0" y="15" width="514" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
@@ -322,7 +322,7 @@
 					</textElement>
 					<text><![CDATA[<b>Relatório.</b> <i>(Foto, Referencia de documento, Comentários, etc.)</i>]]></text>
 				</staticText>
-				<textField>
+				<textField isStretchWithOverflow="true">
 					<reportElement uuid="a1554daf-86b7-4cfa-9610-b432887a7efe" mode="Transparent" x="0" y="15" width="514" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
@@ -433,7 +433,7 @@
 				</staticText>
 				<subreport>
 					<reportElement uuid="0630292d-25c3-4a8f-85bc-0017646aa5b2" isPrintRepeatedValues="false" mode="Transparent" x="0" y="15" width="516" height="14" backcolor="#FFFFFF"/>
-					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(br.com.unimake.src.modulo.ModuloNaPropostaServices.getSomenteModulosInclusos($P{rnc}.getAcoesDeContencao()))]]></dataSourceExpression>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rnc}.getAcoesDeContencao())]]></dataSourceExpression>
 					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "rnc_acaoDeContecao.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
@@ -458,7 +458,7 @@
 					</textElement>
 					<text><![CDATA[<b>Causa Provável.</b> <i>(Definição da causa após análise)</i>]]></text>
 				</staticText>
-				<textField>
+				<textField isStretchWithOverflow="true">
 					<reportElement uuid="0e2d64f5-b384-4ab0-90a6-1945e89faf1e" mode="Transparent" x="0" y="15" width="514" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
@@ -489,7 +489,7 @@
 				</staticText>
 				<subreport>
 					<reportElement uuid="0630292d-25c3-4a8f-85bc-0017646aa5b2" isPrintRepeatedValues="false" mode="Transparent" x="0" y="15" width="516" height="14" backcolor="#FFFFFF"/>
-					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(br.com.unimake.src.modulo.ModuloNaPropostaServices.getSomenteModulosInclusos($P{rnc}.getAcoesPropostas()))]]></dataSourceExpression>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{rnc}.getAcoesPropostas())]]></dataSourceExpression>
 					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "rnc_acaoProposta.jasper"]]></subreportExpression>
 				</subreport>
 			</band>
@@ -514,7 +514,7 @@
 					</textElement>
 					<text><![CDATA[<b>Abrangência da Ação.</b> <i>(Demais produtos ou processos afetados pelas ações corretivas)</i>]]></text>
 				</staticText>
-				<textField>
+				<textField isStretchWithOverflow="true">
 					<reportElement uuid="69f1c573-13a7-403b-a383-9fa563f4b9c4" mode="Transparent" x="0" y="15" width="514" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
