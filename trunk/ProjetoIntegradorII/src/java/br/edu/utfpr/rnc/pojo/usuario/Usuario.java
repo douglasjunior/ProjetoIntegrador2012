@@ -23,10 +23,13 @@ public class Usuario implements Serializable {
     private String nome;
     @JoinColumn(name = "RESPONSAVEL_ID", referencedColumnName = "ID")
     @OneToMany(mappedBy = "responsavel")
-    private List<Departamento> departamentos;
+    private List<Departamento> departamentos;    
     private String login;
     private String senha;
     private String email;
+  
+    @ManyToOne
+    private Papel papel;
 
     public String getLogin() {
         return login;
@@ -35,6 +38,15 @@ public class Usuario implements Serializable {
     public void setLogin(String login) {
         this.login = login;
     }
+    
+    public Papel getPapel() {
+        return papel;
+    }
+
+    public void setPapel(Papel papel) {
+        this.papel = papel;
+    }
+    
 
     public String getEmail() {
         return email;

@@ -1,7 +1,9 @@
 package br.edu.utfpr.rnc.managedbean.usuario;
 
+import br.edu.utfpr.rnc.dao.usuario.PapelDao;
 import br.edu.utfpr.rnc.dao.usuario.UsuarioDao;
 import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
+import br.edu.utfpr.rnc.pojo.usuario.Papel;
 import br.edu.utfpr.rnc.pojo.usuario.Usuario;
 import br.edu.utfpr.rnc.util.JsfUtil;
 import br.edu.utfpr.rnc.util.PasswordHash;
@@ -25,6 +27,8 @@ public class UsuarioBean {
 
     @EJB
     private UsuarioDao usuarioDao;
+    @EJB
+    private PapelDao papelDao;
     private Usuario usuario;
     private String confirmaSenha;
 
@@ -167,6 +171,10 @@ public class UsuarioBean {
         return usuarioDao.buscarTodos();
     }
 
+    public List<Papel> getTodosPapeis() {
+        return papelDao.buscarTodos();
+    }
+
     public void limparCampos() {
         usuario = new Usuario();
     }
@@ -182,8 +190,8 @@ public class UsuarioBean {
             token.clear();
 
             subject.getSession().setTimeout(600000l);
-            
-            Usuario u = usuarioDao.buscarLogin(usuario.getLogin());            
+
+            Usuario u = usuarioDao.buscarLogin(usuario.getLogin());
             subject.getSession().setAttribute("authUser", u);
 
             ((GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas")).home();
@@ -207,5 +215,47 @@ public class UsuarioBean {
         }
 
         JsfUtil.redirect("index.xhtml");
+    }
+
+    @FacesConverter(forClass = Papel.class)
+    public static class PapelConverter implements Converter {
+
+        @Override
+        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+            if (value == null || value.length() == 0 || value.equals("null")) {
+                return null;
+            }
+            UsuarioBean bean = (UsuarioBean) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "usuarioBean");
+            return bean.papelDao.buscar(getKey(value));
+        }
+
+        java.lang.Integer getKey(String value) {
+            java.lang.Integer key;
+            key = Integer.valueOf(value);
+            return key;
+        }
+
+        String getStringKey(java.lang.Integer value) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(value);
+            return sb.toString();
+        }
+
+        @Override
+        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
+            if (object == null) {
+                return null;
+            }
+            if (object instanceof Papel) {
+                Papel o = (Papel) object;
+                return getStringKey(o.getId());
+            } else {
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Papel.class.getName());
+            }
+        }
+    }
+    public PapelConverter getPapelConverter() {
+        return new PapelConverter();
     }
 }
