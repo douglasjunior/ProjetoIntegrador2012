@@ -30,14 +30,46 @@ class RrcsController extends AppController {
      *
      * @return void
      */
-    public function index($param = NULL) {
+    public function index($param = NULL, $param2 = NULL) {
         $this->Rrc->recursive = 0;
         if ($param == 'minhas') {
-            $this->set(
-                    'rrcs', $this->paginate(
-                            'Rrc', array('Rrc.user_id =' => $this->Auth->User('id'))
-                    )
-            );
+            if ($param2 == null) {
+                $this->set(
+                        'rrcs', $this->paginate(
+                                'Rrc', array('Rrc.user_id =' => $this->Auth->User('id'))
+                        )
+                );
+            } elseif ($param2 == 'pendentes') {
+                $this->set(
+                        'rrcs', $this->paginate(
+                                'Rrc', array('Rrc.user_id =' => $this->Auth->User('id'), 'Rrc.rnc_id =' => NULL)
+                        )
+                );
+            } else if ($param2 == 'aprovadas') {
+                $rrcsAprovadas = $this->paginate('Rrc', array('Rrc.user_id =' => $this->Auth->User('id'), 'Rrc.rnc_id <>' => NULL));
+                $rrcsExcetoFinalizadas = array();
+                for ($i = 0; $i < count($rrcsAprovadas); $i++) {
+                    $rrcAprovada = $rrcsAprovadas[$i];
+                    if ($rrcAprovada['Rnc'] != NULL && $rrcAprovada['Rnc']['FINALIZADO'] == false) {
+                        array_push($rrcsExcetoFinalizadas, $rrcAprovada);
+                    }
+                }
+                $this->set(
+                        'rrcs', $rrcsExcetoFinalizadas
+                );
+            } else if ($param2 == 'finalizadas') {
+                $rrcsAprovadas = $this->paginate('Rrc', array('Rrc.user_id =' => $this->Auth->User('id'), 'Rrc.rnc_id <>' => NULL));
+                $rrcsFinalizadas = array();
+                for ($i = 0; $i < count($rrcsAprovadas); $i++) {
+                    $rrcAprovada = $rrcsAprovadas[$i];
+                    if ($rrcAprovada['Rnc'] != NULL && $rrcAprovada['Rnc']['FINALIZADO'] == true) {
+                        array_push($rrcsFinalizadas, $rrcAprovada);
+                    }
+                }
+                $this->set(
+                        'rrcs', $rrcsFinalizadas
+                );
+            }
             $this->set('minhas', true);
         } else {
             if ($this->Auth->User('tipo') == 'externo') {

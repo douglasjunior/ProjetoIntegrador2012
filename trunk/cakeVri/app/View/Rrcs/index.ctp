@@ -8,6 +8,16 @@
         }
         ?>
     </h2>
+    <br />
+    <p> Selecione: 
+        <?php
+        echo $this->Html->link('Todas', array('controller' => 'rrcs', 'action' => 'index', 'minhas', NULL)) . ' | ';
+        echo $this->Html->link('Pendentes', array('controller' => 'rrcs', 'action' => 'index', 'minhas', 'pendentes')) . ' | ';
+        echo $this->Html->link('Aprovadas', array('controller' => 'rrcs', 'action' => 'index', 'minhas', 'aprovadas')) . ' | ';
+        echo $this->Html->link('Finalizadas', array('controller' => 'rrcs', 'action' => 'index', 'minhas', 'finalizadas')) . ' | ';
+        ?>
+    </p>
+    <br />
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th><?php echo $this->Paginator->sort('Cód.'); ?></th>
@@ -27,7 +37,7 @@
                     <?php
                     if ($rrc['Rrc']['rnc_id'] == NULL) {
                         echo 'Aguardando aprovação';
-                    } else if ($rrc['Rnc']['FINALIZADO']) {
+                    } else if ($rrc['Rnc'] != null && $rrc['Rnc']['FINALIZADO'] == true) {
                         echo 'Finalizado';
                     } else {
                         echo 'Aprovado';

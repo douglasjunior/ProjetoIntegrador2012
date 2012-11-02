@@ -43,7 +43,7 @@ $cakeDescription = __d('cake_dev', 'Sistema de registro de reclamação de clien
     <body>
         <div id="container">
             <div id="header">
-                <h1>Sistema automatizado para reclamações de clientes insatisfeitos!!!</h1>
+                <h1>Sistema automatizado para registro de reclamações de clientes.</h1>
             </div>
             <?php if (AuthComponent::user() != NULL) { ?>
                 <div id="opcoes">
@@ -59,13 +59,22 @@ $cakeDescription = __d('cake_dev', 'Sistema de registro de reclamação de clien
                 <?php echo $this->fetch('content'); ?>
             </div>
             <div id="footer">
+
+                <p style="text-align: center;"> 
+                    VRI Indústria Eletrônica LTDA <br />
+                    SP: (11) 5084-8803 - vrisp@vri.com.br <br />
+                    PR: (44) 3518-1200 - vripr@vri.com.br <br />
+                </p>
                 <?php
-                echo $this->Html->link(
-                        $this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')), 'http://www.cakephp.org/', array('target' => '_blank', 'escape' => false)
-                );
+                /**
+                  echo $this->Html->link(
+                  $this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')), 'http://www.cakephp.org/', array('target' => '_blank', 'escape' => false)
+                  );
+                 * 
+                 */
                 ?>
             </div>
         </div>
-        <?php echo $this->element('sql_dump'); ?>
+        <?php //echo $this->element('sql_dump'); ?>
     </body>
 </html>
