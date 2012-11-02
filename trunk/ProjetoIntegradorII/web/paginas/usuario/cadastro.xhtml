@@ -59,6 +59,18 @@
 
         <br/>
 
+        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+            <h:outputLabel for="papel" value="Grupo:"><span class="required">*</span></h:outputLabel>
+            <h:panelGrid columns="2">
+                <p:selectOneMenu value="#{usuarioBean.usuario.papel}" id="papel" effect="fade" required="true" converter="#{usuarioBean.papelConverter}">  
+                    <f:selectItem itemLabel="Selecione o grupo do usuario" itemValue="#{usuarioBean.usuario.papel}" />  
+                    <f:selectItems value="#{usuarioBean.todosPapeis}" var="papel" itemLabel="#{papel.nome}" itemValue="#{papel}"/>  
+                </p:selectOneMenu>   
+                <p:message for="papel"/>
+            </h:panelGrid>
+        </h:panelGrid>
+
+
         <p:commandButton value="Salvar" styleClass="saveButton" id="save" ajax="false" title="Salvar alterações"
                          action="#{usuarioBean.salvar}" image="ui-icon ui-icon-disk" style="margin-left: 100px;"/>
 
