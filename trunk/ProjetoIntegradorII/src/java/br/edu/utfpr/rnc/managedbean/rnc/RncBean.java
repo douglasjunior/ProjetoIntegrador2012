@@ -6,11 +6,11 @@ import br.edu.utfpr.rnc.dao.usuario.UsuarioDao;
 import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
 import br.edu.utfpr.rnc.pojo.rnc.Rnc;
 import br.edu.utfpr.rnc.util.JsfUtil;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -21,6 +21,7 @@ import javax.faces.convert.FacesConverter;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.ImageIcon;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.util.JRLoader;
 
@@ -87,6 +88,16 @@ public class RncBean {
     private void finalizarRnc() {
         rnc.setFinalizado(true);
         rncDao.editar(rnc);
+    }
+
+    private java.awt.Image getLogotipoImage() {
+        try {
+            byte[] bytes = JsfUtil.bytesFromFile(new File(getClass().getResource("../../../../../../../../relatorios/rnc/logo.png").getFile()));
+            return new ImageIcon(bytes).getImage();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     @FacesConverter(forClass = Rnc.class)
@@ -217,13 +228,15 @@ public class RncBean {
     public Date getDataAtual() {
         return new Date();
     }
- 
+
     public void imprimir(Rnc rnc) {
         String caminho = "/relatorios/rnc/rnc.jasper";
 
         Map parametros = new HashMap();
 
         parametros.put("rnc", rnc);
+
+        parametros.put("logo", getLogotipoImage());
 
         System.out.println(getClass().getResource("../../../../../../../../relatorios/rnc/").toString());
 
