@@ -2,26 +2,26 @@
      xmlns:ui="http://java.sun.com/jsf/facelets"
      xmlns:h="http://java.sun.com/jsf/html"
      xmlns:f="http://java.sun.com/jsf/core"
-     xmlns:p="http://primefaces.org/ui">
-
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:shiro="http://shiro.apache.org/tags">
 
     <h:form id="formRnc" prependId="false">
         <p:tabView id="tabView">
-            <p:tab id="tabCabecalho" title="Dados da RNC">
+            <p:tab id="tabCabecalho" title="Dados da RNC" rendered="true">
 
                 <p:growl id="messages" showDetail="true" globalOnly="true" life="3000" />
                 <h3 class="tituloCadastro"><h:outputText value="Cadastro de RNC"/></h3>
                 <h:inputHidden value="#{rncBean.rnc.id}" id="id" />
 
-                <h:panelGrid columns="3" cellpadding="5">
+                <h:panelGrid columns="3" cellpadding="5" >
                     <h:outputLabel for="data" value="Data:"><span class="required">*</span></h:outputLabel>
-                    <p:calendar value="#{rncBean.rnc.dataRnc}" id="data" size="10"
+                    <p:calendar value="#{rncBean.rnc.dataRnc}" id="data" size="10" disabled="#{rncBean.rnc.aprovado}"
                                 title="Data de abertura." required="true" requiredMessage="Informe a data de abertura da RNC" 
                                 pattern="dd/MM/yyyy"/>
                     <p:message for="data"/>
 
                     <h:outputLabel for="setorEmitente" value="Setor/Empresa Emitente:"><span class="required">*</span></h:outputLabel>
-                    <p:selectOneMenu id="setorEmitente" required="true" requiredMessage="Informe o setor emitente." style="width: 200px"
+                    <p:selectOneMenu id="setorEmitente" required="true" requiredMessage="Informe o setor emitente." style="width: 200px" disabled="#{rncBean.rnc.aprovado}"
                                      value="#{rncBean.rnc.setorEmitente}" converter="#{departamentoBean.converter}">
                         <f:selectItem itemLabel="" itemValue="#{rncBean.rnc.setorEmitente}"/>
                         <f:selectItems var="departamento" itemLabel="#{departamento.nome}" value="#{departamentoBean.todosDepartamentos}"/>
@@ -29,69 +29,67 @@
                     <p:message for="setorEmitente"/>
 
                     <h:outputLabel for="emitente" value="Usuario Emitente:"><span class="required">*</span></h:outputLabel>
-                    <p:selectOneMenu id="emitente" required="true" requiredMessage="Informe o usuário emitente." style="width: 200px"
+                    <p:selectOneMenu id="emitente" required="true" requiredMessage="Informe o usuário emitente." style="width: 200px" disabled="#{rncBean.rnc.aprovado}"
                                      value="#{rncBean.rnc.emitente}" converter="#{usuarioBean.converter}">
                         <f:selectItem itemLabel="" itemValue="#{rncBean.rnc.emitente}"/>
                         <f:selectItems var="usuario" itemLabel="#{usuario.nome}" value="#{usuarioBean.todosUsuarios}"/>
                     </p:selectOneMenu>
                     <p:message for="emitente"/>
 
-
-
                     <h:outputLabel for="codigoProduto" value="Código do Produto:"></h:outputLabel>
-                    <p:inputText value="#{rncBean.rnc.codigoProduto}" id="codigoProduto" maxlength="45"
+                    <p:inputText value="#{rncBean.rnc.codigoProduto}" id="codigoProduto" maxlength="45" disabled="#{rncBean.rnc.aprovado}"
                                  title="Código do produto." size="45" />
                     <p:message for="codigoProduto"/>
 
                     <h:outputLabel for="descricaoProduto" value="Descrição do Produto:"></h:outputLabel>
-                    <p:inputText value="#{rncBean.rnc.descricaoProduto}" id="descricaoProduto" maxlength="255"
+                    <p:inputText value="#{rncBean.rnc.descricaoProduto}" id="descricaoProduto" maxlength="255" disabled="#{rncBean.rnc.aprovado}"
                                  title="Descrição do produto." size="45" />
                     <p:message for="descricaoProduto"/>
 
                     <h:outputLabel for="qtdeReprovada" value="Qtde Reprovada:"></h:outputLabel>
-                    <p:spinner value="#{rncBean.rnc.quantidadeReprovada}" id="qtdeReprovada" min="0"
+                    <p:spinner value="#{rncBean.rnc.quantidadeReprovada}" id="qtdeReprovada" min="0" disabled="#{rncBean.rnc.aprovado}"
                                title="Quantidade reprovada do produto." size="8" />
                     <p:message for="qtdeReprovada"/>
 
                     <h:outputLabel for="qtdeRecebida" value="Qtde Recebida:"></h:outputLabel>
-                    <p:spinner value="#{rncBean.rnc.quantidadeRecebida}" id="qtdeRecebida" min="0"
+                    <p:spinner value="#{rncBean.rnc.quantidadeRecebida}" id="qtdeRecebida" min="0" disabled="#{rncBean.rnc.aprovado}"
                                title="Quantidade recebida do produto." size="8" />
                     <p:message for="qtdeRecebida"/>
 
                     <h:outputLabel for="docOrigem" value="Documento Origem:"></h:outputLabel>
-                    <p:inputText value="#{rncBean.rnc.documentoOrigem}" id="docOrigem" maxlength="255"
+                    <p:inputText value="#{rncBean.rnc.documentoOrigem}" id="docOrigem" maxlength="255" disabled="#{rncBean.rnc.aprovado}"
                                  title="Documento de Origem." size="45" />
                     <p:message for="docOrigem"/>
 
                     <h:outputLabel for="numLote" value="Nº Lote/Série/O.P."><span class="required">*</span></h:outputLabel>
-                    <p:inputText value="#{rncBean.rnc.numeroLote}" id="numLote" maxlength="255"
+                    <p:inputText value="#{rncBean.rnc.numeroLote}" id="numLote" maxlength="255" disabled="#{rncBean.rnc.aprovado}"
                                  title="Número do lote/Série/O.P." required="true" requiredMessage="Campo obrigatório" size="45" />
                     <p:message for="numLote"/>
 
                     <h:outputLabel for="placa" value="Placa"></h:outputLabel>
-                    <p:inputText value="#{rncBean.rnc.placa}" id="placa" maxlength="255"
+                    <p:inputText value="#{rncBean.rnc.placa}" id="placa" maxlength="255" disabled="#{rncBean.rnc.aprovado}"
                                  title="Placa" size="45" />
                     <p:message for="placa"/>
 
                     <h:outputLabel for="origemRnc" value="Origem RNC:"><span class="required">*</span></h:outputLabel>
-                    <p:selectOneMenu id="origemRnc" required="true" requiredMessage="Informe a origem da RNC"
-                                     value="#{rncBean.rnc.origemRnc}" editable="true" >
+                    <p:selectOneMenu id="origemRnc" required="true" requiredMessage="Informe a origem da RNC" disabled="#{rncBean.rnc.aprovado}"
+                                     value="#{rncBean.rnc.origemRnc}" editable="true">
                         <f:selectItem itemLabel="" itemValue=""/>
                         <f:selectItems value="#{rncBean.origensRnc}" var="origRnc" itemLabel="#{origRnc}" itemValue="#{origRnc}"/> 
                     </p:selectOneMenu>
                     <p:message for="origemRnc"/>
 
-                    <h:outputLabel for="descricaoNC" value="Descrição da Não Conformidade:"><span class="required">*</span></h:outputLabel>                    
-                    <p:inputTextarea id="descricaoNC" style="width: 700px" value="#{rncBean.rnc.descricaoNc}"></p:inputTextarea>
+                    <h:outputLabel for="descricaoNC" value="Descrição da Não Conformidade:"><span class="required">*</span></h:outputLabel>
+                    <p:inputTextarea id="descricaoNC" style="width: 700px" value="#{rncBean.rnc.descricaoNc}" disabled="#{rncBean.rnc.aprovado}"></p:inputTextarea>
                     <p:message for="descricaoNC"/>
 
                     <h:outputLabel for="relatorio" value="Relatório:"><span class="required">*</span></h:outputLabel>                    
-                    <p:inputTextarea id="relatorio" style="width: 700px" value="#{rncBean.rnc.relatorio}"></p:inputTextarea>
+                    <p:inputTextarea id="relatorio" style="width: 700px" value="#{rncBean.rnc.relatorio}" disabled="#{rncBean.rnc.aprovado}"></p:inputTextarea>
                     <p:message for="relatorio"/>    
 
                     <h:outputLabel for="setorResponsavel" value="Setor Responsável:"><span class="required">*</span></h:outputLabel>
                     <p:selectOneMenu id="setorResponsavel" required="true" requiredMessage="Informe o setor responsável." style="width: 200px"
-                                     value="#{rncBean.rnc.setorResponsavel}" converter="#{departamentoBean.converter}">
+                                     value="#{rncBean.rnc.setorResponsavel}" converter="#{departamentoBean.converter}" disabled="#{rncBean.rnc.aprovado}">
                         <f:selectItem itemLabel="" itemValue="#{rncBean.rnc.setorResponsavel}"/>
                         <f:selectItems var="departamento" itemLabel="#{departamento.nome}" value="#{departamentoBean.todosDepartamentos}"/>
                     </p:selectOneMenu>                    
@@ -100,7 +98,7 @@
 
                     <h:outputLabel for="usuarioresponsavel" value="Usuario Responsável:"><span class="required">*</span></h:outputLabel>
                     <p:selectOneMenu id="usuarioresponsavel" required="true" requiredMessage="Informe o usuário responsável." style="width: 200px"
-                                     value="#{rncBean.rnc.responsavel}" converter="#{usuarioBean.converter}">
+                                     value="#{rncBean.rnc.responsavel}" converter="#{usuarioBean.converter}" disabled="#{rncBean.rnc.aprovado}">
                         <f:selectItem itemLabel="" itemValue="#{rncBean.rnc.responsavel}"/>
                         <f:selectItems var="usuario" itemLabel="#{usuario.nome}" value="#{usuarioBean.todosUsuarios}"/>
                     </p:selectOneMenu>
@@ -109,11 +107,11 @@
                 </h:panelGrid>
             </p:tab>
 
-            <p:tab id="tabDisposicao" title="Disposição" >
+            <p:tab id="tabDisposicao" title="Disposição"  rendered="true">
                 <h:panelGrid columns="1" title="Selecione uma das opções para disposição do material não conforme.">
                     <h:outputLabel for="disposicao" value="Destino dado ao material não conforme:"></h:outputLabel>
                     <h:panelGrid columns="2">
-                        <p:selectOneMenu id="disposicao" style="width: 700px" 
+                        <p:selectOneMenu id="disposicao" style="width: 700px"
                                          value="#{rncBean.rnc.disposicao}" editable="true">
                             <f:selectItem itemLabel="" itemValue=""/>
                             <f:selectItems value="#{rncBean.disposicoesRnc}" var="dispRnc" itemLabel="#{dispRnc}" itemValue="#{dispRnc}"/> 
@@ -148,9 +146,11 @@
                                         pattern="dd/MM/yyyy"/>
                             <p:message for="prazoAcaoContencao"/>
 
-                            <p:commandButton id="btn_add_acaoContencao" value="Adicionar" actionListener="#{acaoContencaoBean.add()}" update="acoesContencoesTable messages"
-                                             process="@this,descricaoAcaoContencao,responsavelAcaoContencao,prazoAcaoContencao">
-                            </p:commandButton>
+                            <shiro:hasAnyRoles name="gerente, assistente">
+                                <p:commandButton id="btn_add_acaoContencao" value="Adicionar" actionListener="#{acaoContencaoBean.add()}" update="acoesContencoesTable messages"
+                                                 process="@this,descricaoAcaoContencao,responsavelAcaoContencao,prazoAcaoContencao">
+                                </p:commandButton>
+                            </shiro:hasAnyRoles>
 
                         </h:panelGrid>
 
@@ -189,8 +189,10 @@
                                 <f:facet name="header">
                                     <h:outputText value="Opções" />
                                 </f:facet>
-                                <p:commandButton id="rmv" value="Excluir" update="@form" actionListener="#{acaoContencaoBean.remover(acaoContencao)}">
-                                </p:commandButton>
+                                <shiro:hasAnyRoles name="gerente, assistente">
+                                    <p:commandButton id="rmv" value="Excluir" update="@form" actionListener="#{acaoContencaoBean.remover(acaoContencao)}">
+                                    </p:commandButton>
+                                </shiro:hasAnyRoles>
                             </p:column>
 
                         </p:dataTable>
@@ -199,7 +201,7 @@
                 </h:panelGrid>
 
             </p:tab>
-            <p:tab id="tabCausaProvavel" title="Causa Provável">
+            <p:tab id="tabCausaProvavel" title="Causa Provável" rendered="true">
                 <h:panelGrid columns="1" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Definição da causa após analise.">
                     <h:outputLabel for="causaProvavel" value="Informe a causa provável:"><span class="required">*</span></h:outputLabel>
                     <h:panelGrid columns="2">
@@ -227,8 +229,6 @@
 
                         <h:panelGrid columns="3" id="gridAcaoProposta">
 
-
-
                             <h:outputLabel value="Descrição da ação: " for="descricaoAcaoProposta"><span class="required">*</span></h:outputLabel>
                             <p:inputText id="descricaoAcaoProposta"
                                          value="#{acaoPropostaBean.acao.descricao}" size="60"/>
@@ -246,13 +246,11 @@
                             <p:calendar value="#{acaoPropostaBean.acao.prazo}"  id="prazoAcaoProposta" size="10"                                        
                                         pattern="dd/MM/yyyy"/>
                             <p:message for="prazoAcaoProposta"/>
-
-
-
-                            <p:commandButton id="btn_add_acaoProposta" value="Adicionar" actionListener="#{acaoPropostaBean.add()}" update="acoesPropostasTable messages"
-                                             process="@this,tipoAcaoProposta,descricaoAcaoProposta,responsavelAcaoProposta,prazoAcaoProposta">
-                            </p:commandButton>
-
+                            <shiro:hasAnyRoles name="gerente, assistente">
+                                <p:commandButton id="btn_add_acaoProposta" value="Adicionar" actionListener="#{acaoPropostaBean.add()}" update="acoesPropostasTable messages"
+                                                 process="@this,tipoAcaoProposta,descricaoAcaoProposta,responsavelAcaoProposta,prazoAcaoProposta">
+                                </p:commandButton>
+                            </shiro:hasAnyRoles>
                         </h:panelGrid>
                         <br />
 
@@ -289,8 +287,10 @@
                                 <f:facet name="header">
                                     <h:outputText value="Opções" />
                                 </f:facet>
-                                <p:commandButton id="rmv_ap" value="Excluir" update="@form" actionListener="#{acaoPropostaBean.remover(acaoProposta)}">
-                                </p:commandButton>
+                                <shiro:hasAnyRoles name="gerente, assistente">
+                                    <p:commandButton id="rmv_ap" value="Excluir" update="@form" actionListener="#{acaoPropostaBean.remover(acaoProposta)}">
+                                    </p:commandButton>
+                                </shiro:hasAnyRoles>
                             </p:column>
 
                         </p:dataTable>
@@ -298,7 +298,7 @@
 
                 </h:panelGrid>
             </p:tab>
-            <p:tab id="tabAbrangenciaDaAcao" title="Abrangencia da Ação">
+            <p:tab id="tabAbrangenciaDaAcao" title="Abrangencia da Ação" rendered="true">
                 <h:panelGrid columns="1" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Demais produtos ou processos afetados pelas ações corretivas.">
                     <h:outputLabel for="abrangenciaDaAcao" value="Informe a abrangencia da ação:"><span class="required">*</span></h:outputLabel>
                     <h:panelGrid columns="2">
@@ -308,7 +308,7 @@
                     </h:panelGrid>
                 </h:panelGrid>
             </p:tab>
-            <p:tab id="tabEficacia" title="Análise da Eficácia">
+            <p:tab id="tabEficacia" title="Análise da Eficácia" rendered="true">
                 <h:panelGrid columns="1" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Analise das ações realizadas e encerramento.">
                     <h:outputLabel for="comentario" value="Comentários:"></h:outputLabel>
                     <h:panelGrid columns="2">
@@ -347,12 +347,13 @@
                 </h:panelGrid>
             </p:tab>
         </p:tabView>
-        <p:commandButton value="Salvar" styleClass="saveButton" id="save" ajax="false" title="Salvar alterações"
-                         action="#{rncBean.salvar}" image="ui-icon ui-icon-disk" style="margin-left: 100px;"/>
-
-        <p:commandButton value="Limpar" id="cancel" styleClass="cancelButton" update="@all" title="Limpar formulário"
-                         immediate="true" actionListener="#{rncBean.clearFields()}" image="ui-icon ui-icon-close"
-                         style="margin-left: 80px;" />
+        <shiro:hasAnyRoles name="gerente, assistente">
+            <p:commandButton value="Salvar" styleClass="saveButton" id="save" ajax="false" title="Salvar alterações"
+                             action="#{rncBean.salvar}" image="ui-icon ui-icon-disk" style="margin-left: 100px;"/>
+            <p:commandButton value="Limpar" id="cancel" styleClass="cancelButton" update="@all" title="Limpar formulário"
+                             immediate="true" actionListener="#{rncBean.clearFields()}" image="ui-icon ui-icon-close"
+                             style="margin-left: 80px;" />
+        </shiro:hasAnyRoles>
     </h:form>
 
 </div>

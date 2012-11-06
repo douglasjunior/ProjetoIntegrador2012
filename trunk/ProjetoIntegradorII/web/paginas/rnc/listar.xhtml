@@ -1,7 +1,9 @@
 <div xmlns="http://www.w3.org/1999/xhtml"
      xmlns:h="http://java.sun.com/jsf/html"
      xmlns:f="http://java.sun.com/jsf/core"
-     xmlns:p="http://primefaces.org/ui">
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:shiro="http://shiro.apache.org/tags">
+
     <h:form id="listarRNCs" prependId="false">
         <p:growl globalOnly="true" id="messages" />
         <p:ajaxStatus style="width:16px;height:20px;margin-top: 3px;">
@@ -46,15 +48,15 @@
             <p:column headerText="Opções">
                 <p:commandButton actionListener="#{rncBean.editar()}" icon="ui-icon-pencil"
                                  action="#{gerenciadorPaginas.cadastroRNC()}" ajax="false"
-                                 title="Editar esta RNC"  id="editar" rendered="#{not rnc.finalizado}"/>
-                
-                
+                                 title="Editar esta RNC" id="editar" rendered="#{not rnc.finalizado}"/>
+
                 <p:commandButton actionListener="#{rncBean.imprimir(rnc)}" icon="ui-icon-print"
-                                 ajax="false" title="Imprimir a RNC"  id="imprimir" />                
-                
-                
-                <p:commandButton  icon="ui-icon-trash" title="Excluir esta RNC"  actionListener="#{rncBean.adicionarRNCnaSessao()}"
-                                  id="excluir" oncomplete="confirmation.show()" rendered="#{not rnc.bound}"/>
+                                 ajax="false" title="Imprimir a RNC" id="imprimir" />
+
+                <shiro:hasAnyRoles name="gerente">
+                    <p:commandButton  icon="ui-icon-trash" title="Excluir esta RNC"  actionListener="#{rncBean.adicionarRNCnaSessao()}"
+                                      id="excluir" oncomplete="confirmation.show()" rendered="#{not rnc.bound}"/>
+                </shiro:hasAnyRoles>
 
                 <p:commandButton  icon="ui-icon-search" title="Visualizar Cabeçalho da RNC" actionListener="#{rncBean.adicionarRNCnaSessao()}"
                                   id="visualizarCabecalhoRNC" update=":listarRNCs:cabecalhoRNC" oncomplete="CabecalhoRNC.show()">
@@ -93,12 +95,14 @@
 
                 <h:outputLabel for="cabSetorResponsavelRNC" value="Setor Responsável: " style="font-weight: bold"/>
                 <h:outputText id="cabSetorResponsavelRNC" value="#{rncBean.cabRNC.setorResponsavel.nome}"/>
-                
-                <p:commandButton value="Aprovar RNC" id="confirmAprovar" update="rncLista messages" oncomplete="CabecalhoRNC.hide()" style="position: relative;left: 45px;" rendered="#{not rnc.aprovado}"
-                             actionListener="#{rncBean.aprovar()}">
-                </p:commandButton>
-                            <p:commandButton value="Fechar" id="confirmFecharVisualizacao" oncomplete="CabecalhoRNC.hide()" style="position: relative;left: 115px;"
-                             actionListener="#{rncBean.removerRNCDaSessao()}"/>
+
+                <shiro:hasAnyRoles name="gerente">
+                    <p:commandButton value="Aprovar RNC" id="confirmAprovar" update="rncLista messages" oncomplete="CabecalhoRNC.hide()" style="position: relative;left: 45px;" rendered="#{not rnc.aprovado}"
+                                     actionListener="#{rncBean.aprovar()}">
+                    </p:commandButton>                    
+                </shiro:hasAnyRoles>
+                <p:commandButton value="Fechar" id="confirmFecharVisualizacao" oncomplete="CabecalhoRNC.hide()" style="position: relative;left: 115px;"
+                                 actionListener="#{rncBean.removerRNCDaSessao()}"/>
             </h:panelGrid>
         </p:dialog>
 
