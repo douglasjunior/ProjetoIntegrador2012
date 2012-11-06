@@ -2,11 +2,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="20" bottomMargin="50" uuid="ec554c7e-eb5c-431e-91e3-34004c2fcea7">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="399"/>
+	<property name="ireport.y" value="443"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<parameter name="rnc" class="br.edu.utfpr.rnc.pojo.rnc.Rnc"/>
+	<parameter name="logo" class="java.awt.Image"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -32,11 +33,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="15" width="93" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="true" isStrikeThrough="false"/>
@@ -47,11 +48,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="30" width="93" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="true" isStrikeThrough="false"/>
@@ -62,11 +63,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="45" width="93" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="true" isStrikeThrough="false"/>
@@ -77,11 +78,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="60" width="93" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="true" isStrikeThrough="false"/>
@@ -89,29 +90,57 @@
 					</textElement>
 					<text><![CDATA[Nº Lote/Série/O.P.:]]></text>
 				</staticText>
-				<textField pattern="dd/MM/yyyy">
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 					<reportElement uuid="32bfdf1d-3357-45ab-9734-efea67212757" mode="Transparent" x="93" y="15" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{rnc}.getDataRnc()]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="e9270ebe-5f73-4032-9781-eb61a212f48f" mode="Transparent" x="93" y="30" width="152" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{rnc}.getCodigoProduto()]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="ff8c2e69-6d2f-4324-b028-6d9a7ea75ec4" mode="Transparent" x="93" y="45" width="63" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{rnc}.getQuantidadeReprovada()]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="b5eb3ce5-b233-467f-8e52-68475eb39bde" mode="Transparent" x="93" y="60" width="136" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -120,11 +149,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="156" y="45" width="73" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="true" isStrikeThrough="false"/>
@@ -135,11 +164,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="156" y="15" width="49" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="true" isStrikeThrough="false"/>
@@ -147,8 +176,15 @@
 					</textElement>
 					<text><![CDATA[Emitente:]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="527b5cc9-0889-4895-8600-c8a135291d52" mode="Transparent" x="205" y="15" width="120" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -157,11 +193,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="245" y="30" width="108" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="true" isStrikeThrough="false"/>
@@ -169,8 +205,15 @@
 					</textElement>
 					<text><![CDATA[Descrição do Produto:]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="1b2a51eb-c89b-4439-be35-054a1bf4eba2" mode="Transparent" x="229" y="45" width="69" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -179,11 +222,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="229" y="60" width="32" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="true" isStrikeThrough="false"/>
@@ -194,11 +237,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="325" y="15" width="74" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="true" isStrikeThrough="false"/>
@@ -206,15 +249,29 @@
 					</textElement>
 					<text><![CDATA[Setor/Empresa:]]></text>
 				</staticText>
-				<textField>
-					<reportElement uuid="18e8887a-887a-4907-bc8c-d7ba592283bb" mode="Transparent" x="399" y="15" width="116" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textField isBlankWhenNull="true">
+					<reportElement uuid="18e8887a-887a-4907-bc8c-d7ba592283bb" mode="Transparent" x="399" y="15" width="115" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{rnc}.getEmpresaEmitente() != null ? $P{rnc}.getEmpresaEmitente() : $P{rnc}.getSetorEmitente().getNome()]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="f73bd0b6-072d-4599-9ec5-9d8a4edf8909" mode="Transparent" x="353" y="30" width="161" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -223,11 +280,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="298" y="45" width="78" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="true" isStrikeThrough="false"/>
@@ -235,15 +292,29 @@
 					</textElement>
 					<text><![CDATA[Doc. de Origem:]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="17373447-bd86-4a9b-aa4c-eb5ff03c190a" mode="Transparent" x="376" y="45" width="138" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{rnc}.getDocumentoOrigem()]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="65c3bab5-c753-4f10-ac91-b7eb665e0777" mode="Transparent" x="261" y="60" width="253" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -252,11 +323,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Opaque" x="0" y="75" width="93" height="15" forecolor="#000000" backcolor="#FFFFCC"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="true" isStrikeThrough="false"/>
@@ -264,8 +335,15 @@
 					</textElement>
 					<text><![CDATA[Origem da RNC:]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="b0260be9-e716-45eb-bb82-cb136a3e8e14" mode="Transparent" x="93" y="75" width="421" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -293,8 +371,15 @@
 					</textElement>
 					<text><![CDATA[<b>Descrição da Não Conformidade.</b> <i>(Descrição da falha ou problema observado)</i>]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="true">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement uuid="b0b1ff0a-f2bf-48d8-9b9a-7b30ef185581" mode="Transparent" x="0" y="15" width="514" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -322,8 +407,15 @@
 					</textElement>
 					<text><![CDATA[<b>Relatório.</b> <i>(Foto, Referencia de documento, Comentários, etc.)</i>]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="true">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement uuid="a1554daf-86b7-4cfa-9610-b432887a7efe" mode="Transparent" x="0" y="15" width="514" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -336,15 +428,24 @@
 		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
 		<groupHeader>
 			<band height="15">
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="e3bafddb-c4cb-49bf-90ac-934b2fd79b1c" mode="Transparent" x="69" y="0" width="252" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<topPen lineWidth="1.5"/>
+						<bottomPen lineWidth="1.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{rnc}.getResponsavel().getNome()]]></textFieldExpression>
 				</textField>
-				<textField>
-					<reportElement uuid="a3771d93-5a2b-4e61-a166-600fde1a9465" mode="Transparent" x="353" y="0" width="161" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textField isBlankWhenNull="true">
+					<reportElement uuid="a3771d93-5a2b-4e61-a166-600fde1a9465" mode="Transparent" x="353" y="0" width="162" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<topPen lineWidth="1.5"/>
+						<bottomPen lineWidth="1.5"/>
+						<rightPen lineWidth="1.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -355,9 +456,9 @@
 					<box>
 						<pen lineWidth="0.0"/>
 						<topPen lineWidth="1.5"/>
-						<leftPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.5"/>
 						<bottomPen lineWidth="1.5"/>
-						<rightPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="true" isStrikeThrough="false"/>
@@ -372,7 +473,7 @@
 						<topPen lineWidth="1.5"/>
 						<leftPen lineWidth="1.5"/>
 						<bottomPen lineWidth="1.5"/>
-						<rightPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="true" isStrikeThrough="false"/>
@@ -402,8 +503,15 @@
 					</textElement>
 					<text><![CDATA[Disposição:]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="84b50bb5-df32-4c5c-b75b-938213e5ba2d" mode="Transparent" x="69" y="0" width="445" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -458,8 +566,15 @@
 					</textElement>
 					<text><![CDATA[<b>Causa Provável.</b> <i>(Definição da causa após análise)</i>]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="true">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement uuid="0e2d64f5-b384-4ab0-90a6-1945e89faf1e" mode="Transparent" x="0" y="15" width="514" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -514,8 +629,15 @@
 					</textElement>
 					<text><![CDATA[<b>Abrangência da Ação.</b> <i>(Demais produtos ou processos afetados pelas ações corretivas)</i>]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="true">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement uuid="69f1c573-13a7-403b-a383-9fa563f4b9c4" mode="Transparent" x="0" y="15" width="514" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -546,11 +668,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Transparent" x="0" y="15" width="93" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
@@ -558,8 +680,15 @@
 					</textElement>
 					<text><![CDATA[Foi eficaz?]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="300c3b7e-cb9d-4f1a-a755-3b441a893314" mode="Transparent" x="0" y="30" width="93" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -568,11 +697,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Transparent" x="93" y="15" width="272" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
@@ -583,11 +712,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Transparent" x="365" y="15" width="73" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
@@ -598,11 +727,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Transparent" x="438" y="15" width="76" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
@@ -610,22 +739,43 @@
 					</textElement>
 					<text><![CDATA[Nº Nova RNC]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="ef29faa2-9b8e-4b97-a9c7-2e1a92f9447c" mode="Transparent" x="93" y="30" width="272" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{rnc}.getVeficadoPor().getNome()]]></textFieldExpression>
 				</textField>
-				<textField pattern="dd/MM/yyyy">
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 					<reportElement uuid="bbca8fa6-f2ca-4c49-9288-d814aeb962eb" mode="Transparent" x="365" y="30" width="73" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{rnc}.getDataAnalise()]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement uuid="ab1b7503-17e3-44bf-8506-f18674fe4682" mode="Transparent" x="438" y="30" width="76" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -634,11 +784,11 @@
 				<staticText>
 					<reportElement uuid="79af47ec-5c50-4ec1-9f80-e50206b15e85" mode="Transparent" x="0" y="45" width="93" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
 					<box>
-						<pen lineWidth="0.0"/>
-						<topPen lineWidth="0.0"/>
-						<leftPen lineWidth="0.0"/>
-						<bottomPen lineWidth="0.0"/>
-						<rightPen lineWidth="0.0"/>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
 					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
@@ -646,8 +796,15 @@
 					</textElement>
 					<text><![CDATA[Comentarios:]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="true">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement uuid="0ed8056a-f9d4-4edb-9beb-b4bed70706a2" mode="Transparent" x="0" y="60" width="514" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
 					<textElement verticalAlignment="Middle" markup="html">
 						<font size="9" isBold="false" isStrikeThrough="false"/>
 					</textElement>
@@ -656,36 +813,62 @@
 			</band>
 		</groupHeader>
 	</group>
-	<pageHeader>
+	<title>
 		<band height="61">
-			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} != 1]]></printWhenExpression>
 			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle" isLazy="true" onErrorType="Blank">
 				<reportElement uuid="c191fce9-a432-4f10-b7ac-b0360b8d5046" mode="Opaque" x="0" y="0" width="131" height="61"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<graphicElement>
 					<pen lineColor="#FFFFFF"/>
 				</graphicElement>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement uuid="7eac04e8-fd88-4e1c-9ea6-b00e4234d0eb" x="103" y="0" width="323" height="61">
-					<printWhenExpression><![CDATA[]]></printWhenExpression>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[RELATÓRIO DE NÃO-CONFORMIDADE]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="71559d22-f0f3-475e-b296-309e2d711b42" mode="Opaque" x="427" y="0" width="87" height="32" backcolor="#FFFFCC"/>
+				<reportElement uuid="71559d22-f0f3-475e-b296-309e2d711b42" mode="Opaque" x="428" y="0" width="86" height="32" backcolor="#FFFFCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[RNC Nº]]></text>
 			</staticText>
-			<textField pattern="00000#">
-				<reportElement uuid="8ad02125-5aa0-4a67-994f-4b6c18628778" x="426" y="32" width="88" height="29"/>
+			<textField pattern="000000" isBlankWhenNull="true">
+				<reportElement uuid="8ad02125-5aa0-4a67-994f-4b6c18628778" x="428" y="32" width="86" height="29"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{rnc}.getId()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement uuid="8415528d-3d09-41f2-bb3f-b7e8a442e6c7" x="131" y="0" width="297" height="61"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE NÃO CONFORMIDADE]]></text>
+			</staticText>
 		</band>
-	</pageHeader>
+	</title>
 </jasperReport>
