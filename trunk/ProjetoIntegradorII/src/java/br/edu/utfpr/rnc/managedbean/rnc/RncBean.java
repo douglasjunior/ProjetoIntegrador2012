@@ -7,10 +7,7 @@ import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
 import br.edu.utfpr.rnc.pojo.rnc.Rnc;
 import br.edu.utfpr.rnc.util.JsfUtil;
 import java.io.*;
-import java.net.URISyntaxException;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -23,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.ImageIcon;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.util.JRLoader;
 
 @ManagedBean(name = "rncBean")
 @SessionScoped
@@ -249,15 +245,8 @@ public class RncBean {
         //pega o caminho do arquivo .jasper da aplicação
         InputStream reportStream = context.getExternalContext().getResourceAsStream(caminho);
 
-        /*
-         * //envia a resposta com o MIME Type
-         * if(tipoFormatoRelatorio.equals(TipoFormatoRelatorio.ACROBAT_PDF)){
-         * response.setContentType("application/pdf"); }else
-         * if(tipoFormatoRelatorio.equals(TipoFormatoRelatorio.PAGINA_HTML)){
-         * response.setContentType("application/html"); }
-         */
         response.setHeader("Content-Disposition", "attachment; filename=rnc.pdf");
-        response.setContentType("application/download");
+        response.setContentType("application/pdf");
         response.setHeader("Pragma", "no-cache");
         try {
             ServletOutputStream servletOutputStream = response.getOutputStream();
@@ -273,51 +262,79 @@ public class RncBean {
             context.responseComplete();
         }
     }
-//    public void imprimir(Rnc rnc) {
-//        Map parametros = new HashMap();
-//        parametros.put("rnc", rnc);
-//
-//        try {
-//            HttpServletResponse response = ((HttpServletResponse) JsfUtil.getContext().getExternalContext().getResponse());
-//
-//            String caminho = "../../../../../../../../relatorios/rnc/rnc.jasper";
-//            try {
-//                // Carregando o modelo do relatório
-//                System.out.println("1:" + getClass().getResource("").toURI().toString());
-//                System.out.println("2:" + getClass().getResource(caminho).toURI().toString());
-//            } catch (URISyntaxException ex) {
-//                ex.printStackTrace();
-//            } 
-//            InputStream resource = this.getClass().getResourceAsStream(caminho);
-//            // Configurando o FileResolver para caminhos relativos
-////            String reportsDirPath = JsfUtil.getContext().getExternalContext().getRealPath("/relatorios/rnc") + "/";
-////            File reportsDir = new File(reportsDirPath);
-////            if (!reportsDir.exists()) {
-////                throw new FileNotFoundException(String.valueOf(reportsDir));
-////            }
-//            //params.put(JRParameter.REPORT_FILE_RESOLVER, new SimpleFileResolver(reportsDir));
-//
-//            // Compilando o modelo em pdf e convertendo para array de bytes
-//            byte[] bytes = JasperRunManager.runReportToPdf(resource, parametros);
-//
-//            // adicionando informações do relatório ao cabeçalho da resposta
-//            response.setContentType("application/pdf");
-//            response.addHeader("Content-Disposition", "attachment;filename=rnc.pdf");
-//            response.setContentLength(bytes.length);
-//
-//            // Obtendo o fluxo de saída do servlet
-//            ServletOutputStream servletOutputStream = response.getOutputStream();
-//            // Escrevendo no fluxo de saída do servlet
-//            servletOutputStream.write(bytes, 0, bytes.length);
-//            servletOutputStream.flush();
-//            servletOutputStream.close();
-//
-//            JsfUtil.getContext().responseComplete();
-//
-//        } catch (JRException ex) {
-//            ex.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+    public boolean getHabilitaDisposicao() {
+        if (!JsfUtil.getUsuarioLogado().getPapel().getNome().equals("gerente")) {
+            if (rnc.getId() == 0) {
+                return false;
+            }
+            if (!JsfUtil.getUsuarioLogado().equals(rnc.getResponsavel())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean getHabilitaAcaoContencao() {
+        if (!JsfUtil.getUsuarioLogado().getPapel().getNome().equals("gerente")) {
+            if (rnc.getId() == 0) {
+                return false;
+            }
+            if (!JsfUtil.getUsuarioLogado().equals(rnc.getResponsavel())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean getHabilitaCausaProvavel() {
+        if (!JsfUtil.getUsuarioLogado().getPapel().getNome().equals("gerente")) {
+            if (rnc.getId() == 0) {
+                return false;
+            }
+            if (!JsfUtil.getUsuarioLogado().equals(rnc.getResponsavel())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean getHabilitaAcaoProposta() {
+        if (!JsfUtil.getUsuarioLogado().getPapel().getNome().equals("gerente")) {
+            if (rnc.getId() == 0) {
+                return false;
+            }
+            if (!JsfUtil.getUsuarioLogado().equals(rnc.getResponsavel())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean getHabilitaAbrangenciaAcao() {
+        if (!JsfUtil.getUsuarioLogado().getPapel().getNome().equals("gerente")) {
+            if (rnc.getId() == 0) {
+                return false;
+            }
+            if (!JsfUtil.getUsuarioLogado().equals(rnc.getResponsavel())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean getHabilitaAnaliseEficacia() {
+        if (!JsfUtil.getUsuarioLogado().getPapel().getNome().equals("gerente")) {
+            if (rnc.getId() == 0) {
+                return false;
+            }
+            if (!JsfUtil.getUsuarioLogado().equals(rnc.getResponsavel())) {
+                return false;
+            }
+            if (!rnc.getAcoesConcluidas()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

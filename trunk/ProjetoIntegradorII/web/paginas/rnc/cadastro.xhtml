@@ -7,7 +7,7 @@
 
     <h:form id="formRnc" prependId="false">
         <p:tabView id="tabView">
-            <p:tab id="tabCabecalho" title="Dados da RNC" rendered="true">
+            <p:tab id="tabCabecalho" title="Dados da RNC">
 
                 <p:growl id="messages" showDetail="true" globalOnly="true" life="3000" />
                 <h3 class="tituloCadastro"><h:outputText value="Cadastro de RNC"/></h3>
@@ -107,7 +107,7 @@
                 </h:panelGrid>
             </p:tab>
 
-            <p:tab id="tabDisposicao" title="Disposição"  rendered="true">
+            <p:tab id="tabDisposicao" title="Disposição" disabled="#{not rncBean.habilitaDisposicao}">
                 <h:panelGrid columns="1" title="Selecione uma das opções para disposição do material não conforme.">
                     <h:outputLabel for="disposicao" value="Destino dado ao material não conforme:"></h:outputLabel>
                     <h:panelGrid columns="2">
@@ -121,7 +121,7 @@
                 </h:panelGrid>
             </p:tab>
 
-            <p:tab id="tabContencao" title="Ação de Contenção">
+            <p:tab id="tabContencao" title="Ação de Contenção" disabled="#{not rncBean.habilitaAcaoContencao}">
                 <h:panelGrid columns="1" title="Informe as ações de contenção a serem executadas." style="width: 100%" >
 
                     <p:panel header="Cadastro de Ação de Contenção" style="width: 100%">
@@ -197,11 +197,10 @@
 
                         </p:dataTable>
                     </p:panel>
-
                 </h:panelGrid>
-
             </p:tab>
-            <p:tab id="tabCausaProvavel" title="Causa Provável" rendered="true">
+            
+            <p:tab id="tabCausaProvavel" title="Causa Provável" disabled="#{not rncBean.habilitaCausaProvavel}">
                 <h:panelGrid columns="1" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Definição da causa após analise.">
                     <h:outputLabel for="causaProvavel" value="Informe a causa provável:"><span class="required">*</span></h:outputLabel>
                     <h:panelGrid columns="2">
@@ -210,7 +209,8 @@
                     </h:panelGrid>
                 </h:panelGrid>
             </p:tab>
-            <p:tab id="tabAcaoProposta" title="Ação Proposta">
+            
+            <p:tab id="tabAcaoProposta" title="Ação Proposta" disabled="#{not rncBean.habilitaAcaoProposta}">
                 <h:panelGrid columns="1" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Informe as ações de contenção a serem executadas." style="width: 100%">
                     <p:panel>
                         <h:panelGrid columns="3" >
@@ -225,8 +225,8 @@
                             <p:message for="tipoAcaoProposta"/>
                         </h:panelGrid>
                     </p:panel>
+                    
                     <p:panel header="Cadastro de Ação Proposta" style="width: 100%">
-
                         <h:panelGrid columns="3" id="gridAcaoProposta">
 
                             <h:outputLabel value="Descrição da ação: " for="descricaoAcaoProposta"><span class="required">*</span></h:outputLabel>
@@ -252,6 +252,7 @@
                                 </p:commandButton>
                             </shiro:hasAnyRoles>
                         </h:panelGrid>
+                        
                         <br />
 
                         <p:dataTable id="acoesPropostasTable" value="#{acaoPropostaBean.acoes}" var="acaoProposta">
@@ -295,10 +296,10 @@
 
                         </p:dataTable>
                     </p:panel>
-
                 </h:panelGrid>
             </p:tab>
-            <p:tab id="tabAbrangenciaDaAcao" title="Abrangencia da Ação" rendered="true">
+            
+            <p:tab id="tabAbrangenciaDaAcao" title="Abrangencia da Ação" disabled="#{not rncBean.habilitaAbrangenciaAcao}">
                 <h:panelGrid columns="1" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Demais produtos ou processos afetados pelas ações corretivas.">
                     <h:outputLabel for="abrangenciaDaAcao" value="Informe a abrangencia da ação:"><span class="required">*</span></h:outputLabel>
                     <h:panelGrid columns="2">
@@ -308,7 +309,8 @@
                     </h:panelGrid>
                 </h:panelGrid>
             </p:tab>
-            <p:tab id="tabEficacia" title="Análise da Eficácia" rendered="true">
+            
+            <p:tab id="tabEficacia" title="Análise da Eficácia" disabled="#{not rncBean.habilitaAnaliseEficacia}">
                 <h:panelGrid columns="1" cellpadding="5" columnClasses="col" rowClasses="breakRow" title="Analise das ações realizadas e encerramento.">
                     <h:outputLabel for="comentario" value="Comentários:"></h:outputLabel>
                     <h:panelGrid columns="2">
@@ -347,6 +349,7 @@
                 </h:panelGrid>
             </p:tab>
         </p:tabView>
+        
         <shiro:hasAnyRoles name="gerente, assistente">
             <p:commandButton value="Salvar" styleClass="saveButton" id="save" ajax="false" title="Salvar alterações"
                              action="#{rncBean.salvar}" image="ui-icon ui-icon-disk" style="margin-left: 100px;"/>

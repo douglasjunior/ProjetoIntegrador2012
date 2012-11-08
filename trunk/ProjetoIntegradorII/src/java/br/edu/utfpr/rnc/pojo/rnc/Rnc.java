@@ -416,4 +416,21 @@ public class Rnc implements Serializable {
             return "Pendente";
         }
     }
+    
+    public boolean getAcoesConcluidas(){
+        if(acoesDeContencao.isEmpty() || acoesPropostas.isEmpty()){
+            return false;
+        }
+        for (AcaoContencao acaoContencao : acoesDeContencao) {
+            if(!acaoContencao.isConcluido()){
+                return false;
+            }
+        }
+        for (AcaoProposta acaoProposta : acoesPropostas) {
+            if(!acaoProposta.isConcluido()){
+                return false;
+            }
+        }
+        return true;
+    }
 }
