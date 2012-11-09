@@ -25,6 +25,6 @@
     <h3><?php echo __('Opções'); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('Alterar senha'), array('action' => 'alterarSenha', $user['User']['id'])); ?></li>
-        <li><a href="#" onclick="javascript:history.back(2)" >Voltar</a></li>
+        <li><?php echo $this->element('botaoVoltar'); ?></li>
     </ul>
 </div>

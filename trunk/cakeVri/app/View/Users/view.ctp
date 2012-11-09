@@ -60,7 +60,7 @@
             <li><?php echo $this->Html->link(__('Editar usuário'), array('action' => 'edit', $user['User']['id'])); ?> </li>
             <li><?php echo $this->Form->postLink(__('Excluir usuário'), array('action' => 'delete', $user['User']['id']), null, __('Você realmente deseja excluir o usuário %s?', $user['User']['nome'])); ?> </li>
         <?php } ?>
-        <li><a href="#" onclick="javascript:history.back(2)" >Voltar</a></li>
+        <li><?php echo $this->element('botaoVoltar'); ?></li>
     </ul>
 </div>
 <div class="related">
