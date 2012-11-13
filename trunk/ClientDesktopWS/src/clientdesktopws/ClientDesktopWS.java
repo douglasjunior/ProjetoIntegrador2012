@@ -4,6 +4,8 @@
  */
 package clientdesktopws;
 
+import java.util.List;
+
 /**
  *
  * @author NOTEBOOK
@@ -14,6 +16,6 @@ public class ClientDesktopWS {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+     
     }
 }
