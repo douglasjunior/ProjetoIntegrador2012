@@ -5,6 +5,7 @@ import br.edu.utfpr.rnc.dao.rnc.RncDao;
 import br.edu.utfpr.rnc.dao.usuario.UsuarioDao;
 import br.edu.utfpr.rnc.managedbean.GerenciadorPaginas;
 import br.edu.utfpr.rnc.pojo.rnc.Rnc;
+import br.edu.utfpr.rnc.pojo.usuario.Usuario;
 import br.edu.utfpr.rnc.util.JsfUtil;
 import java.io.*;
 import java.util.*;
@@ -186,6 +187,12 @@ public class RncBean {
     public void editar() {
         Rnc rnc = (Rnc) JsfUtil.getObjectFromRequestParameter("rnc");
         this.rnc = rnc;
+        ((GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas")).cadastroRNC();
+    }
+
+    public void cadastrar() {
+        this.rnc = new Rnc();
+        ((GerenciadorPaginas) JsfUtil.getObjectFromSession("gerenciadorPaginas")).cadastroRNC();
     }
 
     public void remover() {
@@ -210,7 +217,12 @@ public class RncBean {
     }
 
     public List<Rnc> getTodasRNCs() {
-        return rncDao.buscarTodos();
+        Usuario u = JsfUtil.getUsuarioLogado();
+        if (u.getPapel().getNome().equals("usuario")) {
+            return rncDao.executeNamedQueryComParametros("RNC.buscaResponsavel", new String[]{"responsavel"}, new Object[]{u});
+        } else {
+            return rncDao.buscarTodos();
+        }
     }
 
     public Rnc getCabRNC() {

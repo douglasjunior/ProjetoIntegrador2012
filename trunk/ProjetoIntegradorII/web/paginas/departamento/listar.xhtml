@@ -3,7 +3,7 @@
      xmlns:f="http://java.sun.com/jsf/core"
      xmlns:p="http://primefaces.org/ui">
     <h:form id="listarDepartamento">
-        <p:growl globalOnly="true" id="messages" />
+        <p:growl globalOnly="true" id="messages" life="10000"/>
         <p:dataTable var="departamento" value="#{departamentoBean.todosDepartamentos}" id="departamentoLista" rows="10"
                      emptyMessage="Nenhum registro encontrado!" paginator="true" paginatorPosition="bottom"
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

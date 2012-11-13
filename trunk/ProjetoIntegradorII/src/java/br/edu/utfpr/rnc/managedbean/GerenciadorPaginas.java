@@ -64,7 +64,7 @@ public class GerenciadorPaginas implements Serializable {
         return "refreshPage";
     }
         public String home() {
-        this.conteudo = "./paginas/home.xhtml";
+        this.conteudo = "./paginas/rnc/listar.xhtml";
         return "refreshPage";
     }
 }

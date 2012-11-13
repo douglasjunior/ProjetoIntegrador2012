@@ -5,7 +5,7 @@
      xmlns:shiro="http://shiro.apache.org/tags">
 
     <h:form id="listarRNCs" prependId="false">
-        <p:growl globalOnly="true" id="messages" />
+        <p:growl globalOnly="true" id="messages" life="10000"/>
         <p:dataTable var="rnc" value="#{rncBean.todasRNCs}" id="rncLista" rows="10"
                      emptyMessage="Nenhum registro encontrado!" paginator="true" paginatorPosition="bottom"
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -37,10 +37,11 @@
             </p:column>
 
             <p:column headerText="Opções">
-                <p:commandButton actionListener="#{rncBean.editar()}" icon="ui-icon-pencil"
-                                 action="#{gerenciadorPaginas.cadastroRNC()}" ajax="false"
-                                 title="Editar esta RNC" id="editar" rendered="#{not rnc.finalizado}"/>
-
+                <shiro:hasAnyRoles name="gerente, assistente">
+                    <p:commandButton actionListener="#{rncBean.editar()}" icon="ui-icon-pencil" ajax="false"
+                                     title="Editar esta RNC" id="editar" rendered="#{not rnc.finalizado}"/>
+                </shiro:hasAnyRoles>
+                
                 <p:commandButton actionListener="#{rncBean.imprimir(rnc)}" icon="ui-icon-print"
                                  ajax="false" title="Imprimir a RNC" id="imprimir" />
 
@@ -68,7 +69,8 @@
 
         </p:confirmDialog>
 
-        <p:dialog id="cabecalhoRNC" header="Dados da RNC" widgetVar="CabecalhoRNC" modal="true" showEffect="fade" closable="false">
+        <p:dialog id="cabecalhoRNC" header="Dados da RNC" widgetVar="CabecalhoRNC" modal="true" showEffect="fade" closable="false"
+                  height="250" width="500">
             <h:panelGrid columns="2" cellpadding="2" >
                 <h:outputLabel for="cabCodigoRNC" value="Código: " style="font-weight: bold"/>
                 <h:outputText id="cabCodigoRNC" value="#{rncBean.cabRNC.id}"/>

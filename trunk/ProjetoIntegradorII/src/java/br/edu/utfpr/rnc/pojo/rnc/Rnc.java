@@ -18,7 +18,8 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "RNC.buscaTodos", query = "SELECT r FROM Rnc r ORDER BY r.id"),
     @NamedQuery(name = "RNC.buscaPendente", query = "SELECT r FROM Rnc r WHERE r.aprovado = false AND r.finalizado = false ORDER BY r.id"),
     @NamedQuery(name = "RNC.buscaAprovado", query = "SELECT r FROM Rnc r WHERE r.aprovado = true AND r.finalizado = false ORDER BY r.id"),
-    @NamedQuery(name = "RNC.buscaFinalizado", query = "SELECT r FROM Rnc r WHERE r.finalizado = true ORDER BY r.id")
+    @NamedQuery(name = "RNC.buscaFinalizado", query = "SELECT r FROM Rnc r WHERE r.finalizado = true ORDER BY r.id"),
+    @NamedQuery(name = "RNC.buscaResponsavel", query = "SELECT r FROM Rnc r WHERE r.responsavel = :responsavel ORDER BY r.id")
 })
 public class Rnc implements Serializable {
 

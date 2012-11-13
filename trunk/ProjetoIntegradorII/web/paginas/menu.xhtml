@@ -25,7 +25,7 @@
 
                 <shiro:hasAnyRoles name="gerente, assistente">
                     <p:submenu label="Operações" icon="ui-icon ui-icon-document" id="subOperacoes">
-                        <p:menuitem action="#{gerenciadorPaginas.cadastroRNC}" ajax="false" value="Rnc" id="itemCadRNC"></p:menuitem>
+                        <p:menuitem action="#{rncBean.cadastrar()}" ajax="false" value="Rnc" id="itemCadRNC"></p:menuitem>
                     </p:submenu>
                 </shiro:hasAnyRoles>
                 <shiro:authenticated>

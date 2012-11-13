@@ -6,10 +6,9 @@
      xmlns:shiro="http://shiro.apache.org/tags">
     <p:panel>
         <h:form id="formRnc" prependId="false">
+            <p:growl id="messages" showDetail="true" globalOnly="true" life="10000" />
             <p:tabView id="tabView">
                 <p:tab id="tabCabecalho" title="Dados da RNC">
-
-                    <p:growl id="messages" showDetail="true" globalOnly="true" life="3000" />
                     <h3 class="tituloCadastro"><h:outputText value="Cadastro de RNC"/></h3>
                     <h:inputHidden value="#{rncBean.rnc.id}" id="id" />
 
@@ -147,7 +146,7 @@
                                 <p:message for="prazoAcaoContencao"/>
 
                                 <shiro:hasAnyRoles name="gerente, assistente">
-                                    <p:commandButton id="btn_add_acaoContencao" value="Adicionar" actionListener="#{acaoContencaoBean.add()}" update="acoesContencoesTable messages"
+                                    <p:commandButton id="btn_add_acaoContencao" value="Adicionar" actionListener="#{acaoContencaoBean.add()}" update="acoesContencoesTable :formRnc:messages"
                                                      process="@this,descricaoAcaoContencao,responsavelAcaoContencao,prazoAcaoContencao">
                                     </p:commandButton>
                                 </shiro:hasAnyRoles>
@@ -247,7 +246,7 @@
                                             pattern="dd/MM/yyyy"/>
                                 <p:message for="prazoAcaoProposta"/>
                                 <shiro:hasAnyRoles name="gerente, assistente">
-                                    <p:commandButton id="btn_add_acaoProposta" value="Adicionar" actionListener="#{acaoPropostaBean.add()}" update="acoesPropostasTable messages"
+                                    <p:commandButton id="btn_add_acaoProposta" value="Adicionar" actionListener="#{acaoPropostaBean.add()}" update="acoesPropostasTable :formRnc:messages"
                                                      process="@this,tipoAcaoProposta,descricaoAcaoProposta,responsavelAcaoProposta,prazoAcaoProposta">
                                     </p:commandButton>
                                 </shiro:hasAnyRoles>
