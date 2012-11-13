@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-xmlns:p="http://primefaces.org/ui"> 
+      xmlns:p="http://primefaces.org/ui"> 
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,23 +13,23 @@ xmlns:p="http://primefaces.org/ui">
     </h:head>
 
     <h:body>
+        <div id="geral">
+            <div id="header">
+                <ui:insert name="cabecalho">R N C</ui:insert>
+            </div>
 
-        <div id="cabecalho">
-            <ui:insert name="cabecalho">R N C</ui:insert>
+            <div id="menu">
+                <ui:insert name="menu">Menu</ui:insert>
+            </div>
+
+            <div id="body" class="center_content">
+                <ui:insert name="conteudo">Conteudo</ui:insert>
+            </div>
+
+            <div id="footer">
+                <ui:insert name="rodape">Rodape</ui:insert>
+            </div>
         </div>
-
-        <div id="menu">
-            <ui:insert name="menu">Menu</ui:insert>
-        </div>
-
-        <div id="conteudo" class="center_content">
-            <ui:insert name="conteudo">Conteudo</ui:insert>
-        </div>
-
-        <div id="rodape">
-            <ui:insert name="rodape">Rodape</ui:insert>
-        </div>
-
     </h:body>
 
 </html>

@@ -2,15 +2,23 @@
      xmlns:h="http://java.sun.com/jsf/html"
      xmlns:f="http://java.sun.com/jsf/core"
      xmlns:p="http://primefaces.org/ui">
-    <h:form id="formLogin">
-        <p:growl globalOnly="true" id="messages" />
-        <h:panelGrid columns="2" cellpadding="2">
-            <h:outputLabel for="#{usuarioBean.usuario.login}" value="UserName"/>
-            <h:inputText value="#{usuarioBean.usuario.login}" label="UserName"></h:inputText>
-            <h:outputLabel for="#{usuarioBean.usuario.senha}" value="Password"/>
-            <h:inputSecret value="#{usuarioBean.usuario.senha}"></h:inputSecret>
-            <h:commandButton type="submit" value="Login" action="#{usuarioBean.login}"></h:commandButton>
-        </h:panelGrid>
-    </h:form>
+    <p:panel>
+        <h2> Insira os dados de Login: </h2>
+        <br />
+        <h:form id="formLogin">
+            <p:growl globalOnly="true" id="messages" />
+            <h:panelGrid columns="2" cellpadding="2">
+
+                <h:outputLabel for="loginUserName" value="Nome de usuário:"/>
+                <h:inputText value="#{usuarioBean.usuario.login}" id="loginUserName" />
+
+                <h:outputLabel for="loginPassword" value="Senha:"/>
+                <h:inputSecret value="#{usuarioBean.usuario.senha}" id="loginPassword" />
+                
+            </h:panelGrid>
+
+            <p:commandButton type="submit" ajax="false" value="Entrar" action="#{usuarioBean.login}"></p:commandButton>
+        </h:form>
+    </p:panel>
 </div>
 

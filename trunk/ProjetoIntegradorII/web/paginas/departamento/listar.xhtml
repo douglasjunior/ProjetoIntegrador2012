@@ -4,15 +4,6 @@
      xmlns:p="http://primefaces.org/ui">
     <h:form id="listarDepartamento">
         <p:growl globalOnly="true" id="messages" />
-        <p:ajaxStatus style="width:16px;height:20px;margin-top: 3px;">
-            <f:facet name="start">
-                <h:graphicImage value="./resources/images/ajaxloading.gif" />
-            </f:facet>
-
-            <f:facet name="complete">
-                <h:outputText value="" />
-            </f:facet>
-        </p:ajaxStatus>
         <p:dataTable var="departamento" value="#{departamentoBean.todosDepartamentos}" id="departamentoLista" rows="10"
                      emptyMessage="Nenhum registro encontrado!" paginator="true" paginatorPosition="bottom"
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

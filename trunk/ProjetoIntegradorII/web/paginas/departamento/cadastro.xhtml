@@ -3,40 +3,38 @@
      xmlns:h="http://java.sun.com/jsf/html"
      xmlns:f="http://java.sun.com/jsf/core"
      xmlns:p="http://primefaces.org/ui"> 
+    <p:panel>
+        <h:form id="formMap" prependId="false">
+            <p:growl id="messages" showDetail="true" globalOnly="true" life="2000" />
+            <h3 class="tituloCadastro"><h:outputText value="Cadastro de Departamento"/></h3>
+            <br />
+            <h:inputHidden value="#{departamentoBean.departamento.id}" id="id" />
 
-    <h:form id="formMap" prependId="false">
-        <p:growl id="messages" showDetail="true" globalOnly="true" life="2000" />
-        <h3 class="tituloCadastro"><h:outputText value="Cadastro de Departamento"/></h3>
-        <h:inputHidden value="#{departamentoBean.departamento.id}" id="id" />
-
-        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
-            <h:outputLabel for="nome" value="Nome:"><span class="required">*</span></h:outputLabel>
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="3" cellpadding="5" columnClasses="col" rowClasses="breakRow">
+                <h:outputLabel for="nome" value="Nome:"><span class="required">*</span></h:outputLabel>
                 <p:inputText value="#{departamentoBean.departamento.nome}" id="nome" maxlength="45" 
                              title="Nome do departamento." required="true" requiredMessage="Campo obrigatório" size="45" />
                 <p:message for="nome"/>
-            </h:panelGrid>
 
-        </h:panelGrid>
-        <h:panelGrid columns="2" cellpadding="5" columnClasses="col" rowClasses="breakRow">
-            <h:outputLabel for="responsavel" value="Responsável:"><span class="required">*</span></h:outputLabel>
-            <h:panelGrid columns="2">
+                <h:outputLabel for="responsavel" value="Responsável:"><span class="required">*</span></h:outputLabel>
+
                 <p:selectOneMenu value="#{departamentoBean.departamento.responsavel}" id="responsavel" effect="fade" converter="#{usuarioBean.converter}" required="false">  
                     <f:selectItem itemLabel="Selecione o usuário responsável" itemValue="" />  
                     <f:selectItems value="#{usuarioBean.todosUsuarios}" var="responsavel" itemLabel="#{responsavel.nome}" itemValue="#{responsavel}"/>  
                 </p:selectOneMenu>   
                 <p:message for="responsavel"/>
+
             </h:panelGrid>
-        </h:panelGrid>
 
-        <br/>
+            <br/>
 
-        <p:commandButton value="Salvar" styleClass="saveButton" id="save" ajax="false" title="Salvar alterações"
-                         action="#{departamentoBean.salvar}" image="ui-icon ui-icon-disk" style="margin-left: 100px;"/>
-        
-        <p:commandButton value="Limpar" id="cancel" styleClass="cancelButton" update="@all" title="Limpar formulário"
-                         immediate="true" actionListener="#{userController.clearFields()}" image="ui-icon ui-icon-close"
-                         style="margin-left: 80px;" rendered="#{departamentoBean.departamento.id == 0}"/>
-    </h:form>
-
+            <h:panelGrid columns="2" columnClasses="col" rowClasses="breakRow">
+                <p:commandButton value="Salvar" styleClass="saveButton" id="save" ajax="false" title="Salvar alterações"
+                                 action="#{departamentoBean.salvar}" image="ui-icon ui-icon-disk" style="margin-left: 100px;" />
+                <p:commandButton value="Limpar" id="cancel" styleClass="cancelButton" update="@all" title="Limpar formulário"
+                                 immediate="true" actionListener="#{userController.clearFields()}" image="ui-icon ui-icon-close"
+                                 style="margin-left: 80px;" rendered="#{departamentoBean.departamento.id == 0}" />
+            </h:panelGrid>
+        </h:form>
+    </p:panel>
 </div>

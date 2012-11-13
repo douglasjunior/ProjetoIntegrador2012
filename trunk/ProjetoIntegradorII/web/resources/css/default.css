@@ -6,26 +6,5 @@ body {
     margin: 10px;
 }
 
+.required {color: red;} 
 
-
-a:link, a:visited {
-  color: #045491;
-  font-weight : bold;
-  text-decoration: none;
-}
-
-a:link:hover, a:visited:hover  {
-  color: #045491;
-  font-weight : bold;
-  text-decoration : underline;
-}
-
-#head_center {
-    margin: 0 auto;
-}
-#head_center h1 {
-    text-align: center;
-    font-size: 30px;
-}
-
-.required {color: red;}
