@@ -87,6 +87,10 @@ class User extends AppModel {
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
+            'doplicate' => array(
+                'rule' => array('isUnique'),
+                'message' => 'Nome de usuário já utilizado.'
+            ),
             'minlength' => array(
                 'rule' => array('minlength', '3'),
                 'message' => 'Informe no mínimo 3 caracteres.',
@@ -101,7 +105,7 @@ class User extends AppModel {
                 'rule' => array('notempty'),
                 'message' => 'Informe a senha.',
                 'allowEmpty' => false,
-             //   'required' => true,
+            //   'required' => true,
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),

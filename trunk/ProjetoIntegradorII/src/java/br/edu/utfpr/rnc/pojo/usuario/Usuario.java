@@ -119,6 +119,6 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "br.edu.utfpr.rnc.pojo.usuario.User[ id=" + id + " ]";
+        return nome;
     }
 }

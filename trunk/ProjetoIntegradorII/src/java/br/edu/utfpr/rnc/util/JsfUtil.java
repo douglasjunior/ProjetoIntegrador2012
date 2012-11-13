@@ -1,5 +1,6 @@
 package br.edu.utfpr.rnc.util;
 
+import br.edu.utfpr.rnc.pojo.usuario.Usuario;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -222,5 +223,10 @@ public class JsfUtil {
             }
         }
         return null;
+    }
+    
+    public static Usuario getUsuarioLogado(){
+        Usuario usuario = (Usuario)getSession(false).getAttribute("authUser");
+        return usuario;
     }
 }

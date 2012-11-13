@@ -76,6 +76,6 @@ public class Departamento implements Serializable {
 
     @Override
     public String toString() {
-        return "br.edu.utfpr.rnc.pojo.departamento.Departamento[ id=" + id + " ]";
+        return nome;
     }
 }

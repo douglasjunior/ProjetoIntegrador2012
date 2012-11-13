@@ -1,12 +1,56 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Cliente WebServices WEB</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h2> Selecione a situação das RNCs desejadas: </h2>
+        <br />
+        <h:form>
+            <p:panelGrid columns="3" >
+                <h:outputText value="Situacao: " />  
+                <p:selectOneMenu value="#{rncBean.situacao}">  
+                    <f:selectItem itemLabel="-- Selecione --" itemValue="" />  
+                    <f:selectItem itemLabel="Pendente" itemValue="pendente" />  
+                    <f:selectItem itemLabel="Aprovado" itemValue="aprovado" />  
+                    <f:selectItem itemLabel="Finalizado" itemValue="finalizado" />  
+                    <f:selectItem itemLabel="Todos" itemValue="todos" />  
+                </p:selectOneMenu> 
+                <p:commandButton action="#{rncBean.buscar()}" value="Buscar" ajax="false" />
+            </p:panelGrid>
+            <br />
+            <p:dataTable var="rnc" value="#{rncBean.rncs}" id="rncLista" rows="10"
+                         emptyMessage="Nenhum registro encontrado!" paginator="true" paginatorPosition="bottom"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+
+                <f:facet name="header">
+                    <h:outputText value="Lista de RNCs"/>
+                </f:facet>
+
+                <p:column styleClass="col_codigo" headerText="Código">
+                    <h:outputText value="#{rnc.id}" />
+                </p:column>
+                <p:column filterBy="#{rnc.origemRnc}" styleClass="col_origemRnc" headerText="Origem RNC" sortBy="#{rnc.origemRnc}">
+                    <h:outputText value="#{rnc.origemRnc}" />
+                </p:column>
+                <p:column filterBy="#{rnc.dateDataRnc}" styleClass="col_dataRNC" headerText="Data RNC" sortBy="#{rnc.dataRnc}">
+                    <h:outputText value="#{rnc.dateDataRnc}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column filterBy="#{rnc.descricaoNc}" styleClass="col_descricaoNc" headerText="Descrição NC" sortBy="#{rnc.descricaoNc}">
+                    <h:outputText value="#{rnc.descricaoNc}" />
+                </p:column>
+                <p:column filterBy="#{rnc.setorResponsavel}" styleClass="col_setorResponsavel" headerText="Setor Responsável" sortBy="#{rnc.setorResponsavel}">
+                    <h:outputText value="#{rnc.responsavel}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
     </h:body>
 </html>
 
