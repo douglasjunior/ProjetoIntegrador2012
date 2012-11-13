@@ -4,6 +4,11 @@
  */
 package clientdesktopws;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author NOTEBOOK
@@ -34,8 +39,18 @@ public class JFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Aprovado", "Finalizado", "Pendente", "Todos" }));
+        jComboBoxStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxStatusActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -45,7 +60,7 @@ public class JFrame extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Descrição", "Dpto Responsavel", "Data"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -73,6 +88,27 @@ public class JFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        // TODO add your handling code here:
+        ListarRNC_Service service = new ListarRNC_Service();
+        List<RncService> rncs = service.getListarRNCPort().listarRncs(jComboBoxStatus.getSelectedItem().toString());
+
+        for (int i = 0; i < rncs.size(); i++) {
+   
+                    jTable2.setValueAt(rncs.get(i).id, i, 0);
+                    jTable2.setValueAt(rncs.get(i).descricaoNc, i, 1);
+                    jTable2.setValueAt(rncs.get(i).setorResponsavel, i, 2);
+                    jTable2.setValueAt(rncs.get(i).dataRnc, i, 3);
+ 
+
+           
+        }
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
     /**
      * @param args the command line arguments
