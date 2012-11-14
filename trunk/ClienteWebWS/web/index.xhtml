@@ -47,6 +47,9 @@
                     <h:outputText value="#{rnc.descricaoNc}" />
                 </p:column>
                 <p:column filterBy="#{rnc.setorResponsavel}" styleClass="col_setorResponsavel" headerText="Setor Responsável" sortBy="#{rnc.setorResponsavel}">
+                    <h:outputText value="#{rnc.setorResponsavel}" />
+                </p:column>
+                <p:column filterBy="#{rnc.responsavel}" styleClass="col_userResponsavel" headerText="Usuario Responsável" sortBy="#{rnc.responsavel}">
                     <h:outputText value="#{rnc.responsavel}" />
                 </p:column>
             </p:dataTable>

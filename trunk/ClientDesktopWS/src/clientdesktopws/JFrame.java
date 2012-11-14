@@ -4,6 +4,7 @@
  */
 package clientdesktopws;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -15,10 +16,10 @@ import javax.swing.table.TableModel;
  */
 public class JFrame extends javax.swing.JFrame {
 
-    /** 
+    /**
      * Creates new form JFrame
      */
-    DefaultTableModel model = new DefaultTableModel(new Object[]{"Id","Descrição","Setor responsavel","Data"}, 0);
+    DefaultTableModel model = new DefaultTableModel(new Object[]{"Id", "Descrição", "Setor responsavel", "Data"}, 0);
 
     public JFrame() {
         initComponents();
@@ -72,20 +73,25 @@ public class JFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jComboBoxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonConfirmar)
-                .addGap(6, 6, 6))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBoxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonConfirmar))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -94,14 +100,19 @@ public class JFrame extends javax.swing.JFrame {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
         model.setNumRows(0);
-        
+
         ListarRNC_Service service = new ListarRNC_Service();
         List<RncService> rncs = service.getListarRNCPort().listarRncs(jComboBoxStatus.getSelectedItem().toString());
-        
+
         for (int i = 0; i < rncs.size(); i++) {
-            model.addRow(new Object[]{rncs.get(i).id,rncs.get(i).descricaoNc,rncs.get(i).setorResponsavel,rncs.get(i).dataRnc});
-                    
+            model.addRow(new Object[]{
+                        rncs.get(i).id,
+                        rncs.get(i).descricaoNc,
+                        rncs.get(i).setorResponsavel,
+                        new SimpleDateFormat("dd/MM/yyyy").format(rncs.get(i).getDateDataRnc())
+                    });
         }
+        
         jTable2.setModel(model);
         jTable2.repaint();
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
@@ -148,7 +159,7 @@ public class JFrame extends javax.swing.JFrame {
 
             public void run() {
                 new JFrame().setVisible(true);
-                
+
             }
         });
     }

@@ -1,18 +1,18 @@
-
 package clientdesktopws;
 
+import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-
 /**
  * <p>Java class for rncService complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
+ * <p>The following schema fragment specifies the expected content contained
+ * within this class.
+ *
  * <pre>
  * &lt;complexType name="rncService">
  *   &lt;complexContent>
@@ -50,8 +50,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "rncService", propOrder = {
@@ -117,11 +117,10 @@ public class RncService {
 
     /**
      * Gets the value of the abrangenciaDaAcao property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getAbrangenciaDaAcao() {
         return abrangenciaDaAcao;
@@ -129,11 +128,10 @@ public class RncService {
 
     /**
      * Sets the value of the abrangenciaDaAcao property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setAbrangenciaDaAcao(String value) {
         this.abrangenciaDaAcao = value;
@@ -141,7 +139,7 @@ public class RncService {
 
     /**
      * Gets the value of the aprovado property.
-     * 
+     *
      */
     public boolean isAprovado() {
         return aprovado;
@@ -149,7 +147,7 @@ public class RncService {
 
     /**
      * Sets the value of the aprovado property.
-     * 
+     *
      */
     public void setAprovado(boolean value) {
         this.aprovado = value;
@@ -157,11 +155,10 @@ public class RncService {
 
     /**
      * Gets the value of the causaProvavel property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getCausaProvavel() {
         return causaProvavel;
@@ -169,11 +166,10 @@ public class RncService {
 
     /**
      * Sets the value of the causaProvavel property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setCausaProvavel(String value) {
         this.causaProvavel = value;
@@ -181,11 +177,10 @@ public class RncService {
 
     /**
      * Gets the value of the codigoProduto property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getCodigoProduto() {
         return codigoProduto;
@@ -193,11 +188,10 @@ public class RncService {
 
     /**
      * Sets the value of the codigoProduto property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setCodigoProduto(String value) {
         this.codigoProduto = value;
@@ -205,11 +199,10 @@ public class RncService {
 
     /**
      * Gets the value of the comentarioAnalise property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getComentarioAnalise() {
         return comentarioAnalise;
@@ -217,11 +210,10 @@ public class RncService {
 
     /**
      * Sets the value of the comentarioAnalise property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setComentarioAnalise(String value) {
         this.comentarioAnalise = value;
@@ -229,11 +221,10 @@ public class RncService {
 
     /**
      * Gets the value of the dataAnalise property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link XMLGregorianCalendar }
-     *     
+     *
      */
     public XMLGregorianCalendar getDataAnalise() {
         return dataAnalise;
@@ -241,11 +232,10 @@ public class RncService {
 
     /**
      * Sets the value of the dataAnalise property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link XMLGregorianCalendar }
-     *     
+     *
      */
     public void setDataAnalise(XMLGregorianCalendar value) {
         this.dataAnalise = value;
@@ -253,23 +243,25 @@ public class RncService {
 
     /**
      * Gets the value of the dataRnc property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link XMLGregorianCalendar }
-     *     
+     *
      */
     public XMLGregorianCalendar getDataRnc() {
         return dataRnc;
     }
 
+    public Date getDateDataRnc() {
+        return new Date(getDataRnc().toGregorianCalendar().getTimeInMillis());
+    }
+
     /**
      * Sets the value of the dataRnc property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link XMLGregorianCalendar }
-     *     
+     *
      */
     public void setDataRnc(XMLGregorianCalendar value) {
         this.dataRnc = value;
@@ -277,11 +269,10 @@ public class RncService {
 
     /**
      * Gets the value of the descricaoNc property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getDescricaoNc() {
         return descricaoNc;
@@ -289,11 +280,10 @@ public class RncService {
 
     /**
      * Sets the value of the descricaoNc property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setDescricaoNc(String value) {
         this.descricaoNc = value;
@@ -301,11 +291,10 @@ public class RncService {
 
     /**
      * Gets the value of the descricaoProduto property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getDescricaoProduto() {
         return descricaoProduto;
@@ -313,11 +302,10 @@ public class RncService {
 
     /**
      * Sets the value of the descricaoProduto property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setDescricaoProduto(String value) {
         this.descricaoProduto = value;
@@ -325,11 +313,10 @@ public class RncService {
 
     /**
      * Gets the value of the disposicao property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getDisposicao() {
         return disposicao;
@@ -337,11 +324,10 @@ public class RncService {
 
     /**
      * Sets the value of the disposicao property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setDisposicao(String value) {
         this.disposicao = value;
@@ -349,11 +335,10 @@ public class RncService {
 
     /**
      * Gets the value of the documentoOrigem property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getDocumentoOrigem() {
         return documentoOrigem;
@@ -361,11 +346,10 @@ public class RncService {
 
     /**
      * Sets the value of the documentoOrigem property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setDocumentoOrigem(String value) {
         this.documentoOrigem = value;
@@ -373,11 +357,10 @@ public class RncService {
 
     /**
      * Gets the value of the eficaz property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getEficaz() {
         return eficaz;
@@ -385,11 +368,10 @@ public class RncService {
 
     /**
      * Sets the value of the eficaz property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setEficaz(String value) {
         this.eficaz = value;
@@ -397,11 +379,10 @@ public class RncService {
 
     /**
      * Gets the value of the emitente property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getEmitente() {
         return emitente;
@@ -409,11 +390,10 @@ public class RncService {
 
     /**
      * Sets the value of the emitente property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setEmitente(String value) {
         this.emitente = value;
@@ -421,11 +401,10 @@ public class RncService {
 
     /**
      * Gets the value of the empresaEmitente property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getEmpresaEmitente() {
         return empresaEmitente;
@@ -433,11 +412,10 @@ public class RncService {
 
     /**
      * Sets the value of the empresaEmitente property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setEmpresaEmitente(String value) {
         this.empresaEmitente = value;
@@ -445,7 +423,7 @@ public class RncService {
 
     /**
      * Gets the value of the finalizado property.
-     * 
+     *
      */
     public boolean isFinalizado() {
         return finalizado;
@@ -453,7 +431,7 @@ public class RncService {
 
     /**
      * Sets the value of the finalizado property.
-     * 
+     *
      */
     public void setFinalizado(boolean value) {
         this.finalizado = value;
@@ -461,7 +439,7 @@ public class RncService {
 
     /**
      * Gets the value of the id property.
-     * 
+     *
      */
     public int getId() {
         return id;
@@ -469,7 +447,7 @@ public class RncService {
 
     /**
      * Sets the value of the id property.
-     * 
+     *
      */
     public void setId(int value) {
         this.id = value;
@@ -477,11 +455,10 @@ public class RncService {
 
     /**
      * Gets the value of the numeroLote property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getNumeroLote() {
         return numeroLote;
@@ -489,11 +466,10 @@ public class RncService {
 
     /**
      * Sets the value of the numeroLote property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setNumeroLote(String value) {
         this.numeroLote = value;
@@ -501,11 +477,10 @@ public class RncService {
 
     /**
      * Gets the value of the origemRnc property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getOrigemRnc() {
         return origemRnc;
@@ -513,11 +488,10 @@ public class RncService {
 
     /**
      * Sets the value of the origemRnc property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setOrigemRnc(String value) {
         this.origemRnc = value;
@@ -525,11 +499,10 @@ public class RncService {
 
     /**
      * Gets the value of the placa property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getPlaca() {
         return placa;
@@ -537,11 +510,10 @@ public class RncService {
 
     /**
      * Sets the value of the placa property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setPlaca(String value) {
         this.placa = value;
@@ -549,7 +521,7 @@ public class RncService {
 
     /**
      * Gets the value of the quantidadeRecebida property.
-     * 
+     *
      */
     public int getQuantidadeRecebida() {
         return quantidadeRecebida;
@@ -557,7 +529,7 @@ public class RncService {
 
     /**
      * Sets the value of the quantidadeRecebida property.
-     * 
+     *
      */
     public void setQuantidadeRecebida(int value) {
         this.quantidadeRecebida = value;
@@ -565,7 +537,7 @@ public class RncService {
 
     /**
      * Gets the value of the quantidadeReprovada property.
-     * 
+     *
      */
     public int getQuantidadeReprovada() {
         return quantidadeReprovada;
@@ -573,7 +545,7 @@ public class RncService {
 
     /**
      * Sets the value of the quantidadeReprovada property.
-     * 
+     *
      */
     public void setQuantidadeReprovada(int value) {
         this.quantidadeReprovada = value;
@@ -581,11 +553,10 @@ public class RncService {
 
     /**
      * Gets the value of the relatorio property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getRelatorio() {
         return relatorio;
@@ -593,11 +564,10 @@ public class RncService {
 
     /**
      * Sets the value of the relatorio property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setRelatorio(String value) {
         this.relatorio = value;
@@ -605,11 +575,10 @@ public class RncService {
 
     /**
      * Gets the value of the responsavel property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getResponsavel() {
         return responsavel;
@@ -617,11 +586,10 @@ public class RncService {
 
     /**
      * Sets the value of the responsavel property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setResponsavel(String value) {
         this.responsavel = value;
@@ -629,7 +597,7 @@ public class RncService {
 
     /**
      * Gets the value of the rrc property.
-     * 
+     *
      */
     public boolean isRrc() {
         return rrc;
@@ -637,7 +605,7 @@ public class RncService {
 
     /**
      * Sets the value of the rrc property.
-     * 
+     *
      */
     public void setRrc(boolean value) {
         this.rrc = value;
@@ -645,11 +613,10 @@ public class RncService {
 
     /**
      * Gets the value of the setorEmitente property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getSetorEmitente() {
         return setorEmitente;
@@ -657,11 +624,10 @@ public class RncService {
 
     /**
      * Sets the value of the setorEmitente property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setSetorEmitente(String value) {
         this.setorEmitente = value;
@@ -669,11 +635,10 @@ public class RncService {
 
     /**
      * Gets the value of the setorResponsavel property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getSetorResponsavel() {
         return setorResponsavel;
@@ -681,11 +646,10 @@ public class RncService {
 
     /**
      * Sets the value of the setorResponsavel property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setSetorResponsavel(String value) {
         this.setorResponsavel = value;
@@ -693,11 +657,10 @@ public class RncService {
 
     /**
      * Gets the value of the tipoAcaoProposta property.
-     * 
-     * @return
-     *     possible object is
+     *
+     * @return possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getTipoAcaoProposta() {
         return tipoAcaoProposta;
@@ -705,14 +668,12 @@ public class RncService {
 
     /**
      * Sets the value of the tipoAcaoProposta property.
-     * 
-     * @param value
-     *     allowed object is
+     *
+     * @param value allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setTipoAcaoProposta(String value) {
         this.tipoAcaoProposta = value;
     }
-
 }
