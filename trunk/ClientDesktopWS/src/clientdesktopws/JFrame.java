@@ -15,9 +15,11 @@ import javax.swing.table.TableModel;
  */
 public class JFrame extends javax.swing.JFrame {
 
-    /**
+    /** 
      * Creates new form JFrame
      */
+    DefaultTableModel model = new DefaultTableModel(new Object[]{"Id","Descrição","Setor responsavel","Data"}, 0);
+
     public JFrame() {
         initComponents();
     }
@@ -91,19 +93,17 @@ public class JFrame extends javax.swing.JFrame {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
+        model.setNumRows(0);
+        
         ListarRNC_Service service = new ListarRNC_Service();
         List<RncService> rncs = service.getListarRNCPort().listarRncs(jComboBoxStatus.getSelectedItem().toString());
-
+        
         for (int i = 0; i < rncs.size(); i++) {
-   
-                    jTable2.setValueAt(rncs.get(i).id, i, 0);
-                    jTable2.setValueAt(rncs.get(i).descricaoNc, i, 1);
-                    jTable2.setValueAt(rncs.get(i).setorResponsavel, i, 2);
-                    jTable2.setValueAt(rncs.get(i).dataRnc, i, 3);
- 
-
-           
+            model.addRow(new Object[]{rncs.get(i).id,rncs.get(i).descricaoNc,rncs.get(i).setorResponsavel,rncs.get(i).dataRnc});
+                    
         }
+        jTable2.setModel(model);
+        jTable2.repaint();
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
@@ -148,6 +148,7 @@ public class JFrame extends javax.swing.JFrame {
 
             public void run() {
                 new JFrame().setVisible(true);
+                
             }
         });
     }
